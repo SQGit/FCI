@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:weightSum="4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginLeft="-30dp"
+                android:background="@drawable/background_tv"
+                android:paddingBottom="@dimen/_6sdp"
+                android:paddingLeft="50dp"
+                android:paddingRight="@dimen/_20sdp"
+                android:paddingTop="@dimen/_6sdp"
+                android:text="Dashboard"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/_11sdp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.8"
+
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/addentry_et"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:hint="Add Entry"
+            android:paddingLeft="@dimen/_10sdp"
+            android:ems="25"
+            android:drawablePadding="@dimen/_5sdp"
+
+            android:drawableLeft="@drawable/addentry_icon"
+            android:background="@drawable/rectangle_bg_et"
+           />
+        <EditText
+            android:id="@+id/viewentry_et"
+
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:hint="View Entry"
+            android:paddingLeft="@dimen/_10sdp"
+            android:ems="25"
+            android:drawableLeft="@drawable/viewentry_icon"
+android:drawablePadding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_bg_et"
+            />
+
+        <EditText
+            android:id="@+id/reports_et"
+
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:hint="Reports"
+            android:paddingLeft="@dimen/_10sdp"
+            android:ems="25"
+            android:drawableLeft="@drawable/createstaf_icon"
+            android:drawablePadding="@dimen/_5sdp"
+
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_bg_et"
+            />
+        <EditText
+            android:id="@+id/settings_et"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:hint="Settings"
+            android:paddingLeft="@dimen/_10sdp"
+            android:ems="25"
+            android:drawableLeft="@drawable/createstaf_icon"
+            android:drawablePadding="@dimen/_5sdp"
+
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rectangle_bg_et"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+</LinearLayout>
