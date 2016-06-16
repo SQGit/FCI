@@ -29,7 +29,7 @@ public class StaffDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(getApplicationContext(),CreateStaff.class);
+                Intent i=new Intent(getApplicationContext(),StaffCreate.class);
                 startActivity(i);
             }
         });

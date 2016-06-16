@@ -3,4 +3,15 @@
     <color name="colorPrimary">#5DB1F1</color>
     <color name="colorPrimaryDark">#5DB1F1</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorDark">#5cb2ef</color>
+    <color name="colorLight">#edf7ff</color>
+
+    <color name="textColorDark">#34466a</color>
+    <color name="textColorGray">#596782</color>
+    <color name="bg1">#b7dbf5</color>
+    <color name="bg2">#d8ebf9</color>
+
+    <color name="listbg">#f6fafd</color>
+    <color name="listbg_storke">#acd7f7</color>
+
 </resources>

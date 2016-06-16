@@ -38,7 +38,7 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".CreateStaff"
+            android:name=".StaffCreate"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
             android:theme="@style/AppTheme">
@@ -55,6 +55,14 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
         </activity>
+
+        <activity
+            android:name=".StaffEdit"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
+
     </application>
 
 </manifest>

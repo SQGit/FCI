@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 /**
  * Created by Ramya on 10-06-2016.
@@ -28,7 +27,7 @@ public class AdminDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(getApplicationContext(),CreateStaff.class);
+                Intent i=new Intent(getApplicationContext(),StaffCreate.class);
                 startActivity(i);
             }
         });
@@ -38,6 +37,16 @@ public class AdminDashboard extends AppCompatActivity {
             {
                 Intent i=new Intent(getApplicationContext(),CreateCompany.class);
                 startActivity(i);
+            }
+        });
+
+        editstaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i=new Intent(getApplicationContext(),StaffEdit.class);
+                startActivity(i);
+
             }
         });
 

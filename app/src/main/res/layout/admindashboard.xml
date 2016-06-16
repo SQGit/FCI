@@ -44,7 +44,9 @@
         <EditText
             android:id="@+id/createstaff_et"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
             android:layout_gravity="center"
             android:background="@drawable/rectangle_bg_et"
             android:drawableLeft="@drawable/createstaf_icon"
@@ -65,7 +67,6 @@
             android:drawablePadding="@dimen/_5sdp"
             android:ems="25"
             android:editable="false"
-
             android:hint="Edit Staff"
             android:paddingLeft="@dimen/_10sdp" />
 
@@ -80,17 +81,11 @@
             android:drawablePadding="@dimen/_5sdp"
             android:ems="25"
             android:editable="false"
-
             android:hint="Create Company"
             android:paddingLeft="@dimen/_10sdp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="vertical">
 
 
     </LinearLayout>
+
+
 </LinearLayout>
