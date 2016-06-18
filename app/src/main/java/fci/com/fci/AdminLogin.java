@@ -21,7 +21,7 @@ public class AdminLogin extends AppCompatActivity
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.adminlogin);
+        setContentView(R.layout.admin_login);
         submit=(ImageView) findViewById(R.id.submit_iv);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

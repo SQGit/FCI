@@ -19,7 +19,7 @@ public class AdminDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.admindashboard);
+        setContentView(R.layout.admin_dashboard);
         createstaff = (EditText) findViewById(R.id.createstaff_et);
         editstaff = (EditText) findViewById(R.id.editstaff_id);
         createcompany = (EditText) findViewById(R.id.createcompany_id);

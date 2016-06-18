@@ -9,9 +9,12 @@
     <color name="textColorDark">#34466a</color>
     <color name="textColorGray">#596782</color>
     <color name="bg1">#b7dbf5</color>
-    <color name="bg2">#d8ebf9</color>
+    <color name="bg2">#99b7dbf5</color>
 
     <color name="listbg">#f6fafd</color>
+    <color name="listbg1">#FFEFF8FF</color>
     <color name="listbg_storke">#acd7f7</color>
+
+    <color name="orange">#ff7c44</color>
 
 </resources>

@@ -38,7 +38,6 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="2.7"
-
         android:orientation="vertical">
 
         <EditText
@@ -48,11 +47,13 @@
             android:background="@drawable/rectangle_bg_et"
             android:drawableLeft="@drawable/compyname_icon"
             android:drawablePadding="@dimen/_5sdp"
-            android:ems="25"
+            android:ems="15"
             android:hint="Company Name"
-            android:inputType="text"
+            android:inputType="textPersonName"
             android:paddingLeft="@dimen/_10sdp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/_12sdp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -62,41 +63,71 @@
             android:background="@drawable/rectangle_bg_et"
             android:drawableLeft="@drawable/cmpyloc_icon"
             android:drawablePadding="@dimen/_5sdp"
-            android:ems="25"
+            android:ems="15"
             android:hint="Company Location"
             android:inputType="text"
             android:paddingLeft="@dimen/_10sdp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/_12sdp" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="65dp"
-
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/rectangle_bg_et"
             android:drawableLeft="@drawable/name_icon"
             android:drawablePadding="@dimen/_5sdp"
-            android:ems="25"
+            android:ems="15"
             android:hint="Manager Name"
             android:inputType="text"
             android:paddingLeft="@dimen/_10sdp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/_12sdp" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="65dp"
-
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/rectangle_bg_et"
             android:drawableLeft="@drawable/phone_icon"
             android:drawablePadding="@dimen/_5sdp"
-            android:ems="25"
+            android:ems="15"
             android:hint="Phone"
+            android:inputType="phone"
+            android:paddingLeft="@dimen/_10sdp"
             android:singleLine="true"
-            android:inputType="text"
-            android:paddingLeft="@dimen/_10sdp" />
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_65sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:drawableLeft="@android:drawable/ic_input_add"
+                android:drawablePadding="@dimen/_5sdp"
+                android:text="Alt. Manager Details"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/_7sdp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/orange"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
