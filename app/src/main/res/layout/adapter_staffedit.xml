@@ -9,40 +9,39 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="left"
+        android:paddingLeft="@dimen/_10sdp"
         android:id="@+id/tv_name"
         android:text="Tim"
         android:textColor="@color/textColorDark"
         android:textSize="@dimen/_10sdp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:paddingLeft="@dimen/_10sdp"
+        android:gravity="left"
         android:id="@+id/tv_phone"
         android:text="734837-373-3838"
         android:textColor="@color/textColorDark"
         android:textSize="@dimen/_10sdp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="left"
+        android:paddingLeft="@dimen/_10sdp"
         android:id="@+id/tv_password"
         android:text="7346"
         android:textColor="@color/textColorDark"
         android:textSize="@dimen/_10sdp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="left"
         android:id="@+id/tv_editview"
         android:text="Edit/View"
         android:textColor="@android:color/holo_red_light"

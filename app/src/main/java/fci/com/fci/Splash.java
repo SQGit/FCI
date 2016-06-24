@@ -13,7 +13,7 @@ import android.view.WindowManager;
  */
 public class Splash extends Activity {
 
-    private static int SPLASH_TIME_OUT = 5000;
+    private static int SPLASH_TIME_OUT = 3000;
 
     public void onAttachedToWindow()
     {

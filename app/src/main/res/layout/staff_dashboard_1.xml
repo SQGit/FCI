@@ -18,19 +18,23 @@
             android:gravity="center"
             android:orientation="vertical">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
                 android:layout_marginLeft="-30dp"
+                android:id="@+id/tv_header"
                 android:background="@drawable/background_tv"
+                android:drawableLeft="@drawable/back_ico"
+                android:drawablePadding="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_6sdp"
                 android:paddingLeft="50dp"
                 android:paddingRight="@dimen/_20sdp"
                 android:paddingTop="@dimen/_6sdp"
                 android:text="Dashboard"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/_11sdp" />
+                android:textSize="@dimen/_15sdp" />
         </LinearLayout>
 
 
@@ -43,99 +47,100 @@
         android:orientation="vertical">
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
+        <RelativeLayout
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:id="@+id/layout_addentry"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/mydrawable"
-            android:gravity="center">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/newone">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:background="@drawable/thee"
-                android:gravity="center"
-                android:paddingLeft="@dimen/_45sdp"
-                android:paddingRight="@dimen/_55sdp">
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/dr_img" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/addentry_icon" />
+
+
 
                 <TextView
-                    android:id="@+id/textview_addentry"
+                    android:id="@+id/tv_add_entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/add_entry_ico"
+                    android:paddingLeft="@dimen/_40sdp"
                     android:text="Add Entry"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_15sdp" />
 
-            </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/mydrawable"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:background="@drawable/thee"
-                android:gravity="center"
-                android:paddingLeft="@dimen/_42sdp"
-                android:paddingRight="@dimen/_53sdp">
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+        </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/viewentry_icon" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:id="@+id/layout_viewentry"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/newone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/dr_img" />
+
+
 
                 <TextView
-                    android:id="@+id/addentry_3et"
+                    android:id="@+id/tv_view_entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_5sdp"
+                    android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/view_entry_ico"
+                    android:paddingLeft="@dimen/_40sdp"
                     android:text="View Entry"
-                    android:textSize="@dimen/_13sdp" />
-
-            </LinearLayout>
-        </LinearLayout>
+                    android:textSize="@dimen/_15sdp" />
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+        </RelativeLayout>
+
+
+       <!-- <RelativeLayout
+            android:layout_width="@dimen/_180sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/mydrawable"
-            android:gravity="center">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/newone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/dr_img" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:background="@drawable/thee"
-                android:gravity="center"
-                android:paddingLeft="@dimen/_50sdp"
-                android:paddingRight="@dimen/_60sdp">
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -143,7 +148,7 @@
                     android:background="@drawable/reports_icon" />
 
                 <TextView
-                    android:id="@+id/edittext_reports"
+                    android:id="@+id/textview_addseddntry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_5sdp"
@@ -151,48 +156,201 @@
                     android:paddingLeft="@dimen/_10sdp"
                     android:text="Reports"
                     android:textSize="@dimen/_13sdp" />
-
             </LinearLayout>
-        </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/mydrawable"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:background="@drawable/thee"
-                android:gravity="center"
-                android:paddingLeft="@dimen/_50sdp"
-                android:paddingRight="@dimen/_60sdp">
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+        </RelativeLayout>-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/setting_icon" />
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:id="@+id/layout_settings"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/newone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/dr_img" />
+
 
                 <TextView
-                    android:id="@+id/edittext_settings"
+                    android:id="@+id/tv_settings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_5sdp"
+                    android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/settings_ico"
+                    android:paddingLeft="@dimen/_40sdp"
                     android:text="Settings"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_15sdp" />
 
-            </LinearLayout>
-        </LinearLayout>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+        </RelativeLayout>
+
+
+        <!-- <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="@dimen/_25sdp"
+             android:layout_gravity="center"
+             android:layout_marginTop="@dimen/_15sdp"
+             android:background="@drawable/mydrawable"
+             android:gravity="center">
+
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="1dp"
+                 android:layout_marginRight="1dp"
+                 android:background="@drawable/thee"
+                 android:gravity="center"
+                 android:paddingLeft="@dimen/_45sdp"
+                 android:paddingRight="@dimen/_55sdp">
+
+
+                 <ImageView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/addentry_icon" />
+
+                 <TextView
+                     android:id="@+id/textview_addentry"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:drawablePadding="@dimen/_5sdp"
+                     android:gravity="center_vertical"
+                     android:paddingLeft="@dimen/_10sdp"
+                     android:text="Add Entry"
+                     android:textSize="@dimen/_13sdp" />
+
+             </LinearLayout>
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="@dimen/_25sdp"
+             android:layout_gravity="center"
+             android:layout_marginTop="@dimen/_15sdp"
+             android:background="@drawable/mydrawable"
+             android:gravity="center">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="1dp"
+                 android:layout_marginRight="1dp"
+                 android:background="@drawable/thee"
+                 android:gravity="center"
+                 android:paddingLeft="@dimen/_42sdp"
+                 android:paddingRight="@dimen/_53sdp">
+
+                 <ImageView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/viewentry_icon" />
+
+                 <TextView
+                     android:id="@+id/addentry_3et"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:drawablePadding="@dimen/_5sdp"
+                     android:gravity="center_vertical"
+                     android:paddingLeft="@dimen/_10sdp"
+                     android:text="View Entry"
+                     android:textSize="@dimen/_13sdp" />
+
+             </LinearLayout>
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="@dimen/_25sdp"
+             android:layout_gravity="center"
+             android:layout_marginTop="@dimen/_15sdp"
+             android:background="@drawable/mydrawable"
+             android:gravity="center">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="1dp"
+                 android:layout_marginRight="1dp"
+                 android:background="@drawable/thee"
+                 android:gravity="center"
+                 android:paddingLeft="@dimen/_40sdp"
+                 android:paddingRight="@dimen/_70sdp">
+
+                 <ImageView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/reports_icon" />
+
+                 <TextView
+                     android:id="@+id/edittext_reports"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:drawablePadding="@dimen/_5sdp"
+                     android:gravity="center_vertical"
+                     android:paddingLeft="@dimen/_10sdp"
+                     android:text="Reports"
+                     android:textSize="@dimen/_13sdp" />
+
+             </LinearLayout>
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="@dimen/_25sdp"
+             android:layout_gravity="center"
+             android:layout_marginTop="@dimen/_15sdp"
+             android:background="@drawable/mydrawable"
+             android:gravity="center">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="1dp"
+                 android:layout_marginRight="1dp"
+                 android:background="@drawable/thee"
+                 android:gravity="center"
+                 android:paddingLeft="@dimen/_50sdp"
+                 android:paddingRight="@dimen/_60sdp">
+
+                 <ImageView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/setting_icon" />
+
+                 <TextView
+                     android:id="@+id/edittext_settings"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:drawablePadding="@dimen/_5sdp"
+                     android:gravity="center_vertical"
+                     android:paddingLeft="@dimen/_10sdp"
+                     android:text="Settings"
+                     android:textSize="@dimen/_13sdp" />
+
+             </LinearLayout>
+         </LinearLayout>-->
 
     </LinearLayout>
 

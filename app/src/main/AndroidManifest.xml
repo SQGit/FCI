@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fci.com.fci">
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        tools:replace = "android:icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -38,13 +46,13 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".StaffCreate"
+            android:name=".AdminStaffCreate"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".CreateCompany"
+            android:name=".AdminCreateCompany"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
             android:theme="@style/AppTheme">
@@ -57,11 +65,33 @@
         </activity>
 
         <activity
-            android:name=".StaffEdit"
+            android:name=".AdminStaffEdit"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
         </activity>
+
+        <activity
+            android:name=".StaffAddEntry"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
+
+        <activity
+            android:name=".StaffViewEntry"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
+
+        <activity
+            android:name=".BarScan"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
+
 
     </application>
 

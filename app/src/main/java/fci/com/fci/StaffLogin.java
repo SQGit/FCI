@@ -30,6 +30,7 @@ public class StaffLogin extends AppCompatActivity
     Spinner spn_staffname;
     Typeface tf;
     EditText et_phone,et_pass;
+    TextView tv_header,tv_footer,tv_repass;
 
 
     @Override
@@ -38,16 +39,29 @@ public class StaffLogin extends AppCompatActivity
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.stafflogin);
+        setContentView(R.layout.staff_login_1);
 
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
 
-
+        spn_staffname = (Spinner) findViewById(R.id.spn_staff_name);
+        tv_header = (TextView) findViewById(R.id.tv_header);
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_pass = (EditText) findViewById(R.id.et_password);
 
-
+        tv_repass = (TextView) findViewById(R.id.tv_repassword);
+        tv_footer = (TextView) findViewById(R.id.tv_terms);
         submit=(ImageView) findViewById(R.id.submit_iv);
+
+
+
+        tv_header.setTypeface(tf);
+        et_phone.setTypeface(tf);
+        et_pass.setTypeface(tf);
+        tv_repass.setTypeface(tf);
+        tv_footer.setTypeface(tf);
+
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -57,7 +71,18 @@ public class StaffLogin extends AppCompatActivity
             }
         });
 
-        spn_staffname = (Spinner) findViewById(R.id.spn_staff_name);
+
+        tv_header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getApplicationContext(),Dashboard.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
+
 
         et_phone.setTypeface(tf,1);
         et_pass.setTypeface(tf,1);

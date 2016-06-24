@@ -18,9 +18,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center"
             android:layout_marginLeft="-30dp"
+            android:id="@+id/tv_header"
             android:background="@drawable/background_tv"
             android:paddingBottom="@dimen/_6sdp"
             android:paddingLeft="50dp"
+            android:drawableLeft="@drawable/back_ico"
+            android:drawablePadding="@dimen/_10sdp"
             android:paddingRight="@dimen/_20sdp"
             android:paddingTop="@dimen/_6sdp"
             android:text="Create Staff"
@@ -76,7 +79,105 @@
         android:layout_weight="3"
         android:orientation="vertical">
 
-        <EditText
+
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/newone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/dr_img" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:hint="Name"
+                    android:id="@+id/et_name"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:inputType="textPersonName"
+                    android:drawableLeft="@drawable/name_ico"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+        </RelativeLayout>
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/newone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/dr_img" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:hint="Phone"
+                    android:id="@+id/et_phone"
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:inputType="phone"
+                    android:drawableLeft="@drawable/phone_ico"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+        </RelativeLayout>
+
+
+
+     <!--   <EditText
             android:layout_width="wrap_content"
             android:layout_height="65dp"
             android:layout_gravity="center"
@@ -90,9 +191,9 @@
             android:paddingLeft="@dimen/_10sdp"
             android:singleLine="true"
             android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp" />-->
 
-        <EditText
+       <!-- <EditText
             android:layout_width="wrap_content"
             android:layout_height="65dp"
             android:layout_gravity="center"
@@ -104,11 +205,11 @@
             android:hint="Phone"
             android:id="@+id/et_phone"
             android:imeOptions="actionNext"
-            android:inputType="number"
+            android:inputType="phone"
             android:paddingLeft="@dimen/_10sdp"
             android:singleLine="true"
             android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp" />-->
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -119,11 +220,11 @@
 
 
             <TextView
-                android:id="@+id/password_tv"
+                android:id="@+id/tv_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@drawable/password_icon"
+                android:drawableLeft="@drawable/pass_ico"
                 android:drawablePadding="@dimen/_5sdp"
                 android:ems="14"
                 android:hint="Password"
@@ -212,11 +313,11 @@
 
 
             <TextView
-                android:id="@+id/repassword_tv"
+                android:id="@+id/tv_repassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@drawable/password_icon"
+                android:drawableLeft="@drawable/pass_ico"
                 android:drawablePadding="@dimen/_5sdp"
                 android:ems="14"
                 android:maxLength="1"
@@ -305,7 +406,7 @@
                 android:id="@+id/submit_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/submit_icon" />
+                android:background="@drawable/submit_ico" />
 
         </LinearLayout>
     </LinearLayout>

@@ -12,6 +12,7 @@
         android:layout_weight="0.8"
         android:orientation="vertical">
 
+
     </LinearLayout>
 
     <LinearLayout
@@ -29,8 +30,8 @@
 
             <LinearLayout
                 android:id="@+id/admin_lv"
-                android:layout_width="@dimen/_85sdp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:background="@drawable/square_bg"
@@ -39,28 +40,29 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/_2sdp"
-                    android:background="@drawable/admin_icon"
+                    android:background="@drawable/admin_ico"
                     android:gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:id="@+id/tv_admin"
                     android:gravity="center"
                     android:text="Admin"
-                    android:textSize="@dimen/_11sdp" />
+                    android:textSize="@dimen/_13sdp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/staff_lv"
 
-                android:layout_width="@dimen/_85sdp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_30sdp"
                 android:background="@drawable/square_bg"
@@ -69,10 +71,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/staff_icon"
+                    android:background="@drawable/staff_ico"
                     android:gravity="center" />
 
                 <TextView
@@ -80,8 +82,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
+                    android:id="@+id/tv_staff"
                     android:text="Staff"
-                    android:textSize="@dimen/_11sdp" />
+                    android:textSize="@dimen/_13sdp" />
 
             </LinearLayout>
         </LinearLayout>

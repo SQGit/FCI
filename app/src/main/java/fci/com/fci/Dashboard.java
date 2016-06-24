@@ -1,6 +1,7 @@
 package fci.com.fci;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,13 +9,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Ramya on 10-06-2016.
  */
-public class Dashboard extends AppCompatActivity
-{
+public class Dashboard extends AppCompatActivity {
     LinearLayout admin,staff;
+    TextView tv_admin,tv_staff;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,6 +29,15 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.dashboard);
         admin=(LinearLayout) findViewById(R.id.admin_lv);
         staff=(LinearLayout) findViewById(R.id.staff_lv);
+
+        tv_admin = (TextView) findViewById(R.id.tv_admin);
+        tv_staff = (TextView) findViewById(R.id.tv_staff);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
+
+        tv_admin.setTypeface(tf);
+        tv_staff.setTypeface(tf);
+
         admin.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -42,5 +56,42 @@ public class Dashboard extends AppCompatActivity
                 startActivity(i);
             }
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+       // super.onBackPressed();
+
+        new SweetAlertDialog(Dashboard.this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Do you want to exit the Application?")
+                .setConfirmText("Yes!")
+                .setCancelText("No")
+
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        Intent i1 = new Intent(Intent.ACTION_MAIN);
+                        i1.setAction(Intent.ACTION_MAIN);
+                        i1.addCategory(Intent.CATEGORY_HOME);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i1);
+                        finish();
+                        sDialog.dismiss();
+
+                    }
+                })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+
+                    }
+                })
+                .show();
+
+
     }
 }
