@@ -1,6 +1,7 @@
 package fci.com.fci;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -79,6 +80,14 @@ public class StaffViewEntry extends Activity{
             }
         });
 
+
+        tv_header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goStf = new Intent(getApplicationContext(),StaffDashboard.class);
+                startActivity(goStf);
+            }
+        });
 
 
 
