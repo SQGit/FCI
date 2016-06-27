@@ -120,7 +120,6 @@
                     android:id="@+id/et_password"
                     android:paddingLeft="@dimen/_10sdp"
                     android:maxLength="8"
-                    android:inputType="numberPassword"
                     android:drawableLeft="@drawable/pass_ico"
                     android:drawablePadding="@dimen/_5sdp"
                     android:textSize="@dimen/_13sdp"

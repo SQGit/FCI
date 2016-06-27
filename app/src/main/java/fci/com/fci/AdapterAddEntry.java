@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -45,11 +46,15 @@ public class AdapterAddEntry extends BaseAdapter {
     ArrayList<String> v_mm = new ArrayList<>();
     ArrayList<String> final_datas = new ArrayList<>();
     ArrayList<String> final_datas1 = new ArrayList<>();
-    private ZXingScannerView mScannerView;
     int sizz;
+    DbHelper dbclass;
+    ArrayList<String> getdata = new ArrayList<>();
+    ArrayList<String> getdata1 = new ArrayList<>();
+    ArrayList<String> getdata2 = new ArrayList<>();
+    private ZXingScannerView mScannerView;
 
 
-    AdapterAddEntry(Context c1, HashMap<Integer, String> v_mk, ArrayList<Integer> v_p, ArrayList<String> aa,int k) {
+    AdapterAddEntry(Context c1, HashMap<Integer, String> v_mk, ArrayList<Integer> v_p, ArrayList<String> aa, int k) {
         this.context = c1;
         if (!(dddd == null)) {
             Log.e("tag", "outside" + dddd);
@@ -107,31 +112,40 @@ public class AdapterAddEntry extends BaseAdapter {
 
         LayoutInflater inflat = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflat.inflate(R.layout.adapter_addentry, null);
-
-
         holder = (Holder) convertView.getTag();
+        holder = new Holder(convertView);
+        tf = Typeface.createFromAsset(context.getAssets(), "fonts/asin.TTF");
+        // holder.tv_vinno = (TextView) convertView.findViewById(R.id.tv_vinno);
+        holder.tv_make = (TextView) convertView.findViewById(R.id.tv_make);
+        holder.tv_startgug = (TextView) convertView.findViewById(R.id.tv_startgug);
+        holder.tv_endgug = (TextView) convertView.findViewById(R.id.tv_endgug);
+        holder.tv_vinno.setTypeface(tf);
+        holder.tv_make.setTypeface(tf);
+        holder.tv_startgug.setTypeface(tf);
+        holder.tv_endgug.setTypeface(tf);
 
-        Log.e("tag", "adapterTag" + dddd);
+        dbclass = new DbHelper(context);
+
+        getFromDb();
+
+        putData(position);
+
+
+
+
+
+
+
+
+
+
+     /*   Log.e("tag", "adapterTag" + dddd);
 
         if (!(dddd == null)) {
             if (!(dddd.isEmpty())) {
                 Log.e("tag", "outside" + dddd);
             }
         }
-
-        holder = new Holder(convertView);
-
-        tf = Typeface.createFromAsset(context.getAssets(), "fonts/asin.TTF");
-
-        // holder.tv_vinno = (TextView) convertView.findViewById(R.id.tv_vinno);
-        holder.tv_make = (TextView) convertView.findViewById(R.id.tv_make);
-        holder.tv_startgug = (TextView) convertView.findViewById(R.id.tv_startgug);
-        holder.tv_endgug = (TextView) convertView.findViewById(R.id.tv_endgug);
-
-        holder.tv_vinno.setTypeface(tf);
-        holder.tv_make.setTypeface(tf);
-        holder.tv_startgug.setTypeface(tf);
-        holder.tv_endgug.setTypeface(tf);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -163,7 +177,7 @@ public class AdapterAddEntry extends BaseAdapter {
 
 
         Log.e("tag", "" + v_pos.size());
-        Log.e("tag", "" + v_mm.size());
+        Log.e("tag", "" + v_mm.size());*/
 
       /*  if (!(v_pos.isEmpty())) {
             for (int i = 0; i < v_pos.size(); i++) {
@@ -237,6 +251,52 @@ public class AdapterAddEntry extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    private void getFromDb() {
+
+        Log.e("tag", "getfromdb");
+
+        Cursor cursor = dbclass.getFromDb();
+
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+
+                    String id = cursor.getString(cursor.getColumnIndex("pos"));
+                    String vin_no = cursor.getString(cursor.getColumnIndex("vinno"));
+                    String make = cursor.getString(cursor.getColumnIndex("make"));
+
+                    getdata.add(id);
+                    getdata1.add(vin_no);
+                    getdata2.add(make);
+
+                } while (cursor.moveToNext());
+            }
+        }
+
+        Log.e("tag","getfromdb"+getdata.size()+getdata1.size()+getdata2.size());
+
+
+    }
+
+    private void putData(int position) {
+        Log.e("tag", "putdata");
+
+        for (int k = 0; k < getdata.size(); k++) {
+
+            int da = Integer.parseInt(getdata.get(k));
+
+            if (da == position) {
+
+                holder.tv_vinno.setText(getdata1.get(k));
+                holder.tv_make.setText(getdata2.get(k));
+
+            }
+
+        }
+
     }
 
 
