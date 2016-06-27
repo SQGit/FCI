@@ -1,6 +1,7 @@
 package fci.com.fci;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -32,12 +33,17 @@ public class StaffAddEntry extends Activity{
     int siz_da;
     ImageView img_save;
 
+    DbHelper dbclass;
+    Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.staff_addentry);
 
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
+
+        dbclass = new DbHelper(context);
 
         lv_entries = (ListView) findViewById(R.id.listview);
 
@@ -57,7 +63,7 @@ public class StaffAddEntry extends Activity{
         tv_save = (TextView) findViewById(R.id.tv_save);
         tv_note = (TextView) findViewById(R.id.tv_note);
         tv_add_another = (TextView) findViewById(R.id.tv_add_another);
-        img_save = (ImageView) findViewById(R.id.img_save);
+       // img_save = (ImageView) findViewById(R.id.img_save);
 
 
         tv_header.setTypeface(tf,1);
@@ -101,7 +107,7 @@ public class StaffAddEntry extends Activity{
             }
         });
 
-        img_save.setOnClickListener(new View.OnClickListener() {
+        tv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -112,6 +118,8 @@ public class StaffAddEntry extends Activity{
                     editor.remove("vv_make"+i);
                     editor.commit();
                 }
+
+                dbclass.deleteDb();
 
                 Intent goasdf = new Intent(getApplicationContext(),StaffDashboard.class);
                 startActivity(goasdf);

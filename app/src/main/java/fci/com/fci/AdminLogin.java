@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Ramya on 11-06-2016.
@@ -54,13 +55,15 @@ public class AdminLogin extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         } else {
-
+                            Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
                         }
 
                     } else {
-
+                        Toast.makeText(getApplicationContext(), "Password not empty", Toast.LENGTH_LONG).show();
                     }
                 } else {
+
+                    Toast.makeText(getApplicationContext(), "Phone not empty", Toast.LENGTH_LONG).show();
 
                 }
 

@@ -66,7 +66,7 @@
                     android:layout_centerVertical="true"
                     android:paddingLeft="@dimen/_45sdp"
                     android:gravity="center|center_vertical|center_horizontal"
-                    android:drawableLeft="@drawable/edit_comp_ico"
+                    android:drawableLeft="@drawable/create_staff_ico"
                     android:text="Create Staff"
                     android:textSize="@dimen/_13sdp" />
 
@@ -107,7 +107,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/_47sdp"
                 android:gravity="center|center_vertical|center_horizontal"
-                android:drawableLeft="@drawable/edit_comp_ico"
+                android:drawableLeft="@drawable/edit_staff_ico"
                 android:text="Edit Staff"
                 android:textSize="@dimen/_13sdp" />
 
@@ -185,7 +185,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/_46sdp"
                 android:gravity="center|center_vertical|center_horizontal"
-                android:drawableLeft="@drawable/create_comp_ico"
+                android:drawableLeft="@drawable/edit_comp_ico"
                 android:text="Edit Company"
                 android:textSize="@dimen/_13sdp" />
 

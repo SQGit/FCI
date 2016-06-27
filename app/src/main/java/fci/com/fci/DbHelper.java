@@ -114,4 +114,14 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
+    protected void deleteDb() {
+        Log.d("tag", "insertdb ");
+
+        SQLiteDatabase sdb1;
+        sdb1 = getWritableDatabase();
+        String query = " DELETE from fci_entry ";
+        sdb1.execSQL(query);
+    }
+
+
 }
