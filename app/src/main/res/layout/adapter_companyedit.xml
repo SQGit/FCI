@@ -1,49 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:id="@+id/layout_bg"
     android:paddingBottom="15dp"
-    android:paddingTop="15dp">
+    android:paddingTop="15dp"
+    android:weightSum="4">
 
 
     <TextView
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:paddingLeft="@dimen/_10sdp"
         android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:gravity="left"
+        android:paddingLeft="@dimen/_7sdp"
         android:text="Tim"
         android:textColor="@color/textColorDark"
+        android:singleLine="true"
+
         android:textSize="@dimen/_10sdp" />
 
     <TextView
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/_10sdp"
-        android:gravity="left"
         android:id="@+id/tv_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="@dimen/_5sdp"
         android:text="734837-373-3838"
+        android:layout_weight="1"
+        android:singleLine="true"
+
         android:textColor="@color/textColorDark"
         android:textSize="@dimen/_10sdp" />
 
     <TextView
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:paddingLeft="@dimen/_10sdp"
         android:id="@+id/tv_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
         android:text="7346"
+        android:layout_weight="0.8"
+android:singleLine="true"
         android:textColor="@color/textColorDark"
         android:textSize="@dimen/_10sdp" />
 
     <TextView
-        android:layout_width="@dimen/_120sdp"
+        android:id="@+id/tv_editview"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:id="@+id/tv_editview"
         android:text="Edit/View"
+        android:layout_weight="1"
+        android:singleLine="true"
+
         android:textColor="@android:color/holo_red_light"
         android:textSize="@dimen/_10sdp" />
 

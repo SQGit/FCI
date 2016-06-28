@@ -248,11 +248,7 @@ public class AdminStaffCreate extends AppCompatActivity {
                 if (et_pin4.getText().length() == 1) {
                     str_pin = et_pin1.getText().toString() + et_pin2.getText().toString() + et_pin3.getText().toString() + et_pin4.getText().toString();
                     str_repin = et_repin1.getText().toString() + et_repin2.getText().toString() + et_repin3.getText().toString() + et_repin4.getText().toString();
-                    //Toast.makeText(getApplicationContext(),pin,Toast.LENGTH_LONG).show();
-                    Log.d("tag", "" + str_pin + str_repin);
-
                     submit.requestFocus();
-
                 } else {
                     et_repin4.requestFocus();
                 }
@@ -269,17 +265,6 @@ public class AdminStaffCreate extends AppCompatActivity {
                 str_phone = et_phone.getText().toString();
                 str_pin = et_pin1.getText().toString() + et_pin2.getText().toString() + et_pin3.getText().toString() + et_pin4.getText().toString();
                 str_repin = et_repin1.getText().toString() + et_repin2.getText().toString() + et_repin3.getText().toString() + et_repin4.getText().toString();
-
-/*
-                if (str_pin == str_repin) {
-                    Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
-                    startActivity(i);
-                } else {
-                    et_pin1.requestFocus();
-                    Toast.makeText(getApplicationContext(), "Pin not matech", Toast.LENGTH_LONG).show();
-                    Log.d("tag", str_pin + str_repin);
-                }*/
-
                 if (!(str_name.isEmpty())) {
                     if (!(str_phone.isEmpty() || str_phone.length() < 4 || str_phone.length() > 10)) {
                         if (!(str_pin == str_repin)) {
@@ -358,14 +343,10 @@ public class AdminStaffCreate extends AppCompatActivity {
         protected void onPostExecute(String s) {
             Log.d("tag", "<-----rerseres---->" + s);
             super.onPostExecute(s);
-
             sweetDialog.dismiss();
-
             try {
                 JSONObject jo = new JSONObject(s);
-
                 String status = jo.getString("status");
-
                 String msg = jo.getString("message");
                 Log.d("tag", "<-----Status----->" + status);
 

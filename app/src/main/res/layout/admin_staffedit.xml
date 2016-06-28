@@ -96,17 +96,18 @@
                 android:weightSum="4">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/tv_name"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:text="Name"
+                    android:paddingLeft="@dimen/_10sdp"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_11sdp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/tv_phone"
@@ -117,22 +118,23 @@
                     android:textSize="@dimen/_11sdp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/tv_password"
-                    android:gravity="center"
+                    android:gravity="right"
                     android:text="Password"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_11sdp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:id="@+id/tv_edit"
                     android:text="Edit/View"
+                    android:paddingLeft="@dimen/_27sdp"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_11sdp" />
 

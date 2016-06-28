@@ -41,12 +41,13 @@ public class AdapterCompanyEdit extends BaseAdapter {
     SweetAlertDialog sweetDialog;
 
 
-    AdapterCompanyEdit(Context c1, ArrayList<String> name, ArrayList<String>location, ArrayList<String> email,ArrayList<String> manager_phone) {
+    AdapterCompanyEdit(Context c1, ArrayList<String> name, ArrayList<String>location, ArrayList<String> email,ArrayList<String> manager_phone,ArrayList<String>manager_name) {
         this.context = c1;
         this.com_name = name;
         this.com_email = email;
         this.manager_phone = manager_phone;
         this.com_loc=location;
+        this.manager_name=manager_name;
 
 
     }
@@ -102,8 +103,8 @@ public class AdapterCompanyEdit extends BaseAdapter {
 
 
         tv_name.setText(com_name.get(position));
-        tv_phone.setText(com_email.get(position));
-        tv_password.setText(com_loc.get(position));
+        tv_phone.setText(com_loc.get(position));
+        tv_password.setText(manager_phone.get(position));
 
 
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -148,6 +149,8 @@ public class AdapterCompanyEdit extends BaseAdapter {
                 goupdate.putExtra("location",com_loc.get(position) );
                 goupdate.putExtra("phone",manager_phone.get(position));
                 goupdate.putExtra("email",com_email.get(position));
+                goupdate.putExtra("managerName",manager_name.get(position));
+
                 context.startActivity(goupdate);
             }
         });
@@ -203,16 +206,10 @@ public class AdapterCompanyEdit extends BaseAdapter {
 
             try {
                 JSONObject jo = new JSONObject(s);
-
                 String status = jo.getString("status");
-
                 String msg = jo.getString("message");
                 Log.d("tag", "<-----Status----->" + status);
-
-
                 if (status.equals("success")) {
-                    Log.d("tag", "<-----msg----->" + msg);
-                   // notifyDataSetChanged();
                     new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
                             .setTitleText("Success")
                             .setContentText(msg)
@@ -221,11 +218,8 @@ public class AdapterCompanyEdit extends BaseAdapter {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-
-                                  //  notifyDataSetChanged();
                                     Intent goDash = new Intent(context, AdminCreateCompany.class);
                                     context.startActivity(goDash);
-
                                 }
                             })
                             .show();
@@ -241,11 +235,7 @@ public class AdapterCompanyEdit extends BaseAdapter {
 
                                 }
                             })
-                            .show();
-
-                }
-
-
+                            .show();}
             } catch (JSONException e) {
                 e.printStackTrace();
             }

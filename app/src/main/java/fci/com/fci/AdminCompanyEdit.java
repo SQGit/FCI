@@ -32,6 +32,7 @@ public class AdminCompanyEdit extends Activity {
     ArrayList<String> ar_com_loc = new ArrayList<>();
     ArrayList<String> ar_com_phone = new ArrayList<>();
     ArrayList<String> ar_com_email = new ArrayList<>();
+    ArrayList<String> ar_com_managerName = new ArrayList<>();
 
     Typeface tf;
 
@@ -42,9 +43,7 @@ public class AdminCompanyEdit extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_companyedit);
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
-
         lv_staffsList = (ListView) findViewById(R.id.listview);
-
         tv_header = (TextView) findViewById(R.id.tv_header);
         tv_name_txt = (TextView) findViewById(R.id.tv_name);
         tv_phone_txt = (TextView) findViewById(R.id.tv_phone);
@@ -150,13 +149,8 @@ public class AdminCompanyEdit extends Activity {
                 if (status.equals("success")) {
                     JSONArray staff_datas = jo.getJSONArray("company");
                     Log.d("tag", "<-----company----->" + "" + staff_datas);
-
-                 //   company_name, company_location, company_email, mgr_name, mgr_phone, alt_mgr_name, alt_mgr_phone
-
                     for (int i = 0; i < staff_datas.length(); i++) {
-
                         JSONObject datas = staff_datas.getJSONObject(i);
-
                         HashMap<String, String> map = new HashMap<String, String>();
                         map.put("company_name", datas.getString("company_name"));
                         map.put("company_location", datas.getString("company_location"));
@@ -165,19 +159,15 @@ public class AdminCompanyEdit extends Activity {
                         map.put("mgr_phone", datas.getString("mgr_phone"));
                         map.put("alt_mgr_name", datas.getString("alt_mgr_name"));
                         map.put("alt_mgr_phone", datas.getString("alt_mgr_phone"));
-
                         ar_com_name.add(i,datas.getString("company_name"));
                         ar_com_loc.add(i,datas.getString("company_location"));
                         ar_com_phone.add(i,datas.getString("mgr_phone"));
                         ar_com_email.add(i,datas.getString("company_email"));
-
+                        ar_com_managerName.add(i,datas.getString("mgr_name"));
                     }
 
-
-                    AdapterCompanyEdit staff_adapter = new AdapterCompanyEdit(AdminCompanyEdit.this,ar_com_name,ar_com_loc,ar_com_email,ar_com_phone);
-
+                    AdapterCompanyEdit staff_adapter = new AdapterCompanyEdit(AdminCompanyEdit.this,ar_com_name,ar_com_loc,ar_com_email,ar_com_phone,ar_com_managerName);
                     lv_staffsList.setAdapter(staff_adapter);
-
 
                 }
                 else {

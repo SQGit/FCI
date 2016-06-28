@@ -28,12 +28,13 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class AdminCreateCompany extends AppCompatActivity {
     ImageView submit;
     TextView tv_header, tv_add_manag;
-    EditText et_comp_name, et_comp_loc, et_manag_name, et_manag_phone,et_comp_email;
+    EditText et_comp_name, et_comp_loc, et_manag_name, et_manag_phone, et_comp_email;
     Typeface tf;
     LinearLayout lt_add;
     SweetAlertDialog sweetDialog;
-    String createCompany,companyname,companylocation,companyemail,managername,managerphone,altermanagername,altermanagerphone,str_address;
-int sss;
+    String companyname, companylocation, companyemail, managername, managerphone, altermanagername, altermanagerphone, str_address;
+    int sss;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,32 +59,30 @@ int sss;
         et_manag_name.setTypeface(tf);
         et_manag_phone.setTypeface(tf);
         et_comp_email.setTypeface(tf);
-        createCompany = Data_Service.SERVICE_URL_NEW + "company/add";
+        str_address = Data_Service.SERVICE_URL_NEW + "company/add";
         Intent get_intent = getIntent();
-        sss = get_intent.getIntExtra("sts",0);
-        if(sss == 0){
+        sss = get_intent.getIntExtra("sts", 0);
+        if (sss == 0) {
             et_comp_loc.setEnabled(true);
             et_manag_name.setEnabled(true);
             et_comp_email.setEnabled(true);
             et_manag_phone.setEnabled(true);
-
-
-            Log.d("tag","fromdash");
+            Log.d("tag", "fromdash");
             str_address = Data_Service.SERVICE_URL_NEW + "company/add";
             tv_header.setText("Create Company");
-        }
-        else if(sss == 1){
-            String name = get_intent.getStringExtra("name");
+        } else if (sss == 1) {
+            companyname = get_intent.getStringExtra("name");
             String location = get_intent.getStringExtra("location");
             String phone = get_intent.getStringExtra("phone");
             String email = get_intent.getStringExtra("email");
-            str_address = Data_Service.SERVICE_URL + "company/update";
-            Log.d("tag","fromUpdate");
+            String managerName = get_intent.getStringExtra("managerName");
+            str_address = Data_Service.SERVICE_URL_NEW + "company/update";
+            Log.d("tag", "fromUpdate");
+            et_comp_name.setText(companyname);
             et_comp_loc.setText(location);
             et_comp_email.setText(email);
-            et_manag_name.setText(name);
+            et_manag_name.setText(managerName);
             et_manag_phone.setText(phone);
-
             et_comp_name.setEnabled(false);
             et_comp_loc.requestFocus();
             tv_header.setText("Update Company");
@@ -92,21 +91,17 @@ int sss;
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(AdminCreateCompany.this);
-                String code= sharedPreferences.getString("tag", "");
-                if((code == ""))
-                {
-                    managername=et_manag_name.getText().toString();
-                    managerphone=et_manag_phone.getText().toString();
+                String code = sharedPreferences.getString("tag", "");
+                if ((code == "")) {
+                    managername = et_manag_name.getText().toString();
+                    managerphone = et_manag_phone.getText().toString();
+                } else {
+                    altermanagername = et_manag_name.getText().toString();
+                    altermanagerphone = et_manag_phone.getText().toString();
                 }
-                else
-                {
-                    altermanagername=et_manag_phone.getText().toString();
-                    altermanagerphone=et_manag_phone.getText().toString();
-                }
-                companyname=et_comp_name.getText().toString();
-                companylocation=et_comp_loc.getText().toString();
-                companyemail=et_comp_email.getText().toString();
-
+                companyname = et_comp_name.getText().toString();
+                companylocation = et_comp_loc.getText().toString();
+                companyemail = et_comp_email.getText().toString();
                 new createCompany_Task().execute();
 
 
@@ -124,20 +119,17 @@ int sss;
 
         lt_add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor edit = s_pref.edit();
                 edit.putString("tag", "1234");
                 edit.commit();
-                managername=et_manag_name.getText().toString();
-                managerphone=et_manag_phone.getText().toString();
+                managername = et_manag_name.getText().toString();
+                managerphone = et_manag_phone.getText().toString();
                 et_manag_name.setText("");
                 et_manag_phone.setText("");
                 et_manag_name.requestFocus();
-
-                Log.e("tag","managerrr"+managername+managerphone);
-                Log.e("tag","ALTERRmanagerrr"+altermanagername+altermanagerphone);
-
 
             }
         });
@@ -150,14 +142,11 @@ int sss;
 
         protected void onPreExecute() {
             super.onPreExecute();
-
             sweetDialog = new SweetAlertDialog(AdminCreateCompany.this, SweetAlertDialog.PROGRESS_TYPE);
             sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#FFE64A19"));
             sweetDialog.setTitleText("Loading");
             sweetDialog.setCancelable(false);
-            sweetDialog.show();
-
-        }
+            sweetDialog.show();}
 
         @Override
         protected String doInBackground(String... params) {
@@ -173,7 +162,7 @@ int sss;
                 jsonObject.accumulate("alt_mgr_name", altermanagername);
                 jsonObject.accumulate("alt_mgr_phone", altermanagerphone);
                 json = jsonObject.toString();
-                return jsonStr = PostService.makeRequest(createCompany, json);
+                return jsonStr = PostService.makeRequest(str_address, json);
             } catch (Exception e) {
                 Log.d("InputStream", e.getLocalizedMessage());
             }
@@ -191,13 +180,9 @@ int sss;
 
             try {
                 JSONObject jo = new JSONObject(s);
-
                 String status = jo.getString("status");
-
                 String msg = jo.getString("message");
                 Log.d("tag", "<-----Status----->" + status);
-
-
                 if (status.equals("success")) {
                     Log.d("tag", "<-----msg----->" + msg);
                     new SweetAlertDialog(AdminCreateCompany.this, SweetAlertDialog.SUCCESS_TYPE)
@@ -208,8 +193,8 @@ int sss;
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                   Intent goDash = new Intent(getApplicationContext(), AdminDashboard.class);
-                                   startActivity(goDash);
+                                    Intent goDash = new Intent(getApplicationContext(), AdminDashboard.class);
+                                    startActivity(goDash);
                                     finish();
                                 }
                             })
