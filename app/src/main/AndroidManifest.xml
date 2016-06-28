@@ -84,7 +84,12 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
         </activity>
-
+        <activity
+            android:name=".AdminCompanyEdit"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
         <activity
             android:name=".BarScan"
             android:screenOrientation="landscape"

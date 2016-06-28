@@ -28,15 +28,11 @@ public class AdminLogin extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.admin_login_1);
-
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
-
-
         submit = (ImageView) findViewById(R.id.submit_iv);
         tv_header = (TextView) findViewById(R.id.tv_header);
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_pass = (EditText) findViewById(R.id.et_password);
-
         tv_header.setTypeface(tf);
         et_phone.setTypeface(tf);
         et_pass.setTypeface(tf);
@@ -44,10 +40,8 @@ public class AdminLogin extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 str_phone = et_phone.getText().toString();
                 str_pass = et_pass.getText().toString();
-
                 if (!(str_phone.isEmpty())) {
                     if (!(str_pass.isEmpty())) {
                         if ((str_phone.matches("12345") && str_pass.matches("admin"))) {

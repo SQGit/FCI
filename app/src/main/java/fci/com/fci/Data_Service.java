@@ -10,6 +10,8 @@ import android.net.NetworkInfo;
 public class Data_Service {
 
     static final String SERVICE_URL = "http://fci.sqindia.net/";
+    static final String SERVICE_URL_NEW = "http://androidtesting.newlogics.in/";
+
 
     public static boolean isNetworkAvailable(Context c1) {
         ConnectivityManager connectivityManager

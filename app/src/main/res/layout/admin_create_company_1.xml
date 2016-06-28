@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:weightSum="4">
+    android:weightSum="4.5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.7"
+        android:layout_weight="4"
         android:orientation="vertical">
 
 
@@ -67,7 +67,7 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:hint="Company Name"
                     android:id="@+id/et_comp_name"
@@ -115,9 +115,9 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:hint="Company Name"
+                    android:hint="Company Location"
                     android:id="@+id/et_comp_location"
                     android:drawableLeft="@drawable/comp_loc_ico"
                     android:paddingLeft="@dimen/_10sdp"
@@ -136,8 +136,6 @@
                 android:background="@drawable/dr_img"
                 android:rotation="180" />
         </RelativeLayout>
-
-
 
         <RelativeLayout
             android:layout_width="@dimen/_200sdp"
@@ -161,7 +159,51 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:hint="Company Email"
+                    android:id="@+id/et_comp_email"
+                    android:drawableLeft="@drawable/comp_loc_ico"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:inputType="textEmailAddress"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/newone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/dr_img" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:hint="Manager Name"
                     android:id="@+id/et_manager_name"
@@ -208,7 +250,7 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:hint="Phone"
                     android:id="@+id/et_manager_phone"
@@ -327,7 +369,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="horizontal">
 
             <ImageView
@@ -339,12 +382,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="vertical">
 
-
-    </LinearLayout>
 </LinearLayout>

@@ -26,20 +26,16 @@ public class AdminDashboard extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.admin_dashboard_1);
-
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
-
         tv_header = (TextView) findViewById(R.id.tv_header);
         tv_createstaff = (TextView) findViewById(R.id.tv_create_staff);
         tv_editstaff = (TextView) findViewById(R.id.tv_edit_staff);
         tv_createcomp = (TextView) findViewById(R.id.tv_create_companey);
         tv_editcomp = (TextView) findViewById(R.id.tv_edit_companey);
-
         lt_stf_cr  = (RelativeLayout) findViewById(R.id.lt_create_staff);
         lt_stf_ed  = (RelativeLayout) findViewById(R.id.lt_edit_staff);
         lt_comp_cr  = (RelativeLayout) findViewById(R.id.lt_create_company);
         lt_comp_ed  = (RelativeLayout) findViewById(R.id.lt_edit_company);
-
         tv_header.setTypeface(tf);
         tv_createstaff.setTypeface(tf);
         tv_editstaff.setTypeface(tf);
@@ -72,6 +68,14 @@ public class AdminDashboard extends AppCompatActivity {
             }
         });
 
+        lt_comp_ed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i=new Intent(getApplicationContext(),AdminCompanyEdit.class);
+                startActivity(i);
+            }
+        });
 
 
 

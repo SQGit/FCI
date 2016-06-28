@@ -67,12 +67,8 @@ public class AdminStaffCreate extends AppCompatActivity {
         tv_pass_txt = (TextView) findViewById(R.id.tv_password);
         tv_repass_txt = (TextView) findViewById(R.id.tv_repassword);
 
-
-
-
         sss = get_intent.getIntExtra("sts",0);
         Log.d("tag",""+status);
-
         if(sss == 0){
             et_phone.setEnabled(true);
             Log.d("tag","fromdash");
@@ -91,13 +87,6 @@ public class AdminStaffCreate extends AppCompatActivity {
             et_pin1.requestFocus();
             tv_header.setText("Update Staff");
         }
-
-
-
-
-
-
-
 
         tv_header.setTypeface(tf);
         et_name.setTypeface(tf);

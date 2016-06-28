@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/layout_bg"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp">
+
+
+    <TextView
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="@dimen/_10sdp"
+        android:id="@+id/tv_name"
+        android:text="Tim"
+        android:textColor="@color/textColorDark"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/_10sdp"
+        android:gravity="left"
+        android:id="@+id/tv_phone"
+        android:text="734837-373-3838"
+        android:textColor="@color/textColorDark"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="@dimen/_10sdp"
+        android:id="@+id/tv_password"
+        android:text="7346"
+        android:textColor="@color/textColorDark"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:id="@+id/tv_editview"
+        android:text="Edit/View"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/_10sdp" />
+
+</LinearLayout>
