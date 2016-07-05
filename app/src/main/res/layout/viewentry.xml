@@ -38,6 +38,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/staff_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -54,6 +55,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/logout_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -92,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Company:"
+                android:visibility="invisible"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -101,13 +104,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Hertz"
+                android:text="Company1"
+                android:visibility="invisible"
+
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
             <View
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
+                android:visibility="invisible"
+
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:background="@color/bg2" />
 
@@ -117,7 +124,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Company:"
+                android:text="Manager:"
+                android:visibility="invisible"
+
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -127,7 +136,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Hertz"
+                android:visibility="invisible"
+                android:text="raman"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -148,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="22/06/2016"
+                android:text="01/07/2016"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -174,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Hertz"
+                android:text="18:57"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -216,6 +226,7 @@
                     android:ems="6"
                     android:gravity="center"
                     android:text="StaffName"
+                    android:paddingLeft="@dimen/_25sdp"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_11sdp" />
 
@@ -224,7 +235,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="right"
                     android:text="Total Gallons"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_10sdp" />
@@ -234,8 +245,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="left"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:gravity="right"
                 android:text="View"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
@@ -245,9 +255,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="left"
-                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:gravity="right"
                     android:text="Status"
+                    android:paddingRight="@dimen/_20sdp"
+
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_10sdp" />
 
@@ -256,7 +267,9 @@
             <ListView
                 android:id="@+id/listview"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_140sdp"></ListView>
+                android:layout_height="@dimen/_140sdp">
+
+            </ListView>
 
 
 

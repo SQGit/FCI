@@ -123,6 +123,7 @@
                     android:drawableLeft="@drawable/pass_ico"
                     android:drawablePadding="@dimen/_5sdp"
                     android:textSize="@dimen/_13sdp"
+                    android:inputType="textPassword"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
                     />

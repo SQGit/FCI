@@ -24,6 +24,46 @@ import java.net.UnknownHostException;
 public class PostService {
 
     public static final String TAG = "tagH";
+    public static String makeRequest12(String url, String json) {
+        Log.v(TAG, "URL-->" + url);
+        Log.v(TAG, "input-->" + json);
+
+
+        try {
+            Log.v(TAG, "inside-->");
+
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setEntity(new StringEntity(json));
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
+            httpPost.setHeader("formid", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
+
+            HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
+
+
+            // receive response as inputStream
+            InputStream inputStream = httpResponse.getEntity().getContent();
+            // convert inputstream to string
+            if (inputStream != null) {
+                String result = convertInputStreamToString(inputStream);
+                Log.e(TAG, "output-->" + result);
+                return result;
+            } else {
+                Log.e(TAG, "output-->" + inputStream);
+
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
 
     public static String makeRequest(String url, String json) {

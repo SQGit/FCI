@@ -10,10 +10,15 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -46,13 +51,21 @@ public class AdapterAddEntry extends BaseAdapter {
     ArrayList<String> v_mm = new ArrayList<>();
     ArrayList<String> final_datas = new ArrayList<>();
     ArrayList<String> final_datas1 = new ArrayList<>();
-    int sizz;
+    static int sizz;
     DbHelper dbclass;
     ArrayList<String> getdata = new ArrayList<>();
     ArrayList<String> getdata1 = new ArrayList<>();
     ArrayList<String> getdata2 = new ArrayList<>();
-    private ZXingScannerView mScannerView;
+    ArrayList<String> getStart = new ArrayList<>();
+    ArrayList<String> getEnd = new ArrayList<>();
 
+
+    StaffAddEntry staffaddEntry;
+    private ZXingScannerView mScannerView;
+    ArrayList<String> s = new ArrayList<>();
+
+    String tanks[] = {"1/2 tank", "1/4 tank", "3/4 tank"};
+    String spn;
 
     AdapterAddEntry(Context c1, HashMap<Integer, String> v_mk, ArrayList<Integer> v_p, ArrayList<String> aa, int k) {
         this.context = c1;
@@ -68,26 +81,12 @@ public class AdapterAddEntry extends BaseAdapter {
 
     public void getData() {
 
-        //new getVin_Make(dddd).execute();
-
-        /*if (!(dddd.isEmpty())) {
-            Log.e("tag", "" + dddd + "pos--" + post);
-            //tv_vinno.setText(dddd);
-
-
-        }*/
-
-
     }
 
 
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
-       /* if (!(dddd.isEmpty())) {
-            Log.d("tag", "notify" + dddd );
-        }*/
-
 
     }
 
@@ -114,105 +113,52 @@ public class AdapterAddEntry extends BaseAdapter {
         convertView = inflat.inflate(R.layout.adapter_addentry, null);
         holder = (Holder) convertView.getTag();
         holder = new Holder(convertView);
+        staffaddEntry = new StaffAddEntry();
         tf = Typeface.createFromAsset(context.getAssets(), "fonts/asin.TTF");
         // holder.tv_vinno = (TextView) convertView.findViewById(R.id.tv_vinno);
         holder.tv_make = (TextView) convertView.findViewById(R.id.tv_make);
-        holder.tv_startgug = (TextView) convertView.findViewById(R.id.tv_startgug);
-        holder.tv_endgug = (TextView) convertView.findViewById(R.id.tv_endgug);
+        holder.tv_startgug = (Spinner) convertView.findViewById(R.id.tv_startgug);
+        holder.tv_endgug = (Spinner) convertView.findViewById(R.id.tv_endgug);
         holder.tv_vinno.setTypeface(tf);
         holder.tv_make.setTypeface(tf);
-        holder.tv_startgug.setTypeface(tf);
-        holder.tv_endgug.setTypeface(tf);
-
         dbclass = new DbHelper(context);
-
         getFromDb();
-
         putData(position);
-
-
-
-
-
-
-
-
-
-
-     /*   Log.e("tag", "adapterTag" + dddd);
-
-        if (!(dddd == null)) {
-            if (!(dddd.isEmpty())) {
-                Log.e("tag", "outside" + dddd);
-            }
-        }
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        if (!(sharedPreferences.getString("data", "").isEmpty())) {
-
-            String vinno = sharedPreferences.getString("data", "");
-            String asd = sharedPreferences.getString("pos", "");
-            String make = sharedPreferences.getString("make", "");
-            int ss = Integer.valueOf(asd);
-
-        }
-
-        if (!(sharedPreferences.getString("vv_vin" + position, "").isEmpty())) {
-
-            for (int i = 0; i < 2; i++) {
-                final_datas.add(sharedPreferences.getString("vv_vin" + position, ""));
-                final_datas1.add(sharedPreferences.getString("vv_make" + position, ""));
-            }
-
-        }
-
-        if (!(final_datas.isEmpty())) {
-            for (int i = 0; i < final_datas.size(); i++) {
-
-                holder.tv_vinno.setText(final_datas.get(i));
-                holder.tv_make.setText(final_datas1.get(i));
-            }
-        }
-
-
-        Log.e("tag", "" + v_pos.size());
-        Log.e("tag", "" + v_mm.size());*/
-
-      /*  if (!(v_pos.isEmpty())) {
-            for (int i = 0; i < v_pos.size(); i++) {
-                if (v_pos.get(i).equals(position)) {
-
-                    holder.tv_vinno.setText(v_mm.get(i));
-                    holder.tv_make.setText(make);
-                }
-            }
-
-        }*/
-
-
-      /*  if (ss == position) {
-
-            if (!(vinno.isEmpty())) {
-                holder.tv_vinno.setText(vinno);
-                holder.tv_make.setText(make);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, tanks);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.tv_startgug.setAdapter(spinnerArrayAdapter);
+        holder.tv_endgug.setAdapter(spinnerArrayAdapter);
+        holder.tv_startgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spn = holder.tv_startgug.getSelectedItem().toString();
+                dbclass.insertIntoDB2(position, spn);
 
 
             }
-        }
-*/
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-
-
-       /* if(!(vin_make.isEmpty())){
-            for (int i = 0; i< vin_make.size(); i++){
-                if(vin_make.get(position).equals(position)){
-                    holder.tv_vinno.setText(vin_make.get(position));
-
-                }
             }
-        }*/
+        });
+
+
+        holder.tv_endgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spn = holder.tv_endgug.getSelectedItem().toString();
+                dbclass.insertIntoDB3(position, spn);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        staffaddEntry.name.put(position, holder.tv_make.getText().toString());
 
 
         holder.tv_vinno.setOnClickListener(new View.OnClickListener() {
@@ -223,12 +169,8 @@ public class AdapterAddEntry extends BaseAdapter {
                 Intent goScan = new Intent(context, BarScan.class);
                 goScan.putExtra("pos", position);
                 context.startActivity(goScan);
-
-
                 for (int i = 0; i < sizz; i++) {
-
                     if (!(holder.tv_vinno.getText().toString().contains("Scan Vin"))) {
-
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("vv_vin" + position, holder.tv_vinno.getText().toString());
@@ -236,9 +178,7 @@ public class AdapterAddEntry extends BaseAdapter {
                         editor.commit();
                     }
                 }
-
                 post = position;
-
                 if (!(dddd == null)) {
                     if (!(dddd.isEmpty())) {
                         Log.e("tag", "" + dddd);
@@ -249,7 +189,6 @@ public class AdapterAddEntry extends BaseAdapter {
             }
         });
 
-
         return convertView;
     }
 
@@ -258,156 +197,68 @@ public class AdapterAddEntry extends BaseAdapter {
         Log.e("tag", "getfromdb");
 
         Cursor cursor = dbclass.getFromDb();
-
-
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-
                     String id = cursor.getString(cursor.getColumnIndex("pos"));
                     String vin_no = cursor.getString(cursor.getColumnIndex("vinno"));
                     String make = cursor.getString(cursor.getColumnIndex("make"));
-
+                    String start = cursor.getString(cursor.getColumnIndex("st_g"));
+                    String end = cursor.getString(cursor.getColumnIndex("ed_g"));
                     getdata.add(id);
                     getdata1.add(vin_no);
                     getdata2.add(make);
-
+                    getStart.add(start);
+                    getEnd.add(end);
                 } while (cursor.moveToNext());
+
             }
         }
 
-        Log.e("tag","getfromdb"+getdata.size()+getdata1.size()+getdata2.size());
+        Log.e("tag", "getfromdb" + getdata.size() + getdata1.size() + getdata2.size());
+        Log.e("tag", "starttt" + getStart.size() + getStart);
 
 
     }
+
+
+
+
 
     private void putData(int position) {
         Log.e("tag", "putdata");
-
         for (int k = 0; k < getdata.size(); k++) {
-
             int da = Integer.parseInt(getdata.get(k));
-
             if (da == position) {
-
                 holder.tv_vinno.setText(getdata1.get(k));
                 holder.tv_make.setText(getdata2.get(k));
-
             }
-
         }
 
     }
 
+    public static String getAllValues() {
 
-    class getVin_Make extends AsyncTask<String, Void, String> {
-
-        String vin_no;
-        int pos;
-
-        //https://api.edmunds.com/api/vehicle/v2/vins/2G1FC3D33C9165616?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
-
-        String web_p1 = "https://api.edmunds.com/api/vehicle/v2/vins/";
-
-        String web_p2 = "?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9";
-
-        public getVin_Make(String vinno) {
-
-            this.vin_no = vinno;
-            // this.pos = pos;
+        for (int i = 0; i < sizz; i++)
+        {
+            ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+            HashMap<String, String> row1 = new HashMap<String, String>();
+            data.add(row1);
 
         }
 
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        protected String doInBackground(String... params) {
-
-            String json = "", jsonStr = "";
-
-
-            try {
-                vin_no = "2G1FC3D33C9165616";
-                String virtual_url = web_p1 + vin_no + web_p2;
-
-                JSONObject jsonobject = PostService.getVin(virtual_url);
-
-                Log.d("tag", "" + jsonobject.toString());
-
-                if (jsonobject.toString() == "sam") {
-                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText("Oops!")
-                            .setContentText("Try Check your Network")
-                            .setConfirmText("OK")
-                            .show();
-                }
-
-                json = jsonobject.toString();
-
-                return json;
-            } catch (Exception e) {
-                Log.e("InputStream", "" + e.getLocalizedMessage());
-                jsonStr = "";
-            }
-            return jsonStr;
-
-        }
-
-        @Override
-        protected void onPostExecute(String jsonStr) {
-            Log.e("tag", "<-----rerseres---->" + jsonStr);
-            super.onPostExecute(jsonStr);
-
-
-            try {
-
-                JSONObject jo = new JSONObject(jsonStr);
-
-                // String status = jo.getString("status");
-                // String msg = jo.getString("make");
-
-                if (!(jo.getString("make").isEmpty())) {
-                    String msg = jo.getString("make");
-                    Log.e("tag", "<>" + msg);
-
-                    JSONObject data = new JSONObject(msg);
-
-                    String name = data.getString("name");
-                    Log.e("tag", "<>" + name);
-
-
-                    //notifyDataSetChanged();
-
-//                    holder.tv_make.setText(name);
-
-                    Intent asdf = new Intent(context, StaffAddEntry.class);
-                    context.startActivity(asdf);
-
-
-                } else if (!(jo.getString("make").isEmpty())) {
-                    String status = jo.getString("status");
-                    Log.e("tag", "<>" + status);
-                }
-
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-        }
-
+        return "";
     }
+
+
 
 
     final class Holder {
         public TextView mTVItem;
         TextView tv_vinno;
         TextView tv_make;
-        TextView tv_startgug;
-        TextView tv_endgug;
+        Spinner tv_startgug;
+        Spinner tv_endgug;
 
 
         public Holder(View base) {
@@ -417,4 +268,6 @@ public class AdapterAddEntry extends BaseAdapter {
 
 
     }
+
+
 }

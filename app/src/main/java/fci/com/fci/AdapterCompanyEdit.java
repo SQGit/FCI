@@ -78,25 +78,18 @@ public class AdapterCompanyEdit extends BaseAdapter {
 
         LayoutInflater inflat = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflat.inflate(R.layout.adapter_staffedit, null);
-
         tf = Typeface.createFromAsset(context.getAssets(), "fonts/asin.TTF");
-
         tv_name = (TextView) convertView.findViewById(R.id.tv_name);
         tv_phone = (TextView) convertView.findViewById(R.id.tv_phone);
         tv_password = (TextView) convertView.findViewById(R.id.tv_password);
         tv_editview = (TextView) convertView.findViewById(R.id.tv_editview);
         lt_bg = (LinearLayout) convertView.findViewById(R.id.layout_bg);
-
         tv_name.setTypeface(tf);
         tv_phone.setTypeface(tf);
         tv_password.setTypeface(tf);
         tv_editview.setTypeface(tf);
-
-
         if (position % 2 == 0) {
             lt_bg.setBackgroundColor(context.getResources().getColor(R.color.bg1));
-
-
         } else {
             lt_bg.setBackgroundColor(context.getResources().getColor(R.color.bg2));
         }

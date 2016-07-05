@@ -1,13 +1,17 @@
 package fci.com.fci;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.google.zxing.Result;
@@ -31,7 +35,6 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
     public ArrayList<Integer> v_pos = new ArrayList<>();
     public ArrayList<String> v_mk = new ArrayList<>();
     SweetAlertDialog sweetDialog;
-
     DbHelper dbclass;
 
     @Override
@@ -42,10 +45,6 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
         Intent asdf = getIntent();
         position = asdf.getIntExtra("pos", 0);
         aaa = String.valueOf(position);
-
-        Log.e("tag", "" + position);
-
-
         dbclass = new DbHelper(context);
 
 
@@ -55,8 +54,18 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
     @Override
     public void onResume() {
         super.onResume();
-        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.startCamera();          // Start camera on resume
+      // Register ourselves as a handler for scan results.
+        if(isStoragePermissionGranted()) {
+            mScannerView.setResultHandler(this);
+            mScannerView.startCamera();
+        }
+        else {
+            mScannerView.setResultHandler(this);
+
+            mScannerView.startCamera();
+
+        }
+        // Start camera on resume
     }
 
     @Override
@@ -68,60 +77,24 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
 
     @Override
     public void handleResult(Result rawResult) {
-        // Do something with the result here
         Log.e("tag", rawResult.getText()); // Prints scan results
         Log.e("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
         String dddd = rawResult.getText();
         new getVin_Make(dddd).execute();
-
-         //AdapterAddEntry adapterAddEntry = new AdapterAddEntry(context,vin_make,v_pos,v_mk);
-
-        //adapterAddEntry.getData();
-
-
-        //  adapterAddEntry.dddd = rawResult.getText();
-        //adapterAddEntry.vin_make.put(position,rawResult.getText());
-
-        //adapterAddEntry.getData();
-
         StaffAddEntry staff = new StaffAddEntry();
-
-
         staff.vin_make.put(position, rawResult.getText());
-
         staff.v_pos.add(position);
         staff.v_mk.add(rawResult.getText());
-
-
         if (!(rawResult.getText().isEmpty())) {
-
-
             int i = 0;
-
-
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("data", rawResult.getText());
             editor.putString("pos", aaa);
             editor.putString("make", make);
-
             editor.putString("vv_vin"+position, rawResult.getText());
-
-
             editor.commit();
-
-/*
-            mScannerView.stopCamera();
-            this.finish();*/
-           /* String aa = rawResult.getText();
-            Intent goentry = new Intent(getApplicationContext(),StaffAddEntry.class);
-            goentry.putExtra("vin",aa);
-            startActivity(goentry);
-            finish();*/
         }
-
-        // If you would like to resume scanning, call this method below:
-        // mScannerView.resumeCameraPreview(this);
     }
 
 
@@ -155,7 +128,7 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
             String  kl = "https://api.edmunds.com/api/vehicle/v2/vins/2G1FC3D33C9165616?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9";
 
             try {
-                vin_no = "2G1FC3D33C9165616";
+              //  vin_no = "2G1FC3D33C9165616";
                 String virtual_url = web_p1 + vin_no + web_p2;
 
                 JSONObject jsonobject = PostService.getVin(kl);
@@ -183,28 +156,18 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
 
         @Override
         protected void onPostExecute(String jsonStr) {
-
             Log.e("tag", "<-----rerseres---->" + jsonStr);
+            mScannerView.stopCamera();
+
             super.onPostExecute(jsonStr);
-
-
             try {
-
                 JSONObject jo = new JSONObject(jsonStr);
-
-                // String status = jo.getString("status");
-                // String msg = jo.getString("make");
-
                 if (!(jo.getString("make").isEmpty())) {
                     String msg = jo.getString("make");
                     Log.e("tag", "<>" + msg);
-
                     JSONObject data = new JSONObject(msg);
-
                     String name = data.getString("name");
-
                     Log.e("tag", "<>" + name +vin_no+name);
-
                     dbclass.insertIntoDB(position,vin_no,name);
 
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -212,19 +175,7 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
                     editor.putString("make", name);
                     editor.putString("vv_make"+position,name);
                     editor.commit();
-
-
-
-
-                    mScannerView.stopCamera();
                     finish();
-
-                    //notifyDataSetChanged();
-
-//                    holder.tv_make.setText(name);
-
-                    /*Intent asdf = new Intent(context, StaffAddEntry.class);
-                    context.startActivity(asdf);*/
 
 
                 } else if (!(jo.getString("make").isEmpty())) {
@@ -244,6 +195,27 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
 
 
 
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.e("tag", "Permission is granted");
+                return true;
+            }
+            else
+            {
+
+                Log.e("tag", "Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.e("tag", "Permission is granted");
+            return true;
+        }
+
+
+    }
 
 
 

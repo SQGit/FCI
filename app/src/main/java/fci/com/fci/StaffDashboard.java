@@ -28,15 +28,11 @@ public class StaffDashboard extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.staff_dashboard_1);
 
-        tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
-
-
+       tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
         tv_header = (TextView) findViewById(R.id.tv_header);
         addentry = (TextView) findViewById(R.id.tv_add_entry);
         viewentry = (TextView) findViewById(R.id.tv_view_entry);
-        //reports = (TextView) findViewById(R.id.reports_et);
         setings = (TextView) findViewById(R.id.tv_settings);
-
         lt_addentry = (RelativeLayout) findViewById(R.id.layout_addentry);
         lt_viewentry = (RelativeLayout) findViewById(R.id.layout_viewentry);
         lt_settings = (RelativeLayout) findViewById(R.id.layout_settings);
@@ -53,7 +49,7 @@ public class StaffDashboard extends AppCompatActivity {
             public void onClick(View v)
             {
                 Dialog_ChooseCompany cdd = new Dialog_ChooseCompany(StaffDashboard.this);
-                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+               cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 cdd.show();
             }
         });
@@ -67,15 +63,6 @@ public class StaffDashboard extends AppCompatActivity {
         });
 
 
-        /*
-        viewentry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent i=new Intent(getApplicationContext(),AdminCreateCompany.class);
-                startActivity(i);
-            }
-        });
-*/
+
     }
 }

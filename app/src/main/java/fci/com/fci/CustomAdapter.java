@@ -33,6 +33,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
 
         TextView suggestion = (TextView) view.findViewById(R.id.text1);
+        suggestion.setTextSize(30);
 
 
         return view;

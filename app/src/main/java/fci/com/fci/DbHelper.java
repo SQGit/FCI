@@ -19,8 +19,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS fci_entry(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,pos VARCHAR, vinno VARCHAR, make VARCHAR);");
-    }
+        db.execSQL("CREATE TABLE IF NOT EXISTS fci_entry(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,pos VARCHAR, vinno VARCHAR, make VARCHAR, st_g VARCHAR, ed_g VARCHAR);");    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -42,16 +41,34 @@ public class DbHelper extends SQLiteOpenHelper {
         return c2;
     }
 
+    protected void insertIntoDB2(int a, String b) {
+        Log.d("tag", "insertdb " + a + b);
+        SQLiteDatabase sdb1;
+        sdb1 = getWritableDatabase();
+        //String query = "INSERT INTO fci_entry (st_g) VALUES(\"" + b + "\") Where pos ="+a+";";
+        String query = "UPDATE fci_entry set st_g = \""+b+"\" where pos = "+a;
+        sdb1.execSQL(query);
+    }
 
-    public void deletedata(String qry2, String txt) {
+
+    protected void insertIntoDB3(int a, String b) {
+        Log.d("tag", "insertdb " + a + b);
+        SQLiteDatabase sdb1;
+        sdb1 = getWritableDatabase();
+        //String query = "INSERT INTO fci_entry (st_g) VALUES(\"" + b + "\") Where pos ="+a+";";
+        String query = "UPDATE fci_entry set ed_g = \""+b+"\" where pos = "+a;
+        sdb1.execSQL(query);
+    }
+
+
+
+    public void deletedata() {
 
         try {
             SQLiteDatabase sdb1;
             sdb1 = getWritableDatabase();
             //sdb1.rawQuery(qry2,null);
-            String query = "DELETE FROM cart WHERE id = " + txt;
-
-            // sdb1.delete("cart","size =?", new String[] { txt });
+            String query = "DELETE FROM fci_entry";
 
             sdb1.execSQL(query);
 
@@ -63,16 +80,14 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void del_last_row() {
+    public void deleteTable() {
 
         try {
             SQLiteDatabase sdb1;
             sdb1 = getWritableDatabase();
-            //sdb1.rawQuery(qry2,null);
             String query = "DELETE FROM cart WHERE id = (SELECT MAX(id) FROM cart);";
 
-            // DELETE FROM test WHERE id = (SELECT MAX(id) FROM test);
-            // sdb1.delete("cart","size =?", new String[] { txt });
+
 
             sdb1.execSQL(query);
 
@@ -115,6 +130,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     protected void deleteDb() {
+        Log.d("tag", "insertdb ");
+
+        SQLiteDatabase sdb1;
+        sdb1 = getWritableDatabase();
+        String query = " DELETE from fci_entry ";
+        sdb1.execSQL(query);
+    }
+
+
+    protected void delete() {
         Log.d("tag", "insertdb ");
 
         SQLiteDatabase sdb1;

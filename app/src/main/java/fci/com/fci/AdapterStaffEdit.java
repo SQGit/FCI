@@ -35,7 +35,6 @@ public class AdapterStaffEdit extends BaseAdapter {
     Typeface tf;
     SweetAlertDialog sweetDialog;
 
-
     AdapterStaffEdit(Context c1, ArrayList<String> name, ArrayList<String> phone, ArrayList<String> pass) {
         this.context = c1;
         this.ar_name = name;
@@ -69,9 +68,7 @@ public class AdapterStaffEdit extends BaseAdapter {
 
         LayoutInflater inflat = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflat.inflate(R.layout.adapter_staffedit, null);
-
         tf = Typeface.createFromAsset(context.getAssets(), "fonts/asin.TTF");
-
         tv_name = (TextView) convertView.findViewById(R.id.tv_name);
         tv_phone = (TextView) convertView.findViewById(R.id.tv_phone);
         tv_password = (TextView) convertView.findViewById(R.id.tv_password);
@@ -103,13 +100,10 @@ public class AdapterStaffEdit extends BaseAdapter {
             public boolean onLongClick(View v) {
 
                 Log.d("tag", "-" + ar_phone.get(position));
-
-
                 new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                         .setTitleText("Are you Sure want to Delete?")
                         .setConfirmText("Yes!")
                         .setCancelText("No")
-
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
@@ -151,14 +145,11 @@ public class AdapterStaffEdit extends BaseAdapter {
     class staffDelete_Task extends AsyncTask<String, Void, String> {
 
         String phone;
-
         public staffDelete_Task(String ph) {
             this.phone = ph;
         }
-
         protected void onPreExecute() {
             super.onPreExecute();
-
             sweetDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
             sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#FFE64A19"));
             sweetDialog.setTitleText("Loading");
@@ -174,7 +165,6 @@ public class AdapterStaffEdit extends BaseAdapter {
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.accumulate("phone", phone);
-                // 4. convert JSONObject to JSON to String
                 json = jsonObject.toString();
                 return jsonStr = PostService.makeRequest(Data_Service.SERVICE_URL + "staff/delete", json);
             } catch (Exception e) {
@@ -189,21 +179,14 @@ public class AdapterStaffEdit extends BaseAdapter {
         protected void onPostExecute(String s) {
             Log.d("tag", "<-----rerseres---->" + s);
             super.onPostExecute(s);
-
             sweetDialog.dismiss();
-
             try {
                 JSONObject jo = new JSONObject(s);
-
                 String status = jo.getString("status");
-
                 String msg = jo.getString("message");
                 Log.d("tag", "<-----Status----->" + status);
-
-
                 if (status.equals("success")) {
                     Log.d("tag", "<-----msg----->" + msg);
-                   // notifyDataSetChanged();
                     new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
                             .setTitleText("Success")
                             .setContentText(msg)
@@ -212,8 +195,6 @@ public class AdapterStaffEdit extends BaseAdapter {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-
-                                  //  notifyDataSetChanged();
                                     Intent goDash = new Intent(context, AdminStaffEdit.class);
                                     context.startActivity(goDash);
 
