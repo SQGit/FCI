@@ -75,7 +75,7 @@
                         android:layout_width="@dimen/_197sdp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:paddingLeft="@dimen/_25sdp"
+                        android:paddingLeft="@dimen/_28sdp"
                         android:paddingRight="@dimen/_20sdp"
                         android:spinnerMode="dropdown">
 
@@ -86,6 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_11sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
                         android:background="@drawable/staff_name_ico" />
 
 
@@ -317,7 +318,7 @@
             android:textColor="@color/textColorGray"
             android:layout_gravity="center|center_vertical"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="For login account,you have to agree to FCI's terms and conditions,privacy policies \nand Content Policies."
+            android:text="For login account,you have to agree to FCI's terms and conditions,privacy policies \n                                                     and Content Policies."
             android:textSize="@dimen/_6sdp" />
 
     </LinearLayout>

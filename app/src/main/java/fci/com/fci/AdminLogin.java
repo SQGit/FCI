@@ -25,7 +25,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class AdminLogin extends AppCompatActivity {
     ImageView submit;
-    TextView tv_header;
+    TextView tv_header,content;
     EditText et_phone, et_pass;
     Typeface tf;
     String str_phone, str_pass;
@@ -40,12 +40,14 @@ public class AdminLogin extends AppCompatActivity {
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
         submit = (ImageView) findViewById(R.id.submit_iv);
         tv_header = (TextView) findViewById(R.id.tv_header);
+        content = (TextView) findViewById(R.id.content);
+
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_pass = (EditText) findViewById(R.id.et_password);
         tv_header.setTypeface(tf);
         et_phone.setTypeface(tf);
         et_pass.setTypeface(tf);
-
+        content.setTypeface(tf);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,14 +57,30 @@ public class AdminLogin extends AppCompatActivity {
                     if (!(str_phone.isEmpty())) {
                         if (!(str_pass.isEmpty()))
                         {
-                            new staffLogin_Task().execute();
+                            if(str_phone.equals("0987654321"))
+                            {
+                                new staffLogin_Task().execute();
+                            }
+                            else
+                            {
+                                new SweetAlertDialog(AdminLogin.this, SweetAlertDialog.WARNING_TYPE)
+                                        .setTitleText("WARNING MESSAGE!!!")
+                                        .setContentText("Incorrect Phone Number")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismiss();
+                                            }
+                                        })
+                                        .show();
+                            }
                         } else
                         {
-                            Toast.makeText(getApplicationContext(), "Password not empty", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Password cannot be blank", Toast.LENGTH_LONG).show();
                         }
                     } else {
 
-                        Toast.makeText(getApplicationContext(), "Phone not empty", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Phone Number cannot be blank", Toast.LENGTH_LONG).show();
 
                     }
 

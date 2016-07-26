@@ -67,11 +67,13 @@ public class StaffViewEntry extends Activity {
         DateFormat date = new SimpleDateFormat("HH:mm");
         int m = ca.get(Calendar.MONTH);
         int y = ca.get(Calendar.YEAR);
+        int cHour = ca.get(Calendar.HOUR);
+        int cMinute = ca.get(Calendar.MINUTE);
+        int cSecond = ca.get(Calendar.SECOND);
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {
             dateFrom = format.format(ca.getTime());
-            Log.e("tag", "<---from---->" + dateFrom + "<----to-->" + date.format(date.getTimeZone()));
-
+            Log.e("tag", "<---from---->" + dateFrom + "<----to-->"+cHour+cMinute);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,7 +96,7 @@ public class StaffViewEntry extends Activity {
         tv_staff = (TextView) findViewById(R.id.staff_id);
         tv_logout = (TextView) findViewById(R.id.logout_tv);
         tv_logout.setTypeface(tf);
-
+        tv_time.setText(cHour+":"+cMinute);
         tv_date.setText(dateFrom);
         tv_header.setTypeface(tf, 1);
         tv_comp_namtxt.setTypeface(tf);
@@ -112,6 +114,7 @@ public class StaffViewEntry extends Activity {
         tv_status.setTypeface(tf);
         tv_staff.setTypeface(tf);
         tv_staff.setText("Hi " + staffname);
+
         new staffViewEntry_Task().execute();
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,16 +124,14 @@ public class StaffViewEntry extends Activity {
                         .setTitleText("Do you want to Logout?")
                         .setConfirmText("Yes!")
                         .setCancelText("No")
-
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-
+                            public void onClick(SweetAlertDialog sDialog)
+                            {
                                 Intent intent=new Intent(getApplicationContext(),StaffLogin.class);
                                 startActivity(intent);
                                 finish();
                                 sDialog.dismiss();
-
                             }
                         })
                         .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {

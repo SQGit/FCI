@@ -200,12 +200,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_8sdp"
-            android:text="For login account,you have to agree to FCI's terms and conditions,privacy policies \n \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  and Content Policies."/>
+            android:text="For login account,you have to agree to FCI's terms and conditions,privacy policies \n \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                          Content Policies."/>
 
     </LinearLayout>
 </LinearLayout>

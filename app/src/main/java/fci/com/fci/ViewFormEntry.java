@@ -16,7 +16,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -31,7 +34,7 @@ public class ViewFormEntry extends Activity {
     ListView lv_entries;
     AdapterViewFormEntry avw;
     ArrayList<HashMap<String, String>> contactList;
-    String formId, staffname;
+    String formId, staffname,dateFrom;
     static String FCI_FORM = "fci_entry_form_id";
     static String VIN_NO = "vin_no";
     static String MAKE_MODEL = "make_model";
@@ -78,6 +81,26 @@ public class ViewFormEntry extends Activity {
         tv_view.setTypeface(tf);
         tv_staff.setTypeface(tf);
         tv_staff.setText("Hi " + staffname);
+        SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
+        //String currentDateandTime = datef.format(new Date(date));
+        Calendar ca = Calendar.getInstance();
+        DateFormat date = new SimpleDateFormat("HH:mm");
+        int m = ca.get(Calendar.MONTH);
+        int y = ca.get(Calendar.YEAR);
+        int cHour = ca.get(Calendar.HOUR);
+        int cMinute = ca.get(Calendar.MINUTE);
+        int cSecond = ca.get(Calendar.SECOND);
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            dateFrom = format.format(ca.getTime());
+            Log.e("tag", "<---from---->" + dateFrom + "<----to-->"+cHour+cMinute);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        tv_date.setText(dateFrom);
+        tv_time.setText(cHour+":"+cMinute);
         new staffViewEntry_Task().execute();
 
         tv_header.setOnClickListener(new View.OnClickListener() {

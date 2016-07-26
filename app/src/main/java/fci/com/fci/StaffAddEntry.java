@@ -28,9 +28,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 /**
  * Created by Salman on 6/22/2016.
  */
-public class StaffAddEntry extends Activity {
-
-    TextView tv_logout,tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another;
+public class
+StaffAddEntry extends Activity {
+    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another;
     Typeface tf;
     ListView lv_entries;
     AdapterAddEntry staff_adapter;
@@ -41,13 +41,13 @@ public class StaffAddEntry extends Activity {
     static int siz_da;
     DbHelper dbclass;
     Context context = this;
-    String managername, managerphone, companyname, staffname,dateFrom,staffphone;
+    String managername, managerphone, companyname, staffname, dateFrom, staffphone;
 
-    ArrayList<String> getdata = new ArrayList<>();
-    ArrayList<String> getdata1 = new ArrayList<>();
-    ArrayList<String> getdata2 = new ArrayList<>();
-    ArrayList<String> getStart = new ArrayList<>();
-    ArrayList<String> getEnd = new ArrayList<>();
+    ArrayList<String> vin_positions = new ArrayList<>();
+    ArrayList<String> vin_no = new ArrayList<>();
+    ArrayList<String> vin_makemodel = new ArrayList<>();
+    ArrayList<String> vin_start_guage = new ArrayList<>();
+    ArrayList<String> vin_end_guage = new ArrayList<>();
 
 
     @Override
@@ -58,6 +58,9 @@ public class StaffAddEntry extends Activity {
         Calendar ca = Calendar.getInstance();
         int m = ca.get(Calendar.MONTH);
         int y = ca.get(Calendar.YEAR);
+        int cHour = ca.get(Calendar.HOUR);
+        int cMinute = ca.get(Calendar.MINUTE);
+        int cSecond = ca.get(Calendar.SECOND);
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {
             dateFrom = format.format(ca.getTime());
@@ -67,14 +70,20 @@ public class StaffAddEntry extends Activity {
         }
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
+
+/*
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("size","3");
+        editor.commit();*/
+
+
         companyname = sharedPreferences.getString("companyname", "");
         managername = sharedPreferences.getString("managername", "");
         managerphone = sharedPreferences.getString("managerphone", "");
         staffname = sharedPreferences.getString("staffname", "");
         staffphone = sharedPreferences.getString("phoneno", "");
-
         dbclass = new DbHelper(context);
-        tv_logout= (TextView) findViewById(R.id.logout_tv);
+        tv_logout = (TextView) findViewById(R.id.logout_tv);
         lv_entries = (ListView) findViewById(R.id.listview);
         tv_staff = (TextView) findViewById(R.id.staff_id);
         tv_header = (TextView) findViewById(R.id.tv_header);
@@ -92,7 +101,8 @@ public class StaffAddEntry extends Activity {
         tv_endgug = (TextView) findViewById(R.id.tv_endgug);
         tv_save = (TextView) findViewById(R.id.tv_save);
         tv_note = (TextView) findViewById(R.id.tv_note);
-        tv_add_another = (TextView) findViewById(R.id.tv_add_another);
+        //tv_add_another = (TextView) findViewById(R.id.tv_add_another);
+        tv_time.setText(cHour + ":" + cMinute);
 
         tv_header.setTypeface(tf, 1);
         tv_comp_namtxt.setTypeface(tf);
@@ -110,26 +120,45 @@ public class StaffAddEntry extends Activity {
         tv_save.setTypeface(tf);
         tv_note.setTypeface(tf);
         tv_staff.setTypeface(tf);
-        tv_add_another.setTypeface(tf);
+        //  tv_add_another.setTypeface(tf);
         tv_logout.setTypeface(tf);
         tv_comp_name.setText(companyname);
         tv_manag_name.setText(managername);
         tv_staff.setText("Hi " + staffname);
         tv_date.setText(dateFrom);
+
+
+        siz_da = 3;
+        getFromDb();
+        staff_adapter = new AdapterAddEntry(StaffAddEntry.this, StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
+        lv_entries.setAdapter(staff_adapter);
+
+
+
+       /* tv_add_another.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                siz_da = siz_da + 1;
+                getFromDb();
+                staff_adapter = new AdapterAddEntry(StaffAddEntry.this,StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
+                lv_entries.setAdapter(staff_adapter);
+               // staff_adapter.notifyDataSetChanged();
+            }
+        });*/
+
+
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 new SweetAlertDialog(StaffAddEntry.this, SweetAlertDialog.WARNING_TYPE)
                         .setTitleText("Do you want to Logout?")
                         .setConfirmText("Yes!")
                         .setCancelText("No")
-
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
 
-                                Intent intent=new Intent(getApplicationContext(),StaffLogin.class);
+                                Intent intent = new Intent(getApplicationContext(), StaffLogin.class);
                                 startActivity(intent);
                                 finish();
                                 sDialog.dismiss();
@@ -154,25 +183,12 @@ public class StaffAddEntry extends Activity {
                 startActivity(goStf);
             }
         });
-        siz_da = 3;
-        staff_adapter = new AdapterAddEntry(StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
-        lv_entries.setAdapter(staff_adapter);
 
 
-
-        tv_add_another.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                siz_da = siz_da + 1;
-                staff_adapter = new AdapterAddEntry(StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
-                lv_entries.setAdapter(staff_adapter);
-            }
-        });
         tv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < siz_da; i++)
-                {
+                for (int i = 0; i < siz_da; i++) {
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.remove("vv_vin" + i);
@@ -181,7 +197,7 @@ public class StaffAddEntry extends Activity {
                     String s = AdapterAddEntry.getAllValues();
                     Log.e("tag", "sssss" + name.get(0));
                 }
-             getFromDb();
+                getFromDb();
                 new staff_AddEntry().execute();
 
             }
@@ -192,43 +208,62 @@ public class StaffAddEntry extends Activity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e("tag", "restart");
+        Log.d("tag_", "restart");
 
-        staff_adapter = new AdapterAddEntry(StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
-        lv_entries.setAdapter(staff_adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("tag", "resume");
+        Log.d("tag_", "resume");
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("tag_", "pause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("tag_", "stop");
+    }
 
     private void getFromDb() {
+
+       /* vin_positions.clear();
+        vin_no.clear();
+        vin_makemodel.clear();
+        vin_start_guage.clear();
+        vin_end_guage.clear();*/
+
+
         Log.e("tag", "getfromdb");
         Cursor cursor = dbclass.getFromDb();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     String id = cursor.getString(cursor.getColumnIndex("pos"));
-                    String vin_no = cursor.getString(cursor.getColumnIndex("vinno"));
+                    String vin_nos = cursor.getString(cursor.getColumnIndex("vinno"));
                     String make = cursor.getString(cursor.getColumnIndex("make"));
-                    String start = cursor.getString(cursor.getColumnIndex("st_g"));
-                    String end = cursor.getString(cursor.getColumnIndex("ed_g"));
-                    getdata.add(id);
-                    getdata1.add(vin_no);
-                    getdata2.add(make);
-                    getStart.add(start);
-                    getEnd.add(end);
+                    String start = cursor.getString(cursor.getColumnIndex("start"));
+                    String end = cursor.getString(cursor.getColumnIndex("end"));
+                    vin_positions.add(id);
+                    vin_no.add(vin_nos);
+                    vin_makemodel.add(make);
+                    vin_start_guage.add(start);
+                    vin_end_guage.add(end);
 
                 } while (cursor.moveToNext());
 
             }
         }
 
-        Log.e("tag", "getfromdb" + getdata.size() + getdata1.size() + getdata2.size());
-        Log.e("tag", "starttt" + getStart.size() + getStart);
+        Log.e("tag", "length: " + vin_positions.size());
+
+        //   Log.e("tag", "getfromdb" + vin_positions.size() + vin_no.size() + vin_makemodel.size());
+        // Log.e("tag", "starttt" + getStart.size() + getStart);
     }
 
 
@@ -243,18 +278,34 @@ public class StaffAddEntry extends Activity {
         @Override
         protected String doInBackground(String... params) {
             String json = "", jsonStr = "";
-
+            String start_gauge="";
+            String end_gauge = null;
             try {
                 JSONObject jsonObject = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
                 String asd;
-                for (int i = 0; i < getdata.size(); i++) {
-
+                for (int i = 0; i < vin_positions.size(); i++) {
+                    Log.e("tag", "enndddd" + vin_end_guage.get(i));
+                /*    if (vin_end_guage.get(i).equals(0)) {
+                        end_gauge = "1/2";
+                    } else if (vin_end_guage.get(i).equals(1)) {
+                        end_gauge = "1/4";
+                    } else if (vin_end_guage.get(i).equals(2)) {
+                        end_gauge = "3/4";
+                    }
+                    if (vin_start_guage.get(i).equals(0))
+                    {
+                        start_gauge = "1/2";
+                    } else if (vin_start_guage.get(i).equals(1)) {
+                        start_gauge = "1/4";
+                    } else if (vin_start_guage.get(i).equals(2)) {
+                        start_gauge = "3/4";
+                    }*/
                     JSONObject jsonObject1 = new JSONObject();
-                    jsonObject1.accumulate("vin_no", getdata1.get(i));
-                    jsonObject1.accumulate("make_model", getdata2.get(i));
-                    jsonObject1.accumulate("start_gauge", getStart.get(i));
-                    jsonObject1.accumulate("end_gauge", getEnd.get(i));
+                    jsonObject1.accumulate("vin_no", vin_no.get(i));
+                    jsonObject1.accumulate("make_model", vin_makemodel.get(i));
+                    jsonObject1.accumulate("start_gauge", vin_start_guage.get(i));
+                    jsonObject1.accumulate("end_gauge", vin_start_guage.get(i));
 
                     jsonArray.put(jsonObject1);
                 }
@@ -299,6 +350,7 @@ public class StaffAddEntry extends Activity {
                     SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(StaffAddEntry.this);
                     SharedPreferences.Editor edit = s_pref.edit();
                     edit.putString("entry_form_id", entry_form_id);
+                    edit.putString("size", "3");
                     edit.commit();
                     Log.d("tag", "<-----msg----->" + msg);
                     new SweetAlertDialog(StaffAddEntry.this, SweetAlertDialog.SUCCESS_TYPE)

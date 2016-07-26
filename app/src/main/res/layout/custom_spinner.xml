@@ -27,5 +27,6 @@
     android:gravity="start|center"
     android:textSize="100dp"
     android:text="ghh"
+    android:layout_marginLeft="@dimen/_5sdp"
     android:textColor="#000000"
     android:ellipsize="marquee"/>
