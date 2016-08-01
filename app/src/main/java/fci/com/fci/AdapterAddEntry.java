@@ -49,7 +49,7 @@ public class AdapterAddEntry extends BaseAdapter {
     ArrayList<String> vin_makemodel = new ArrayList<>();
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
-    TextView tv_add_another;
+    TextView tv_add_another,tv_save;
     Activity activity;
     public int p;
 
@@ -117,13 +117,10 @@ public class AdapterAddEntry extends BaseAdapter {
     public View getView(final int pos_view, View convertView, ViewGroup parent) {
 
         LayoutInflater inflat = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null) {
-
+        if (convertView == null)
+        {
             convertView = inflat.inflate(R.layout.adapter_addentry, null);
-
-
             tv_add_another = (TextView) activity.findViewById(R.id.tv_add_another);
-
             holder = (Holder) convertView.getTag();
             holder = new Holder(convertView);
             staffaddEntry = new StaffAddEntry();
@@ -136,7 +133,7 @@ public class AdapterAddEntry extends BaseAdapter {
             holder.tv_make.setTypeface(tf);
             dbclass = new DbHelper(context);
             p = pos_view;
-            Log.e("tag", "posi tion_view " + p);
+            Log.e("tag", "position_view " + p);
             getFromDb();
             // putData(position);
             ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, tanks);
@@ -174,22 +171,8 @@ public class AdapterAddEntry extends BaseAdapter {
 
             holder.tv_startgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                {
-                    String value;
-                    if(position==0)
-                    {
-                        value="1/2";
-                    }
-                    else if(position==1)
-                    {
-                        value="1/4";
-                    }
-                    else
-                    {
-                        value="3/4";
-                    }
-                    dbclass.insertIntoDB2(pos_view, position,value);
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    dbclass.insertIntoDB2(pos_view, position);
                     Log.e("tag","click_start "+ pos_view+position);
                 }
 
@@ -202,20 +185,7 @@ public class AdapterAddEntry extends BaseAdapter {
             holder.tv_endgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String value;
-                    if(position==0)
-                    {
-                        value="1/2";
-                    }
-                    else if(position==1)
-                    {
-                        value="1/4";
-                    }
-                    else
-                    {
-                        value="3/4";
-                    }
-                    dbclass.insertIntoDB3(pos_view, position,value);
+                    dbclass.insertIntoDB3(pos_view, position);
                     Log.e("tag","click_end "+ pos_view+position);
                 }
 
@@ -280,21 +250,17 @@ public class AdapterAddEntry extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Log.e("tag", "vinno_clicked"+pos_view);
-
-
-
-
                     Intent goScan = new Intent(context, BarScan.class);
-                   goScan.putExtra("pos", pos_view);
+                    goScan.putExtra("pos", pos_view);
                     context.startActivity(goScan);
 
-                    for (int i = 0; i < sizz; i++) {
+                 /*   for (int i = 0; i < sizz; i++) {
                         if (!(holder.tv_vinno.getText().toString().contains("Scan Vin"))) {
-                           // SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                          //  SharedPreferences.Editor editor = sharedPreferences.edit();
-                           // editor.putString("vv_vin" + pos_view, holder.tv_vinno.getText().toString());
-                           // editor.putString("vv_make" + pos_view, holder.tv_make.getText().toString());
-                          //  editor.commit();
+                            // SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                            //  SharedPreferences.Editor editor = sharedPreferences.edit();
+                            // editor.putString("vv_vin" + pos_view, holder.tv_vinno.getText().toString());
+                            // editor.putString("vv_make" + pos_view, holder.tv_make.getText().toString());
+                            //  editor.commit();
 
 
                         }
@@ -304,7 +270,7 @@ public class AdapterAddEntry extends BaseAdapter {
                         if (!(dddd.isEmpty())) {
                             Log.e("tag", "" + dddd);
                         }
-                    }
+                    }*/
 
 
                 }

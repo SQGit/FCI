@@ -6,6 +6,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -31,15 +32,17 @@ public class PostService {
 
         try {
             Log.v(TAG, "inside-->");
+            HttpGet httpGet=new HttpGet();
 
-            HttpPost httpPost = new HttpPost(url);
-            httpPost.setEntity(new StringEntity(json));
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
-            httpPost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
-            httpPost.setHeader("formid", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
+            //HttpPost httpPost = new HttpPost(url);
 
-            HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
+            //httpPost.setEntity(new StringEntity(json));
+           // httpPost.setHeader("Accept", "application/json");
+           // httpPost.setHeader("Content-type", "application/json");
+           // httpPost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
+        //    httpPost.setHeader("formid", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
+
+            HttpResponse httpResponse = new DefaultHttpClient().execute(httpGet);
 
 
             // receive response as inputStream
@@ -47,10 +50,10 @@ public class PostService {
             // convert inputstream to string
             if (inputStream != null) {
                 String result = convertInputStreamToString(inputStream);
-                Log.e(TAG, "output-->" + result);
+                Log.d(TAG, "output-->" + result);
                 return result;
             } else {
-                Log.e(TAG, "output-->" + inputStream);
+                Log.d(TAG, "output-->" + inputStream);
 
             }
         } catch (UnsupportedEncodingException e) {
@@ -187,9 +190,11 @@ public class PostService {
 
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(url);
-            //httppost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
-            HttpResponse response = httpclient.execute(httppost);
+            HttpGet httpGet=new HttpGet(url);
+          //  HttpPost httppost = new HttpPost(url);
+            httpGet.setHeader("X-Originating-Ip", "103.48.181.209");
+            httpGet.setHeader("Accept", "application/json");
+            HttpResponse response = httpclient.execute(httpGet);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
 

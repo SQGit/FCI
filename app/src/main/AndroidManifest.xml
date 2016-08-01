@@ -74,6 +74,7 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+
         </activity>
 
         <activity

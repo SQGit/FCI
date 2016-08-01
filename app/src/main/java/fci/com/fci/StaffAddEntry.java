@@ -179,6 +179,12 @@ StaffAddEntry extends Activity {
         tv_header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                dbclass.deleteDb();
+
+
+
                 Intent goStf = new Intent(getApplicationContext(), StaffDashboard.class);
                 startActivity(goStf);
             }
@@ -188,15 +194,7 @@ StaffAddEntry extends Activity {
         tv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < siz_da; i++) {
-                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.remove("vv_vin" + i);
-                    editor.remove("vv_make" + i);
-                    editor.commit();
-                    String s = AdapterAddEntry.getAllValues();
-                    Log.e("tag", "sssss" + name.get(0));
-                }
+
                 getFromDb();
                 new staff_AddEntry().execute();
 
@@ -210,6 +208,8 @@ StaffAddEntry extends Activity {
         super.onRestart();
         Log.d("tag_", "restart");
 
+        //  staff_adapter = new AdapterAddEntry(StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
+        //  lv_entries.setAdapter(staff_adapter);
     }
 
     @Override
@@ -232,11 +232,11 @@ StaffAddEntry extends Activity {
 
     private void getFromDb() {
 
-       /* vin_positions.clear();
+        vin_positions.clear();
         vin_no.clear();
         vin_makemodel.clear();
         vin_start_guage.clear();
-        vin_end_guage.clear();*/
+        vin_end_guage.clear();
 
 
         Log.e("tag", "getfromdb");
@@ -247,8 +247,8 @@ StaffAddEntry extends Activity {
                     String id = cursor.getString(cursor.getColumnIndex("pos"));
                     String vin_nos = cursor.getString(cursor.getColumnIndex("vinno"));
                     String make = cursor.getString(cursor.getColumnIndex("make"));
-                    String start = cursor.getString(cursor.getColumnIndex("start"));
-                    String end = cursor.getString(cursor.getColumnIndex("end"));
+                    String start = cursor.getString(cursor.getColumnIndex("st_g"));
+                    String end = cursor.getString(cursor.getColumnIndex("ed_g"));
                     vin_positions.add(id);
                     vin_no.add(vin_nos);
                     vin_makemodel.add(make);
@@ -278,34 +278,37 @@ StaffAddEntry extends Activity {
         @Override
         protected String doInBackground(String... params) {
             String json = "", jsonStr = "";
-            String start_gauge="";
-            String end_gauge = null;
+            String start_gauge = "1/3", end_gauge = "1/3";
             try {
                 JSONObject jsonObject = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
                 String asd;
                 for (int i = 0; i < vin_positions.size(); i++) {
-                    Log.e("tag", "enndddd" + vin_end_guage.get(i));
-                /*    if (vin_end_guage.get(i).equals(0)) {
+                    Log.e("tag", "valueee" + vin_end_guage.get(i));
+                    if (vin_end_guage.get(i).equals("0")) {
                         end_gauge = "1/2";
-                    } else if (vin_end_guage.get(i).equals(1)) {
+                    } else if (vin_end_guage.get(i).equals("1")) {
                         end_gauge = "1/4";
-                    } else if (vin_end_guage.get(i).equals(2)) {
+                    } else if (vin_end_guage.get(i).equals("2")) {
                         end_gauge = "3/4";
                     }
-                    if (vin_start_guage.get(i).equals(0))
-                    {
+
+
+                    if (vin_start_guage.get(i).equals("0")) {
                         start_gauge = "1/2";
-                    } else if (vin_start_guage.get(i).equals(1)) {
+                    } else if (vin_start_guage.get(i).equals("1")) {
                         start_gauge = "1/4";
-                    } else if (vin_start_guage.get(i).equals(2)) {
+                    } else if (vin_start_guage.get(i).equals("2")) {
                         start_gauge = "3/4";
-                    }*/
+                    }
+
+                    Log.e("tag","endbh "+end_gauge);
+
                     JSONObject jsonObject1 = new JSONObject();
                     jsonObject1.accumulate("vin_no", vin_no.get(i));
                     jsonObject1.accumulate("make_model", vin_makemodel.get(i));
-                    jsonObject1.accumulate("start_gauge", vin_start_guage.get(i));
-                    jsonObject1.accumulate("end_gauge", vin_start_guage.get(i));
+                    jsonObject1.accumulate("start_gauge", start_gauge);
+                    jsonObject1.accumulate("end_gauge", end_gauge);
 
                     jsonArray.put(jsonObject1);
                 }
@@ -362,6 +365,8 @@ StaffAddEntry extends Activity {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
                                     finish();
+                                    dbclass.deleteDb();
+
                                 }
                             })
                             .show();

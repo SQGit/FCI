@@ -106,6 +106,11 @@ public class StaffLogin extends AppCompatActivity {
         tv_header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+
+
                 Intent i = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(i);
                 finish();

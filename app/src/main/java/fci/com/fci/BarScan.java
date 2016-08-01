@@ -79,12 +79,14 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
         Log.e("tag", rawResult.getText()); // Prints scan results
         Log.e("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
         String dddd = rawResult.getText();
+        Toast.makeText(getApplicationContext(),"sss"+dddd,Toast.LENGTH_LONG).show();
         new getVin_Make(dddd).execute();
         StaffAddEntry staff = new StaffAddEntry();
         staff.vin_make.put(position, rawResult.getText());
         staff.v_pos.add(position);
         staff.v_mk.add(rawResult.getText());
         if (!(rawResult.getText().isEmpty())) {
+            mScannerView.stopCamera();
             int i = 0;
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -98,14 +100,12 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
 
 
     class getVin_Make extends AsyncTask<String, Void, String> {
-
         String vin_no;
         int pos;
 
+        //https://api.edmunds.com/api/vehicle/v2/vins/3G5DB03E32S518612?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
         //https://api.edmunds.com/api/vehicle/v2/vins/2G1FC3D33C9165616?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
-
         String web_p1 = "https://api.edmunds.com/api/vehicle/v2/vins/";
-
         String web_p2 = "?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9";
 
         public getVin_Make(String vinno) {
@@ -123,33 +123,28 @@ public class BarScan extends Activity implements ZXingScannerView.ResultHandler 
 
         protected String doInBackground(String... params) {
             String json = "", jsonStr = "";
-
             String kl = "https://api.edmunds.com/api/vehicle/v2/vins/2G1FC3D33C9165616?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9";
 
-
+         //   https://api.edmunds.com/api/vehicle/v2/makes?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
             try {
                 //  vin_no = "2G1FC3D33C9165616";
-
                 String virtual_url = web_p1 + vin_no + web_p2;
                 Log.e("tag", "<---urlll--->" + vin_no);
-
                 Log.e("tag", "<---urlll--->" + virtual_url);
                 JSONObject jsonobject = PostService.getVin(virtual_url);
-
                 Log.d("tag", "" + jsonobject.toString());
-
-                if (jsonobject.toString() == "sam") {
+                if (jsonobject.toString() == "sam")
+                {
                     new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Oops!")
                             .setContentText("Try Check your Network")
                             .setConfirmText("OK")
                             .show();
                 }
-
                 json = jsonobject.toString();
-
                 return json;
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 Log.e("InputStream", "" + e.getLocalizedMessage());
                 jsonStr = "";
             }
