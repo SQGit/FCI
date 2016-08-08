@@ -1,10 +1,13 @@
 package fci.com.fci;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -16,10 +19,12 @@ import android.widget.TextView;
  * Created by Ramya on 10-06-2016.
  */
 public class StaffDashboard extends AppCompatActivity {
-    TextView tv_header,addentry,viewentry,reports,setings;
+    TextView tv_header, addentry, viewentry, reports, setings;
 
-    RelativeLayout lt_addentry,lt_viewentry,lt_settings;
+    RelativeLayout lt_addentry, lt_viewentry, lt_settings;
     Typeface tf;
+    DbHelper dbclass;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,7 @@ public class StaffDashboard extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.staff_dashboard_1);
 
-       tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
+        tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
         tv_header = (TextView) findViewById(R.id.tv_header);
         addentry = (TextView) findViewById(R.id.tv_add_entry);
         viewentry = (TextView) findViewById(R.id.tv_view_entry);
@@ -37,20 +42,28 @@ public class StaffDashboard extends AppCompatActivity {
         lt_viewentry = (RelativeLayout) findViewById(R.id.layout_viewentry);
         lt_settings = (RelativeLayout) findViewById(R.id.layout_settings);
 
-        tv_header.setTypeface(tf,1);
+        tv_header.setTypeface(tf, 1);
         addentry.setTypeface(tf);
         viewentry.setTypeface(tf);
         setings.setTypeface(tf);
 
+        dbclass = new DbHelper(context);
 
 
         lt_addentry.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Dialog_ChooseCompany cdd = new Dialog_ChooseCompany(StaffDashboard.this);
-               cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 cdd.show();
+
+                dbclass.deleteDb();
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("size", String.valueOf(3));
+                editor.commit();
+
             }
         });
 
@@ -59,9 +72,19 @@ public class StaffDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goEntry = new Intent(getApplicationContext(), StaffViewEntry.class);
                 startActivity(goEntry);
+                StaffDashboard.this.finish();
             }
         });
 
+        tv_header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent goStf = new Intent(getApplicationContext(), Dashboard.class);
+                startActivity(goStf);
+                StaffDashboard.this.finish();
+            }
+        });
 
 
     }

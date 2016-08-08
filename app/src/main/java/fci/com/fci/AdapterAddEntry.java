@@ -22,7 +22,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
 public class AdapterAddEntry extends BaseAdapter {
@@ -54,9 +53,8 @@ public class AdapterAddEntry extends BaseAdapter {
     public int p;
 
     StaffAddEntry staffaddEntry;
-    private ZXingScannerView mScannerView;
     ArrayList<String> s = new ArrayList<>();
-    String tanks[] = {"1/2 tank", "1/4 tank", "3/4 tank"};
+    String tanks[] = {"1/2 tank", "1/4 tank","1/8 tank","3/4 tank"};
     String spn;
 
     AdapterAddEntry(Activity act,Context c1, HashMap<Integer, String> v_mk, ArrayList<Integer> v_p, ArrayList<String> aa, int k) {
@@ -69,19 +67,21 @@ public class AdapterAddEntry extends BaseAdapter {
         this.vin_make = v_mk;
         this.v_pos = v_p;
         this.v_mm = aa;
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.sizz = k;
+
+       SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         if(!(sharedPreferences.getString("size","").equals(""))) {
-            Log.e("tag","size: "+Integer.valueOf(sharedPreferences.getString("size","")));
+            Log.e("tag","adapter_size: "+Integer.valueOf(sharedPreferences.getString("size","")));
 
             if (Integer.valueOf(sharedPreferences.getString("size", "")) > 3) {
                 sizz = Integer.valueOf(sharedPreferences.getString("size", ""));
-            } else {
+            } /*else {
                 sizz = 3;
-            }
+            }*/
         }
-        else{
+       /* else{
             sizz = 3;
-        }
+        }*/
 
     }
 
@@ -89,7 +89,6 @@ public class AdapterAddEntry extends BaseAdapter {
     public void getData() {
 
     }
-
 
     @Override
     public void notifyDataSetChanged() {
@@ -104,7 +103,7 @@ public class AdapterAddEntry extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return position;
+        return vin_positions.get(position);
     }
 
     @Override
@@ -120,7 +119,10 @@ public class AdapterAddEntry extends BaseAdapter {
         if (convertView == null)
         {
             convertView = inflat.inflate(R.layout.adapter_addentry, null);
-            tv_add_another = (TextView) activity.findViewById(R.id.tv_add_another);
+
+
+          //  tv_add_another = (TextView) activity.findViewById(R.id.tv_add_another);
+
             holder = (Holder) convertView.getTag();
             holder = new Holder(convertView);
             staffaddEntry = new StaffAddEntry();
@@ -132,9 +134,7 @@ public class AdapterAddEntry extends BaseAdapter {
             holder.tv_vinno.setTypeface(tf);
             holder.tv_make.setTypeface(tf);
             dbclass = new DbHelper(context);
-            p = pos_view;
-            Log.e("tag", "position_view " + p);
-            getFromDb();
+
             // putData(position);
             ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, tanks);
             spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -142,38 +142,88 @@ public class AdapterAddEntry extends BaseAdapter {
             holder.tv_endgug.setAdapter(spinnerArrayAdapter);
 
 
-            if(vin_positions.size()>0){
+        } else {
 
-                Log.e("tag","settext");
+        }
+
+
+
+
+
+
+
+        p = pos_view;
+        Log.e("tag", "positions " + pos_view);
+        getFromDb();
+
+         notifyDataSetChanged();
+           if(vin_positions.size()>0){
+
+                notifyDataSetChanged();
+                Log.e("tag","adatpter_settext");
 
                 for (int i =0; i<vin_positions.size();i++){
-
+                    Log.e("tag__","<0>"+i);
+                    Log.e("tag__","<1>"+pos_view +"--|--"+Integer.valueOf(vin_positions.get(i)));
                     if(pos_view == i){
+                        Log.e("tag__","<2>"+pos_view +"--|--"+Integer.valueOf(vin_positions.get(i)));
+                        Log.e("tag__","data"+i+"\t"+pos_view+"\t"+vin_no.get(i)+"\t"+vin_makemodel.get(i)+"\t"+vin_start_guage.get(i)+"\t"+vin_start_guage.get(i));
+
                         holder.tv_vinno.setText(vin_no.get(i));
                         holder.tv_make.setText(vin_makemodel.get(i));
                         holder.tv_startgug.setSelection(Integer.parseInt(vin_start_guage.get(i)));
                         holder.tv_endgug.setSelection(Integer.parseInt(vin_end_guage.get(i)));
-                        Log.e("tag","data"+i+"\t"+pos_view+"\t"+vin_no.get(i)+"\t"+vin_makemodel.get(i)+"\t"+vin_start_guage.get(i)+"\t"+vin_start_guage.get(i));
-
-
-
+                      //  Log.e("tag","data"+i+"\t"+pos_view+"\t"+vin_no.get(i)+"\t"+vin_makemodel.get(i)+"\t"+vin_start_guage.get(i)+"\t"+vin_start_guage.get(i));
                     }
-                }
+
+               }
             }
 
 
 
+      /*  if(vin_positions.size()>0){
+
+            notifyDataSetChanged();
+            Log.e("tag","adatpter_settext");
+
+            for (int i =0; i<sizz;i++){
+               // Log.e("tag__","<0>"+i);
+//                Log.e("tag__","<1>"+pos_view +"--|--"+Integer.valueOf(vin_positions.get(i)));
+                if(i<vin_positions.size()) {
+                    if (pos_view == Integer.valueOf(vin_positions.get(i))) {
+                        Log.e("tag__", "<2>" + pos_view + "--|--" + Integer.valueOf(vin_positions.get(i)));
+                        Log.e("tag__", "data" + i + "\t" + pos_view + "\t" + vin_no.get(i) + "\t" + vin_makemodel.get(i) + "\t" + vin_start_guage.get(i) + "\t" + vin_start_guage.get(i));
+
+                        holder.tv_vinno.setText(vin_no.get(i));
+                        holder.tv_make.setText(vin_makemodel.get(i));
+                        holder.tv_startgug.setSelection(Integer.parseInt(vin_start_guage.get(i)));
+                        holder.tv_endgug.setSelection(Integer.parseInt(vin_end_guage.get(i)));
+                        //  Log.e("tag","data"+i+"\t"+pos_view+"\t"+vin_no.get(i)+"\t"+vin_makemodel.get(i)+"\t"+vin_start_guage.get(i)+"\t"+vin_start_guage.get(i));
+                    }
+                }
+                else{
+                    holder.tv_vinno.setText("Scan Vin");
+                    holder.tv_make.setText("");
+                }
+
+            }
+        }*/
 
 
 
 
 
 
-            holder.tv_startgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+
+
+           holder.tv_startgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    dbclass.insertIntoDB2(pos_view, position);
-                    Log.e("tag","click_start "+ pos_view+position);
+                    dbclass.insertIntoDB2(p, position);
+                    //Log.e("tag","click_start "+ pos_view+position);
+                    holder.tv_startgug.setSelection(position);
                 }
 
                 @Override
@@ -185,8 +235,9 @@ public class AdapterAddEntry extends BaseAdapter {
             holder.tv_endgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    dbclass.insertIntoDB3(pos_view, position);
-                    Log.e("tag","click_end "+ pos_view+position);
+                    dbclass.insertIntoDB3(p, position);
+                   // Log.e("tag","click_end "+ pos_view+position);
+                    holder.tv_endgug.setSelection(position);
                 }
 
                 @Override
@@ -209,13 +260,11 @@ public class AdapterAddEntry extends BaseAdapter {
                 }
             });*/
 
-            tv_add_another.setOnClickListener(new View.OnClickListener() {
+         /*   tv_add_another.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("tag","insideclidk "+sizz);
+                  //  Log.e("tag","insideclidk "+sizz);
                     sizz = sizz+1;
-                    notifyDataSetChanged();
-                    Log.e("tag","insideclidk1 "+sizz);
 
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -223,9 +272,16 @@ public class AdapterAddEntry extends BaseAdapter {
                     // editor.putString("vv_make" + pos_view, holder.tv_make.getText().toString());
                     editor.commit();
 
-                    Log.e("tag","size1: "+Integer.valueOf(sharedPreferences.getString("size","")));
+                   // getFromDb();
+                    
+
+                    notifyDataSetChanged();
+
+                    Log.e("tag","adapter_insideclidk1 "+sizz);
+
+                    Log.e("tag","adapter_size1: "+Integer.valueOf(sharedPreferences.getString("size","")));
                 }
-            });
+            });*/
 
 
             /*holder.tv_endgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -243,16 +299,19 @@ public class AdapterAddEntry extends BaseAdapter {
             });*/
 
 
-            staffaddEntry.name.put(pos_view, holder.tv_make.getText().toString());
+         //   staffaddEntry.name.put(pos_view, holder.tv_make.getText().toString());
 
 
             holder.tv_vinno.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.e("tag", "vinno_clicked"+pos_view);
-                    Intent goScan = new Intent(context, BarScan.class);
+                    Intent goScan = new Intent(context, ScanActivity.class);
                     goScan.putExtra("pos", pos_view);
                     context.startActivity(goScan);
+
+                    //activity.finish();
+
 
                  /*   for (int i = 0; i < sizz; i++) {
                         if (!(holder.tv_vinno.getText().toString().contains("Scan Vin"))) {
@@ -275,9 +334,7 @@ public class AdapterAddEntry extends BaseAdapter {
 
                 }
             });
-        } else {
 
-        }
 
 
 
@@ -297,7 +354,7 @@ public class AdapterAddEntry extends BaseAdapter {
         vin_end_guage.clear();
 
 
-        Log.e("tag", "getfromdb");
+        Log.e("tag", "adapter_getfromdb");
         Cursor cursor = dbclass.getFromDb();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -318,7 +375,7 @@ public class AdapterAddEntry extends BaseAdapter {
             }
         }
 
-        Log.e("tag", "length: " + vin_positions.size());
+        Log.e("tag", "adapter_length: " + vin_positions.size());
 
         //   Log.e("tag", "getfromdb" + vin_positions.size() + vin_no.size() + vin_makemodel.size());
         // Log.e("tag", "starttt" + getStart.size() + getStart);

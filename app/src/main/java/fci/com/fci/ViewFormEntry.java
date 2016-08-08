@@ -3,6 +3,7 @@ package fci.com.fci;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class ViewFormEntry extends Activity {
     static String MAKE_MODEL = "make_model";
     static String START_GUAGE = "start_gauge";
     static String END_GAUGE = "end_gauge";
+    SweetAlertDialog sweetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +110,7 @@ public class ViewFormEntry extends Activity {
             public void onClick(View v) {
                 Intent goStf = new Intent(getApplicationContext(), StaffViewEntry.class);
                 startActivity(goStf);
+                ViewFormEntry.this.finish();
             }
         });
 
@@ -117,6 +120,12 @@ public class ViewFormEntry extends Activity {
     class staffViewEntry_Task extends AsyncTask<String, Void, String> {
         protected void onPreExecute() {
             super.onPreExecute();
+
+            sweetDialog = new SweetAlertDialog(ViewFormEntry.this, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();
         }
 
         protected String doInBackground(String... params) {
@@ -143,6 +152,7 @@ public class ViewFormEntry extends Activity {
         @Override
         protected void onPostExecute(String jsonStr) {
             Log.e("tag", "<-----rerseres---->" + jsonStr);
+            sweetDialog.dismiss();
             super.onPostExecute(jsonStr);
             try {
                 JSONObject jo = new JSONObject(jsonStr);

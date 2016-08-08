@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by Ramya on 10-06-2016.
  */
@@ -50,7 +52,7 @@ public class AdminDashboard extends AppCompatActivity {
                 Intent i=new Intent(getApplicationContext(),AdminStaffCreate.class);
                 i.putExtra("sts",0);
                 startActivity(i);
-                finish();
+                AdminDashboard.this.finish();
             }
         });
         lt_stf_ed.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +60,7 @@ public class AdminDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(),AdminStaffEdit.class);
                 startActivity(i);
-                finish();
+                AdminDashboard.this.finish();
             }
         });
         lt_comp_cr.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +69,7 @@ public class AdminDashboard extends AppCompatActivity {
             {
                 Intent i=new Intent(getApplicationContext(),AdminCreateCompany.class);
                 startActivity(i);
-                finish();
+                AdminDashboard.this.finish();
             }
         });
 
@@ -77,7 +79,7 @@ public class AdminDashboard extends AppCompatActivity {
             {
                 Intent i=new Intent(getApplicationContext(),AdminCompanyEdit.class);
                 startActivity(i);
-                finish();
+                AdminDashboard.this.finish();
             }
         });
 
@@ -88,9 +90,33 @@ public class AdminDashboard extends AppCompatActivity {
         tv_header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),Dashboard.class);
-                startActivity(i);
-                finish();
+
+
+
+                new SweetAlertDialog(AdminDashboard.this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Do you want to Logout?")
+                        .setConfirmText("Yes!")
+                        .setCancelText("No")
+
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+
+                                Intent i=new Intent(getApplicationContext(),Dashboard.class);
+                                startActivity(i);
+                                AdminDashboard.this.finish();
+                            }
+                        })
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+
+                            }
+                        })
+                        .show();
+
+
             }
         });
 

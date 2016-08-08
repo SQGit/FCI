@@ -48,6 +48,20 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
+    public void updateIntoDB(int position, String vin_no, String make, String start, String end, String s2, String s3) {
+
+        //(pos,vinno,make,st_g,ed_g,start,end) VALUES('" +
+
+        SQLiteDatabase sdb1;
+        sdb1 = getWritableDatabase();
+        //String query = "INSERT INTO fci_entry (st_g) VALUES(\"" + b + "\") Where pos ="+a+";";
+        String query = "UPDATE fci_entry set  vinno = \"" + vin_no + "\", make = \""+make+"\", st_g = \""+start+"\", ed_g = \""+end+"\" where pos = " + position;
+        Log.e("tag", "insertdb_end_guage  " + query);
+        sdb1.execSQL(query);
+
+    }
+
+
     public void deletedata() {
 
         try {
@@ -77,7 +91,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     public Cursor getFromDb() {
-        String query = " SELECT * FROM fci_entry";
+        String query = " SELECT distinct* FROM fci_entry";
         Cursor cursor = null;
         try {
             SQLiteDatabase sdb1;
@@ -101,6 +115,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String query = " DELETE from fci_entry ";
         sdb1.execSQL(query);
     }
+
 
 
 }

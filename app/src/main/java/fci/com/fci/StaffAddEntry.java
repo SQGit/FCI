@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -30,24 +32,26 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class
 StaffAddEntry extends Activity {
-    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another;
-    Typeface tf;
-    ListView lv_entries;
-    AdapterAddEntry staff_adapter;
+    static int siz_da = 3;
     public HashMap<Integer, String> vin_make = new HashMap<>();
     public HashMap<Integer, String> name = new HashMap<>();
     public ArrayList<Integer> v_pos = new ArrayList<>();
     public ArrayList<String> v_mk = new ArrayList<>();
-    static int siz_da;
+    public ArrayList<String> vin_positions = new ArrayList<>();
+    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another;
+    Typeface tf;
+    ListView lv_entries;
+    AdapterAddEntry staff_adapter;
     DbHelper dbclass;
     Context context = this;
     String managername, managerphone, companyname, staffname, dateFrom, staffphone;
-
-    ArrayList<String> vin_positions = new ArrayList<>();
     ArrayList<String> vin_no = new ArrayList<>();
     ArrayList<String> vin_makemodel = new ArrayList<>();
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
+
+    Adapter_Add staff_add_adapter;
+    SweetAlertDialog sweetDialog;
 
 
     @Override
@@ -64,7 +68,7 @@ StaffAddEntry extends Activity {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {
             dateFrom = format.format(ca.getTime());
-            Log.d("tag", "<---from---->" + dateFrom + "<----to-->" + dateFrom);
+            Log.e("tag", "<---from---->" + dateFrom + "<----to-->" + dateFrom);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,7 +105,7 @@ StaffAddEntry extends Activity {
         tv_endgug = (TextView) findViewById(R.id.tv_endgug);
         tv_save = (TextView) findViewById(R.id.tv_save);
         tv_note = (TextView) findViewById(R.id.tv_note);
-        //tv_add_another = (TextView) findViewById(R.id.tv_add_another);
+        tv_add_another = (TextView) findViewById(R.id.tv_add_another);
         tv_time.setText(cHour + ":" + cMinute);
 
         tv_header.setTypeface(tf, 1);
@@ -128,23 +132,37 @@ StaffAddEntry extends Activity {
         tv_date.setText(dateFrom);
 
 
-        siz_da = 3;
         getFromDb();
         staff_adapter = new AdapterAddEntry(StaffAddEntry.this, StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
         lv_entries.setAdapter(staff_adapter);
 
+      /* staff_add_adapter = new Adapter_Add(StaffAddEntry.this,getApplicationContext(),siz_da);
+        lv_entries.setAdapter(staff_add_adapter);*/
+        Log.e("tag", "" + siz_da);
 
 
-       /* tv_add_another.setOnClickListener(new View.OnClickListener() {
+        tv_add_another.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 siz_da = siz_da + 1;
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("size", String.valueOf(siz_da));
+                // editor.putString("vv_make" + pos_view, holder.tv_make.getText().toString());
+                editor.commit();
+
                 getFromDb();
-                staff_adapter = new AdapterAddEntry(StaffAddEntry.this,StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
+                //staff_add_adapter.notifyDataSetChanged();
+                staff_adapter = new AdapterAddEntry(StaffAddEntry.this, StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
                 lv_entries.setAdapter(staff_adapter);
-               // staff_adapter.notifyDataSetChanged();
+                staff_adapter.notifyDataSetChanged();
+
+                Intent intent = getIntent();
+                startActivity(intent);
+                finish();
             }
-        });*/
+        });
 
 
         tv_logout.setOnClickListener(new View.OnClickListener() {
@@ -183,10 +201,15 @@ StaffAddEntry extends Activity {
 
                 dbclass.deleteDb();
 
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("size", String.valueOf(3));
+                editor.commit();
 
 
                 Intent goStf = new Intent(getApplicationContext(), StaffDashboard.class);
                 startActivity(goStf);
+                finish();
             }
         });
 
@@ -206,28 +229,67 @@ StaffAddEntry extends Activity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("tag_", "restart");
+        Log.e("tag_", "restart");
 
-        //  staff_adapter = new AdapterAddEntry(StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
-        //  lv_entries.setAdapter(staff_adapter);
+        // getFromDb();
+        /*staff_adapter = new AdapterAddEntry(StaffAddEntry.this, StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
+        lv_entries.setAdapter(staff_adapter);*/
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("tag_", "resume");
+        Log.e("tag_", "resume");
     }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        Log.e("tag_", "postcreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("tag", "onstart");
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.e("tag", "onporstresume");
+    }
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("tag_", "pause");
+        Log.e("tag_", "pause");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.e("tag_", "restore");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.e("tag_", "saveinst");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        Log.e("tag_", "saveInst2");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("tag_", "stop");
+        Log.e("tag_", "stop");
     }
 
     private void getFromDb() {
@@ -237,9 +299,7 @@ StaffAddEntry extends Activity {
         vin_makemodel.clear();
         vin_start_guage.clear();
         vin_end_guage.clear();
-
-
-        Log.e("tag", "getfromdb");
+        Log.e("tag", "getfromdb_class");
         Cursor cursor = dbclass.getFromDb();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -273,6 +333,12 @@ StaffAddEntry extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
 
+            sweetDialog = new SweetAlertDialog(StaffAddEntry.this, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();
+
         }
 
         @Override
@@ -281,6 +347,8 @@ StaffAddEntry extends Activity {
             String start_gauge = "1/3", end_gauge = "1/3";
             try {
                 JSONObject jsonObject = new JSONObject();
+
+
                 JSONArray jsonArray = new JSONArray();
                 String asd;
                 for (int i = 0; i < vin_positions.size(); i++) {
@@ -302,7 +370,7 @@ StaffAddEntry extends Activity {
                         start_gauge = "3/4";
                     }
 
-                    Log.e("tag","endbh "+end_gauge);
+                    Log.e("tag", "endbh " + end_gauge);
 
                     JSONObject jsonObject1 = new JSONObject();
                     jsonObject1.accumulate("vin_no", vin_no.get(i));
@@ -311,6 +379,8 @@ StaffAddEntry extends Activity {
                     jsonObject1.accumulate("end_gauge", end_gauge);
 
                     jsonArray.put(jsonObject1);
+
+
                 }
                 asd = jsonArray.toString();
                 Log.e("tag", "valueee" + asd);
@@ -339,6 +409,9 @@ StaffAddEntry extends Activity {
         @Override
         protected void onPostExecute(String s) {
             Log.d("tag", "<-----rerseres---->" + s);
+
+            sweetDialog.dismiss();
+
             super.onPostExecute(s);
 
             try {

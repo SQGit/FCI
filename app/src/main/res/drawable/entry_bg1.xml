@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <stroke android:color="@color/bg1" android:width="@dimen/_1sdp"/>
-    <solid android:color="@color/listbg_storke"/>
+    <solid android:color="@color/button_text_color"/>
+
+
+
 </shape>

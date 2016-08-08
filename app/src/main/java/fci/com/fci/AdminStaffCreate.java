@@ -104,12 +104,12 @@ public class AdminStaffCreate extends AppCompatActivity {
                 if(sss == 0){
                     Intent i=new Intent(getApplicationContext(),AdminDashboard.class);
                     startActivity(i);
-                    finish();
+                    AdminStaffCreate.this.finish();
                 }
                 else {
                     Intent i=new Intent(getApplicationContext(),AdminStaffEdit.class);
                     startActivity(i);
-                    finish();
+                    AdminStaffCreate.this.finish();
                 }
 
 
@@ -261,12 +261,12 @@ public class AdminStaffCreate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                str_name = et_name.getText().toString();
-                str_phone = et_phone.getText().toString();
+                str_name = et_name.getText().toString().trim();
+                str_phone = et_phone.getText().toString().trim();
                 str_pin = et_pin1.getText().toString() + et_pin2.getText().toString() + et_pin3.getText().toString() + et_pin4.getText().toString();
                 str_repin = et_repin1.getText().toString() + et_repin2.getText().toString() + et_repin3.getText().toString() + et_repin4.getText().toString();
                 if (!(str_name.isEmpty())) {
-                    if (!(str_phone.isEmpty() || str_phone.length() < 4 || str_phone.length() > 10)) {
+                    if (!(str_phone.isEmpty() || str_phone.length() < 9 || str_phone.length() > 10)) {
                         if (!(str_pin == str_repin)) {
 
                             if (!Data_Service.isNetworkAvailable(AdminStaffCreate.this)) {
@@ -279,6 +279,7 @@ public class AdminStaffCreate extends AppCompatActivity {
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sweetAlertDialog.setCancelable(false);
                                                 startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                                                sweetAlertDialog.dismiss();
                                             }
                                         })
                                         .show();
@@ -363,7 +364,7 @@ public class AdminStaffCreate extends AppCompatActivity {
                                     sweetAlertDialog.dismiss();
                                     Intent goDash = new Intent(getApplicationContext(), AdminDashboard.class);
                                     startActivity(goDash);
-                                    finish();
+                                    AdminStaffCreate.this.finish();
                                 }
                             })
                             .show();

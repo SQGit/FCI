@@ -99,12 +99,49 @@ public class AdminCreateCompany extends AppCompatActivity {
                     altermanagername = et_manag_name.getText().toString();
                     altermanagerphone = et_manag_phone.getText().toString();
                 }
-                companyname = et_comp_name.getText().toString();
-                companylocation = et_comp_loc.getText().toString();
-                companyemail = et_comp_email.getText().toString();
-                new createCompany_Task().execute();
 
+                if (!(et_comp_name.getText().toString().trim().isEmpty())) {
+                    if (!(et_comp_loc.getText().toString().trim().isEmpty())) {
+                        if (!(et_comp_email.getText().toString().isEmpty())) {
+                            if (android.util.Patterns.EMAIL_ADDRESS.matcher(et_comp_email.getText().toString()).matches()) {
+                                if (!(et_manag_name.getText().toString().isEmpty())) {
+                                    if (!(et_manag_phone.getText().toString().isEmpty())) {
+                                        if(!(et_manag_phone.getText().length()<9)){
+                                        companyname = et_comp_name.getText().toString();
+                                        companylocation = et_comp_loc.getText().toString();
+                                        companyemail = et_comp_email.getText().toString();
+                                        new createCompany_Task().execute();
+                                    }
+                                        else{
+                                            et_manag_phone.setError("Enter Valid Phone Number");
+                                            et_manag_phone.requestFocus();
 
+                                        }
+                                    }
+                                        else {
+                                        et_manag_phone.setError("Enter Phone Number");
+                                        et_manag_phone.requestFocus();
+                                    }
+                                } else {
+                                    et_manag_name.setError("Enter Manager Name");
+                                    et_manag_name.requestFocus();
+                                }
+                            } else {
+                                et_comp_email.setError("Enter Valid Mail");
+                                et_comp_email.requestFocus();
+                            }
+                        } else {
+                            et_comp_email.setError("Enter Email");
+                            et_comp_email.requestFocus();
+                        }
+                    } else {
+                        et_comp_loc.setError("Enter Company Location");
+                        et_comp_loc.requestFocus();
+                    }
+                } else {
+                    et_comp_name.setError("Enter Company Name");
+                    et_comp_name.requestFocus();
+                }
             }
         });
 
@@ -113,14 +150,13 @@ public class AdminCreateCompany extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
                 startActivity(i);
-                finish();
+                AdminCreateCompany.this.finish();
             }
         });
 
         lt_add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor edit = s_pref.edit();
                 edit.putString("tag", "1234");
@@ -146,7 +182,8 @@ public class AdminCreateCompany extends AppCompatActivity {
             sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#FFE64A19"));
             sweetDialog.setTitleText("Loading");
             sweetDialog.setCancelable(false);
-            sweetDialog.show();}
+            sweetDialog.show();
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -195,7 +232,7 @@ public class AdminCreateCompany extends AppCompatActivity {
                                     sweetAlertDialog.dismiss();
                                     Intent goDash = new Intent(getApplicationContext(), AdminDashboard.class);
                                     startActivity(goDash);
-                                    finish();
+                                    AdminCreateCompany.this.finish();
                                 }
                             })
                             .show();

@@ -51,6 +51,7 @@ public class StaffViewEntry extends Activity {
     static String MANAGER_SIGN = "mgr_sign_url";
     private long date;
     String dateFrom;
+    SweetAlertDialog sweetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +117,8 @@ public class StaffViewEntry extends Activity {
         tv_staff.setText("Hi " + staffname);
 
         new staffViewEntry_Task().execute();
+
+
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -150,6 +153,7 @@ public class StaffViewEntry extends Activity {
             public void onClick(View v) {
                 Intent goStf = new Intent(getApplicationContext(), StaffDashboard.class);
                 startActivity(goStf);
+                StaffViewEntry.this.finish();
             }
         });
 
@@ -159,6 +163,11 @@ public class StaffViewEntry extends Activity {
     class staffViewEntry_Task extends AsyncTask<String, Void, String> {
         protected void onPreExecute() {
             super.onPreExecute();
+            sweetDialog = new SweetAlertDialog(StaffViewEntry.this, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();
         }
 
         protected String doInBackground(String... params) {
@@ -184,6 +193,7 @@ public class StaffViewEntry extends Activity {
         @Override
         protected void onPostExecute(String jsonStr) {
             Log.e("tag", "<-----rerseres---->" + jsonStr);
+            sweetDialog.dismiss();
             super.onPostExecute(jsonStr);
             try {
                 JSONObject jo = new JSONObject(jsonStr);

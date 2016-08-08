@@ -1,6 +1,7 @@
 package fci.com.fci;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class AdminLogin extends AppCompatActivity {
     Typeface tf;
     String str_phone, str_pass;
     public String URL_LOGIN = Data_Service.SERVICE_URL_NEW + "admin/login";
+    SweetAlertDialog sweetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class AdminLogin extends AppCompatActivity {
         et_phone.setTypeface(tf);
         et_pass.setTypeface(tf);
         content.setTypeface(tf);
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,9 +103,16 @@ public class AdminLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+
+
+
+
+
+
                 Intent i = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(i);
-                finish();
+                AdminLogin.this.finish();
 
             }
         });
@@ -114,6 +125,12 @@ public class AdminLogin extends AppCompatActivity {
 
         protected void onPreExecute() {
             super.onPreExecute();
+
+            sweetDialog = new SweetAlertDialog(AdminLogin.this, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();
         }
 
         @Override
@@ -136,25 +153,18 @@ public class AdminLogin extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.d("tag", "<-----resultlogin---->" + s);
+            sweetDialog.dismiss();
             super.onPostExecute(s);
+
 
             try {
                 JSONObject jo = new JSONObject(s);
                 String status = jo.getString("status");
                 String msg = jo.getString("message");
                 if (status.equals("success")) {
-                    new SweetAlertDialog(AdminLogin.this, SweetAlertDialog.SUCCESS_TYPE)
-                            .setTitleText("MESSAGE!!!")
-                            .setContentText("Login successfully..")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    sweetAlertDialog.dismiss();
-                                    Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
-                                    startActivity(i);
-                                }
-                            })
-                            .show();
+                    Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
+                    startActivity(i);
+                    AdminLogin.this.finish();
                 } else {
                     new SweetAlertDialog(AdminLogin.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("WARNING MESSAGE!!!")

@@ -73,6 +73,7 @@ public class CompanyViewEntry extends Activity{
             public void onClick(View v) {
                 Intent goStf = new Intent(getApplicationContext(),StaffDashboard.class);
                 startActivity(goStf);
+                CompanyViewEntry.this.finish();
             }
         });
 

@@ -254,9 +254,10 @@
                     android:layout_gravity="center"
                     android:hint="Phone"
                     android:id="@+id/et_manager_phone"
+
                     android:drawableLeft="@drawable/phone_ico"
                     android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="textPersonName"
+                    android:inputType="phone"
                     android:drawablePadding="@dimen/_5sdp"
                     android:textSize="@dimen/_13sdp"
                     android:background="@android:color/transparent"

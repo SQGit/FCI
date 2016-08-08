@@ -81,23 +81,23 @@
             android:name=".StaffViewEntry"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".AdminCompanyEdit"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
-        <activity
-            android:name=".BarScan"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
+
 
         <activity
             android:name=".ViewFormEntry"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
+
+        <activity android:name=".__Staff" android:screenOrientation="sensorLandscape"/>
+        <activity android:name=".ScanActivity" android:screenOrientation="sensorLandscape"/>
+
 
     </application>
 

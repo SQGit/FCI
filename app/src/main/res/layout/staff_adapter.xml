@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_vinno"
+            android:id="@+id/textview_vin_no"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_20sdp"
             android:layout_marginLeft="@dimen/_5sdp"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_make"
+            android:id="@+id/textview_vin_make"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
@@ -64,14 +64,14 @@
 
 
 
-        <Spinner
-            android:id="@+id/tv_startgug"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/entry_bg"
-            android:gravity="left"
-            android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_8sdp" />
+            <Spinner
+                android:id="@+id/spinner_start"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/entry_bg"
+                android:gravity="left"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/_8sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,25 +93,25 @@
             android:layout_width="@dimen/_70sdp"
             android:layout_height="wrap_content"
             >
-        <Spinner
-            android:id="@+id/tv_endgug"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/entry_bg"
-            android:gravity="left"
-            android:text="3/4 Tank"
-            android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_8sdp" />
+            <Spinner
+                android:id="@+id/spinner_end"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/entry_bg"
+                android:gravity="left"
+                android:text="3/4 Tank"
+                android:textColor="@color/textColorDark"
+                android:textSize="@dimen/_8sdp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_gravity="right|center"
-            android:paddingRight="@dimen/_5sdp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_gravity="right|center"
+                android:paddingRight="@dimen/_5sdp"
 
-            android:drawableRight="@drawable/drop_ico"
-            />
+                android:drawableRight="@drawable/drop_ico"
+                />
         </FrameLayout>
 
     </LinearLayout>

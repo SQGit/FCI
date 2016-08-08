@@ -48,6 +48,7 @@ public class StaffLogin extends AppCompatActivity {
     public String URL_LOGIN = Data_Service.SERVICE_URL_NEW + "staff/login";
     String phone, password, staffname,phoneno;
     ArrayList<String> fetchList = new ArrayList<String>();
+    SweetAlertDialog sweetDialog;
 
     @Override
 
@@ -107,10 +108,6 @@ public class StaffLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
-
-
                 Intent i = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(i);
                 finish();
@@ -128,6 +125,12 @@ public class StaffLogin extends AppCompatActivity {
 
         protected void onPreExecute() {
             super.onPreExecute();
+
+            sweetDialog = new SweetAlertDialog(StaffLogin.this, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();
         }
 
         @Override
@@ -150,6 +153,7 @@ public class StaffLogin extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.d("tag", "<-----result---->" + s);
+            sweetDialog.dismiss();
             super.onPostExecute(s);
             try {
                 JSONObject jo = new JSONObject(s);
@@ -224,6 +228,13 @@ public class StaffLogin extends AppCompatActivity {
 
         protected void onPreExecute() {
             super.onPreExecute();
+            sweetDialog = new SweetAlertDialog(StaffLogin.this, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();
+
+
         }
 
         @Override
@@ -248,6 +259,7 @@ public class StaffLogin extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.d("tag", "<-----resultlogin---->" + s);
+            sweetDialog.dismiss();
             super.onPostExecute(s);
 
             try {
@@ -255,20 +267,12 @@ public class StaffLogin extends AppCompatActivity {
                 String status = jo.getString("status");
                 String msg = jo.getString("message");
                 if (status.equals("success")) {
-                    new SweetAlertDialog(StaffLogin.this, SweetAlertDialog.SUCCESS_TYPE)
-                            .setTitleText("MESSAGE!!!")
-                            .setContentText("Login successfully..")
 
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    sweetAlertDialog.dismiss();
-                                    Intent i = new Intent(getApplicationContext(), StaffDashboard.class);
-                                    startActivity(i);
-                                }
-                            })
-                            .show();
-                } else {
+                    Intent i = new Intent(getApplicationContext(), StaffDashboard.class);
+                    startActivity(i);
+
+                }
+                else {
                     new SweetAlertDialog(StaffLogin.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("WARNING MESSAGE!!!")
                             .setContentText(msg)

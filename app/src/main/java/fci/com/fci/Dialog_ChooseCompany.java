@@ -2,6 +2,7 @@ package fci.com.fci;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by Salman on 6/22/2016.
  */
@@ -44,6 +47,8 @@ public class Dialog_ChooseCompany extends Dialog {
     String managername, managerphone;
     DbHelper dbclass;
     Context context = this.activity;
+    SweetAlertDialog sweetDialog;
+    View progress;
 
     public Dialog_ChooseCompany(Activity activity) {
         super(activity);
@@ -59,13 +64,21 @@ public class Dialog_ChooseCompany extends Dialog {
         tf = Typeface.createFromAsset(activity.getAssets(), "fonts/asin.TTF");
         spn_compname = (Spinner) findViewById(R.id.spn_comp_name);
         submit = (ImageView) findViewById(R.id.submit);
+
+        progress = findViewById(R.id.progress);
+        progress.setVisibility(View.GONE);
+
         new staffFetch_Task().execute();
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               dbclass.deletedata();
+
                 String company_name = spn_compname.getSelectedItem().toString();
+                if(!(company_name.equals(null))){
+
+
                 Log.e("tag", "name1" + company_name);
                 Log.e("tag", "managername" + managername);
                 SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -75,9 +88,13 @@ public class Dialog_ChooseCompany extends Dialog {
                 edit.putString("managerphone", managerphone);
                 edit.commit();
 
-                Intent goEntry = new Intent(activity, StaffAddEntry.class);
+                Intent goEntry = new Intent(activity, __Staff.class);
                 activity.startActivity(goEntry);
                 dismiss();
+                }
+                else{
+                    Toast.makeText(activity,"Please Wait",Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -96,6 +113,15 @@ public class Dialog_ChooseCompany extends Dialog {
 
         protected void onPreExecute() {
             super.onPreExecute();
+
+            progress.setVisibility(View.VISIBLE);
+
+         /*   sweetDialog = new SweetAlertDialog(activity, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();*/
+
         }
 
         @Override
@@ -118,6 +144,8 @@ public class Dialog_ChooseCompany extends Dialog {
         @Override
         protected void onPostExecute(String s) {
             Log.d("tag", "<-----result---->" + s);
+           // sweetDialog.dismiss();
+            progress.setVisibility(View.GONE);
             super.onPostExecute(s);
             try {
                 JSONObject jo = new JSONObject(s);

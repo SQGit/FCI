@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,9 +40,15 @@ public class AdminStaffEdit extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_staffedit);
-        tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.admin_staffedit);
+
+
+
+        tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
         lv_staffsList = (ListView) findViewById(R.id.listview);
 
         tv_header = (TextView) findViewById(R.id.tv_header);
@@ -67,6 +75,7 @@ public class AdminStaffEdit extends Activity {
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                             sweetAlertDialog.setCancelable(false);
                             startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                            sweetAlertDialog.dismiss();
                         }
                     })
                     .show();
@@ -82,7 +91,7 @@ public class AdminStaffEdit extends Activity {
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(),AdminDashboard.class);
                 startActivity(i);
-                finish();
+                AdminStaffEdit.this.finish();
             }
         });
 
