@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:weightSum="4">
@@ -94,8 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Company:"
                 android:singleLine="true"
+                android:text="Company:"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -105,8 +104,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Hertz"
                 android:singleLine="true"
+                android:text="Hertz"
 
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
@@ -144,8 +143,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_45sdp"
-                android:singleLine="true"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="Date:"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
@@ -164,17 +163,17 @@
             <View
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:singleLine="true"
                 android:layout_marginLeft="@dimen/_5sdp"
-                android:background="@color/bg2" />
+                android:background="@color/bg2"
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
-                android:singleLine="true"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="Time:"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
@@ -204,17 +203,16 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:weightSum="4">
+                android:paddingTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_vinno"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_95sdp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="VinNo"
                     android:textColor="@color/textColorDark"
@@ -222,10 +220,9 @@
 
                 <TextView
                     android:id="@+id/tv_make"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_95sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_25sdp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/_20sdp"
                     android:ems="6"
                     android:gravity="center"
                     android:text="Make/Model"
@@ -234,9 +231,8 @@
 
                 <TextView
                     android:id="@+id/tv_startgug"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="Start Guage"
                     android:textColor="@color/textColorDark"
@@ -244,10 +240,10 @@
 
                 <TextView
                     android:id="@+id/tv_endgug"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/_20sdp"
+
                     android:gravity="center"
                     android:text="End Gauge"
                     android:textColor="@color/textColorDark"
@@ -257,7 +253,7 @@
 
             <ListView
                 android:id="@+id/listview"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_100sdp">
 
             </ListView>
@@ -272,11 +268,11 @@
                     android:id="@+id/tv_note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:gravity="bottom"
+                    android:paddingBottom="@dimen/_5sdp"
                     android:text="Note: Max Capacity - 240 gallons"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_5sdp" />
@@ -286,11 +282,11 @@
                     android:id="@+id/tv_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center|center_horizontal|center_vertical"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:drawableLeft="@drawable/save_ico"
-                    android:layout_centerHorizontal="true"
                     android:drawablePadding="@dimen/_5sdp"
                     android:gravity="center"
                     android:text="Save &amp; Submit"
@@ -302,14 +298,14 @@
                     android:id="@+id/tv_add_another"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
                     android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
                     android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:drawableLeft="@drawable/add_ico"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="center"
                     android:text="Add Another"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_8sdp" />
 
@@ -322,6 +318,7 @@
 
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

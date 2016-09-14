@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
@@ -18,15 +19,16 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
-                android:id="@+id/tv_header"
                 android:layout_marginLeft="-30dp"
                 android:background="@drawable/background_tv"
-                android:paddingBottom="@dimen/_6sdp"
                 android:drawableLeft="@drawable/back_ico"
                 android:drawablePadding="@dimen/_10sdp"
+                android:gravity="center"
+                android:paddingBottom="@dimen/_6sdp"
                 android:paddingLeft="50dp"
                 android:paddingRight="@dimen/_20sdp"
                 android:paddingTop="@dimen/_6sdp"
@@ -66,19 +68,19 @@
 
 
                 <EditText
+                    android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:hint="Phone"
-                    android:id="@+id/et_phone"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="phone"
-                    android:maxLength="10"
+                    android:background="@android:color/transparent"
                     android:drawableLeft="@drawable/phone_ico"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
-                    android:background="@android:color/transparent"
+                    android:hint="Phone"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/_10sdp"
                     android:singleLine="true"
+                    android:textSize="@dimen/_13sdp"
                     />
             </LinearLayout>
 
@@ -113,19 +115,19 @@
 
 
                 <EditText
+                    android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:hint="Password"
-                    android:id="@+id/et_password"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:maxLength="8"
+                    android:background="@android:color/transparent"
                     android:drawableLeft="@drawable/pass_ico"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
+                    android:hint="Password"
                     android:inputType="textPassword"
-                    android:background="@android:color/transparent"
+                    android:maxLength="8"
+                    android:paddingLeft="@dimen/_10sdp"
                     android:singleLine="true"
+                    android:textSize="@dimen/_13sdp"
                     />
             </LinearLayout>
 
@@ -138,44 +140,33 @@
         </RelativeLayout>
 
 
-
-
-
-
-
-
-
-
-
-
-
-       <!-- <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:hint="Phone"
-            android:paddingLeft="@dimen/_10sdp"
-            android:ems="25"
-            android:inputType="number"
-            android:drawableLeft="@drawable/phone_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:singleLine="true"
-            android:background="@drawable/rectangle_bg_et"
-            />-->
-   <!--     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:hint="Password"
-            android:paddingLeft="@dimen/_10sdp"
-            android:ems="25"
-            android:inputType="textPassword"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:drawableLeft="@drawable/password_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:singleLine="true"
-            android:background="@drawable/rectangle_bg_et"
-            />-->
+        <!-- <EditText
+             android:layout_width="wrap_content"
+             android:layout_height="70dp"
+             android:layout_gravity="center"
+             android:hint="Phone"
+             android:paddingLeft="@dimen/_10sdp"
+             android:ems="25"
+             android:inputType="number"
+             android:drawableLeft="@drawable/phone_icon"
+             android:drawablePadding="@dimen/_5sdp"
+             android:singleLine="true"
+             android:background="@drawable/rectangle_bg_et"
+             />-->
+        <!--     <EditText
+                 android:layout_width="wrap_content"
+                 android:layout_height="70dp"
+                 android:layout_gravity="center"
+                 android:hint="Password"
+                 android:paddingLeft="@dimen/_10sdp"
+                 android:ems="25"
+                 android:inputType="textPassword"
+                 android:layout_marginTop="@dimen/_20sdp"
+                 android:drawableLeft="@drawable/password_icon"
+                 android:drawablePadding="@dimen/_5sdp"
+                 android:singleLine="true"
+                 android:background="@drawable/rectangle_bg_et"
+                 />-->
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -201,12 +192,13 @@
 
         <TextView
             android:id="@+id/content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_8sdp"
-            android:text="For login account,you have to agree to FCI's terms and conditions,privacy policies \n \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                          Content Policies."/>
+            android:gravity="center"
+            android:text="For login account,you have to agree to FCI's terms and conditions, \nprivacy policies, Content Policies."
+            android:textSize="@dimen/_8sdp" />
 
     </LinearLayout>
 </LinearLayout>

@@ -19,15 +19,16 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
                 android:layout_marginLeft="-30dp"
-                android:id="@+id/tv_header"
                 android:background="@drawable/background_tv"
-                android:paddingBottom="@dimen/_6sdp"
                 android:drawableLeft="@drawable/back_ico"
                 android:drawablePadding="@dimen/_10sdp"
+                android:gravity="center"
+                android:paddingBottom="@dimen/_6sdp"
                 android:paddingLeft="50dp"
                 android:paddingRight="@dimen/_20sdp"
                 android:paddingTop="@dimen/_6sdp"
@@ -46,10 +47,10 @@
 
 
         <RelativeLayout
+            android:id="@+id/lt_create_staff"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_27sdp"
             android:layout_gravity="center"
-            android:id="@+id/lt_create_staff"
             android:background="@drawable/newone">
 
             <ImageView
@@ -58,18 +59,6 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/dr_img" />
 
-                <TextView
-                    android:id="@+id/tv_create_staff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="@dimen/_45sdp"
-                    android:gravity="center|center_vertical|center_horizontal"
-                    android:drawableLeft="@drawable/create_staff_ico"
-                    android:text="Create Staff"
-                    android:textSize="@dimen/_13sdp" />
-
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -77,15 +66,29 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/dr_img"
                 android:rotation="180" />
+
+            <TextView
+                android:id="@+id/tv_create_staff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/create_staff_ico"
+                android:drawablePadding="@dimen/_10sdp"
+                android:gravity="center|center_vertical|center_horizontal"
+                android:paddingLeft="@dimen/_45sdp"
+                android:text="Create Staff"
+                android:textSize="@dimen/_13sdp" />
         </RelativeLayout>
 
 
 
         <RelativeLayout
+            android:id="@+id/lt_edit_staff"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_27sdp"
             android:layout_gravity="center"
-            android:id="@+id/lt_edit_staff"
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/newone">
 
@@ -96,36 +99,34 @@
                 android:background="@drawable/dr_img" />
 
 
-
-
-
-            <TextView
-                android:id="@+id/tv_edit_staff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/_10sdp"
-                android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/_47sdp"
-                android:gravity="center|center_vertical|center_horizontal"
-                android:drawableLeft="@drawable/edit_staff_ico"
-                android:text="Edit Staff"
-                android:textSize="@dimen/_13sdp" />
-
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/dr_img"
                 android:rotation="180" />
+
+            <TextView
+                android:id="@+id/tv_edit_staff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/edit_staff_ico"
+                android:drawablePadding="@dimen/_6sdp"
+                android:gravity="center|center_vertical|center_horizontal"
+                android:paddingLeft="@dimen/_45sdp"
+                android:text="Edit Staff"
+                android:textSize="@dimen/_13sdp" />
         </RelativeLayout>
 
 
         <RelativeLayout
+            android:id="@+id/lt_create_company"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_27sdp"
             android:layout_gravity="center"
-            android:id="@+id/lt_create_company"
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/newone">
 
@@ -142,11 +143,11 @@
                 android:id="@+id/tv_create_companey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/_10sdp"
                 android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/_46sdp"
-                android:gravity="center|center_vertical|center_horizontal"
                 android:drawableLeft="@drawable/create_comp_ico"
+                android:drawablePadding="@dimen/_13sdp"
+                android:gravity="center|center_vertical|center_horizontal"
+                android:paddingLeft="@dimen/_49sdp"
                 android:text="Create Company"
                 android:textSize="@dimen/_13sdp" />
 
@@ -161,10 +162,10 @@
 
 
         <RelativeLayout
+            android:id="@+id/lt_edit_company"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_27sdp"
             android:layout_gravity="center"
-            android:id="@+id/lt_edit_company"
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/newone">
 
@@ -181,11 +182,11 @@
                 android:id="@+id/tv_edit_companey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/_10sdp"
                 android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/_46sdp"
-                android:gravity="center|center_vertical|center_horizontal"
                 android:drawableLeft="@drawable/edit_comp_ico"
+                android:drawablePadding="@dimen/_6sdp"
+                android:gravity="center|center_vertical|center_horizontal"
+                android:paddingLeft="@dimen/_49sdp"
                 android:text="Edit Company"
                 android:textSize="@dimen/_13sdp" />
 
@@ -199,67 +200,63 @@
         </RelativeLayout>
 
 
+        <!--   <EditText
+               android:id="@+id/createstaff_et"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingTop="25dp"
+               android:paddingBottom="25dp"
+               android:layout_gravity="center"
+               android:background="@drawable/rectangle_bg_et"
+               android:drawableLeft="@drawable/createstaf_icon"
+               android:drawablePadding="@dimen/_5sdp"
+               android:editable="false"
+               android:ems="25"
+               android:hint="Create Staff"
+               android:paddingLeft="@dimen/_10sdp" />
+   -->
+        <!-- <EditText
+             android:id="@+id/editstaff_id"
+             android:layout_width="wrap_content"
+             android:layout_height="70dp"
+             android:layout_gravity="center"
+             android:layout_marginTop="@dimen/_20sdp"
+             android:background="@drawable/rectangle_bg_et"
+             android:drawableLeft="@drawable/editstaf_icon"
+             android:drawablePadding="@dimen/_5sdp"
+             android:ems="25"
+             android:editable="false"
+             android:hint="Edit Staff"
+             android:paddingLeft="@dimen/_10sdp" />-->
 
+        <!-- <EditText
+             android:id="@+id/createcompany_id"
+             android:layout_width="wrap_content"
+             android:layout_height="70dp"
+             android:layout_gravity="center"
+             android:layout_marginTop="@dimen/_20sdp"
+             android:background="@drawable/rectangle_bg_et"
+             android:drawableLeft="@drawable/createstaf_icon"
+             android:drawablePadding="@dimen/_5sdp"
+             android:ems="25"
+             android:editable="false"
+             android:hint="Create Company"
+             android:paddingLeft="@dimen/_10sdp" />-->
 
-
-
-     <!--   <EditText
-            android:id="@+id/createstaff_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="25dp"
-            android:paddingBottom="25dp"
-            android:layout_gravity="center"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/createstaf_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:editable="false"
-            android:ems="25"
-            android:hint="Create Staff"
-            android:paddingLeft="@dimen/_10sdp" />
--->
-       <!-- <EditText
-            android:id="@+id/editstaff_id"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/editstaf_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:ems="25"
-            android:editable="false"
-            android:hint="Edit Staff"
-            android:paddingLeft="@dimen/_10sdp" />-->
-
-       <!-- <EditText
-            android:id="@+id/createcompany_id"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/createstaf_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:ems="25"
-            android:editable="false"
-            android:hint="Create Company"
-            android:paddingLeft="@dimen/_10sdp" />-->
-
-<!--
-        <EditText
-            android:id="@+id/et_edit_company"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/createstaf_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:ems="25"
-            android:editable="false"
-            android:hint="Edit Company"
-            android:paddingLeft="@dimen/_10sdp" />-->
+        <!--
+                <EditText
+                    android:id="@+id/et_edit_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/rectangle_bg_et"
+                    android:drawableLeft="@drawable/createstaf_icon"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:ems="25"
+                    android:editable="false"
+                    android:hint="Edit Company"
+                    android:paddingLeft="@dimen/_10sdp" />-->
 
 
     </LinearLayout>

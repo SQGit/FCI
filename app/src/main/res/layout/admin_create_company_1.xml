@@ -1,39 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:weightSum="4.5">
+    android:weightSum="5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_weight="0.8"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
                 android:layout_marginLeft="-30dp"
                 android:background="@drawable/background_tv"
-                android:paddingBottom="@dimen/_6sdp"
-                android:id="@+id/tv_header"
-                android:paddingLeft="50dp"
                 android:drawableLeft="@drawable/back_ico"
                 android:drawablePadding="@dimen/_10sdp"
+                android:gravity="center"
+                android:paddingBottom="@dimen/_6sdp"
+                android:paddingLeft="50dp"
                 android:paddingRight="@dimen/_20sdp"
                 android:paddingTop="@dimen/_6sdp"
                 android:text="Create Company"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_11sdp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:gravity="right|center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_admin_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="Hi Admin,"
+                    android:textColor="@color/textColorDark"
+                    android:textSize="@dimen/_11sdp" />
+
+                <LinearLayout
+                    android:id="@+id/layout_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_25sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingBottom="2dp"
+                        android:text="Logout"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 
@@ -43,344 +90,377 @@
         android:layout_weight="4"
         android:orientation="vertical">
 
-
-
-
-        <RelativeLayout
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:background="@drawable/newone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/dr_img" />
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center_vertical">
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_5sdp"
+                android:paddingTop="@dimen/_5sdp">
 
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                <RelativeLayout
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
-                    android:hint="Company Name"
-                    android:id="@+id/et_comp_name"
-                    android:drawableLeft="@drawable/comp_name_ico"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="textPersonName"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
-                    android:background="@android:color/transparent"
-                    android:singleLine="true"
-                    />
-            </LinearLayout>
+                    android:background="@drawable/newone">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/dr_img"
-                android:rotation="180" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/dr_img" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
 
 
+                        <EditText
+                            android:id="@+id/et_comp_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/comp_name_ico"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:hint="Company Name"
+                            android:inputType="textPersonName"
+                            android:maxLength="15"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/dr_img"
+                        android:rotation="180" />
+                </RelativeLayout>
 
-
-        <RelativeLayout
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/newone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/dr_img" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center_vertical">
-
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                <RelativeLayout
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
-                    android:hint="Company Location"
-                    android:id="@+id/et_comp_location"
-                    android:drawableLeft="@drawable/comp_loc_ico"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="textPersonName"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
-                    android:background="@android:color/transparent"
-                    android:singleLine="true"
-                    />
-            </LinearLayout>
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/newone">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/dr_img"
-                android:rotation="180" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/dr_img" />
 
-        <RelativeLayout
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/newone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/dr_img" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
 
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                        <EditText
+                            android:id="@+id/et_comp_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/comp_loc_ico"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:hint="Company Location"
+                            android:inputType="textPersonName"
+                            android:maxLength="15"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/dr_img"
+                        android:rotation="180" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
-                    android:hint="Company Email"
-                    android:id="@+id/et_comp_email"
-                    android:drawableLeft="@drawable/comp_loc_ico"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="textEmailAddress"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
-                    android:background="@android:color/transparent"
-                    android:singleLine="true"
-                    />
-            </LinearLayout>
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/newone">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/dr_img"
-                android:rotation="180" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/dr_img" />
 
-        <RelativeLayout
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/newone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/dr_img" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
 
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                        <EditText
+                            android:id="@+id/et_comp_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/comp_loc_ico"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:hint="Company Email"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/dr_img"
+                        android:rotation="180" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
-                    android:hint="Manager Name"
-                    android:id="@+id/et_manager_name"
-                    android:drawableLeft="@drawable/name_ico"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="textPersonName"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
-                    android:background="@android:color/transparent"
-                    android:singleLine="true"
-                    />
-            </LinearLayout>
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/newone">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/dr_img"
-                android:rotation="180" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/dr_img" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
 
 
+                        <EditText
+                            android:id="@+id/et_manager_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/name_ico"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:hint="Manager Name"
+                            android:inputType="textPersonName"
+                            android:maxLength="15"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/dr_img"
+                        android:rotation="180" />
+                </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/newone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/dr_img" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center_vertical">
-
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                <RelativeLayout
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
-                    android:hint="Phone"
-                    android:id="@+id/et_manager_phone"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/newone">
 
-                    android:drawableLeft="@drawable/phone_ico"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="phone"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
-                    android:background="@android:color/transparent"
-                    android:singleLine="true"
-                    />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/dr_img" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
+
+
+                        <EditText
+                            android:id="@+id/et_manager_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/phone_ico"
+                            android:drawablePadding="@dimen/_6sdp"
+                            android:hint="Phone"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/_12sdp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/dr_img"
+                        android:rotation="180" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_65sdp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tv_add_manag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:text="+ Alt. Manager Details"
+                        android:textColor="@color/orange"
+                        android:textSize="@dimen/_7sdp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/orange" />
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/alt_mgr0"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/newone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/dr_img" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
+
+
+                        <EditText
+                            android:id="@+id/et_alt_manager_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/name_ico"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:hint="Alt. Manager Name"
+                            android:inputType="textPersonName"
+                            android:maxLength="15"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/dr_img"
+                        android:rotation="180" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/alt_mgr1"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/newone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/dr_img" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
+
+
+                        <EditText
+                            android:id="@+id/et_alt_manager_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:drawableLeft="@drawable/phone_ico"
+                            android:drawablePadding="@dimen/_6sdp"
+                            android:hint="Alt. Manager Phone"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/_12sdp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/dr_img"
+                        android:rotation="180" />
+                </RelativeLayout>
+
+
             </LinearLayout>
+        </ScrollView>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/dr_img"
-                android:rotation="180" />
-        </RelativeLayout>
+    </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-      <!--  <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/compyname_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:ems="15"
-            android:hint="Company Name"
-            android:inputType="textPersonName"
-            android:paddingLeft="@dimen/_10sdp"
-            android:singleLine="true"
-            android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_12sdp" />-->
-
-<!--        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/cmpyloc_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:ems="15"
-            android:hint="Company Location"
-            android:inputType="text"
-            android:paddingLeft="@dimen/_10sdp"
-            android:singleLine="true"
-            android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_12sdp" />-->
-
-      <!--  <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/name_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:ems="15"
-            android:hint="Manager Name"
-            android:inputType="text"
-            android:paddingLeft="@dimen/_10sdp"
-            android:singleLine="true"
-            android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_12sdp" />-->
-
-    <!--    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/rectangle_bg_et"
-            android:drawableLeft="@drawable/phone_icon"
-            android:drawablePadding="@dimen/_5sdp"
-            android:ems="15"
-            android:hint="Phone"
-            android:inputType="phone"
-            android:paddingLeft="@dimen/_10sdp"
-            android:singleLine="true"
-            android:textColor="@color/textColorDark"
-            android:textSize="@dimen/_12sdp" />-->
-
-
-        <LinearLayout
+        <ImageView
+            android:id="@+id/submit_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/layout_add"
-            android:layout_marginLeft="@dimen/_65sdp"
-            android:orientation="vertical">
+            android:background="@drawable/submit_ico" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:id="@+id/tv_add_manag"
-                android:drawableLeft="@android:drawable/ic_input_add"
-                android:drawablePadding="@dimen/_5sdp"
-                android:text="Alt. Manager Details"
-                android:textColor="@color/orange"
-                android:textSize="@dimen/_7sdp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/orange"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/submit_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/submit_ico" />
-
-        </LinearLayout>
     </LinearLayout>
 
 

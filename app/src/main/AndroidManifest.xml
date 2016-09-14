@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fci.com.fci">
+    package="net.fciapp.fciscanner">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -18,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".Splash"
+            android:name="net.fciapp.fciscanner.Splash"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,77 +27,86 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Dashboard"
+            android:name="net.fciapp.fciscanner.Dashboard"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"></activity>
         <activity
-            android:name=".AdminLogin"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
-        <activity
-            android:name=".StaffLogin"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
-
-        </activity>
-        <activity
-            android:name=".AdminDashboard"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
-        <activity
-            android:name=".AdminStaffCreate"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
-        <activity
-            android:name=".AdminCreateCompany"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
-        <activity
-            android:name=".StaffDashboard"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
-        </activity>
-
-        <activity
-            android:name=".AdminStaffEdit"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
-
-        <activity
-            android:name=".StaffAddEntry"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
-
-        </activity>
-
-        <activity
-            android:name=".StaffViewEntry"
+            android:name="net.fciapp.fciscanner.AdminLogin"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
         <activity
-            android:name=".AdminCompanyEdit"
+            android:name="net.fciapp.fciscanner.StaffLogin"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan">
+
+        </activity>
+        <activity
+            android:name="net.fciapp.fciscanner.AdminDashboard"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name="net.fciapp.fciscanner.AdminStaffCreate"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name="net.fciapp.fciscanner.AdminCreateCompany"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name="net.fciapp.fciscanner.StaffDashboard"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+
+        <activity
+            android:name="net.fciapp.fciscanner.AdminStaffEdit"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+
+        <activity
+            android:name="net.fciapp.fciscanner.StaffAddEntry"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan">
+
+        </activity>
+
+        <activity
+            android:name="net.fciapp.fciscanner.StaffViewEntry"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name="net.fciapp.fciscanner.AdminCompanyEdit"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
 
 
         <activity
-            android:name=".ViewFormEntry"
+            android:name="net.fciapp.fciscanner.ViewFormEntry"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
 
-        <activity android:name=".__Staff" android:screenOrientation="sensorLandscape"/>
-        <activity android:name=".ScanActivity" android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name="net.fciapp.fciscanner.__Staff"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
+        <activity
+            android:name="net.fciapp.fciscanner.ScanActivity"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
+        <activity
+            android:name="net.fciapp.fciscanner.SettingsPage"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
 
 
     </application>

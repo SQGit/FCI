@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash"
-    tools:context="fci.com.fci.Splash">
+    tools:context="net.fciapp.fciscanner.Splash">
 
 
 </RelativeLayout>

@@ -7,47 +7,49 @@
     android:paddingBottom="15dp"
     android:paddingTop="15dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgview"/>
+
 
     <LinearLayout
         android:layout_width="@dimen/_110sdp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_1sdp"
+        android:gravity="center"
+        android:paddingTop="@dimen/_2sdp">
 
         <TextView
             android:id="@+id/textview_vin_no"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_5sdp"
             android:background="@drawable/entry_bg"
             android:drawableRight="@drawable/scan_ico"
             android:ems="10"
             android:gravity="left"
             android:padding="@dimen/_5sdp"
-            android:text="Scan Vin   "
             android:singleLine="true"
+            android:text="Scan Vin   "
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/_8sdp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="wrap_content">
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/_2sdp">
 
         <TextView
             android:id="@+id/textview_vin_make"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_gravity="center"
             android:background="@drawable/entry_bg"
-            android:ems="10"
-            android:singleLine="true"
-
+            android:ems="11"
             android:gravity="left"
             android:padding="@dimen/_5sdp"
+            android:singleLine="true"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/_8sdp" />
 
@@ -56,12 +58,12 @@
     <LinearLayout
         android:layout_width="@dimen/_70sdp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:orientation="vertical">
+
         <FrameLayout
             android:layout_width="@dimen/_70sdp"
-            android:layout_height="wrap_content"
-            >
-
+            android:layout_height="wrap_content">
 
 
             <Spinner
@@ -76,23 +78,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
                 android:layout_gravity="right|center"
+                android:layout_marginRight="@dimen/_5sdp"
 
                 android:drawableRight="@drawable/drop_ico"
-                android:layout_marginRight="@dimen/_5sdp"
-                />
+                android:gravity="right" />
         </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="@dimen/_70sdp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_height="wrap_content">
+        android:layout_marginRight="@dimen/_5sdp">
+
         <FrameLayout
             android:layout_width="@dimen/_70sdp"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <Spinner
                 android:id="@+id/spinner_end"
                 android:layout_width="@dimen/_70sdp"
@@ -106,12 +109,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
                 android:layout_gravity="right|center"
-                android:paddingRight="@dimen/_5sdp"
-
                 android:drawableRight="@drawable/drop_ico"
-                />
+                android:gravity="right"
+
+                android:paddingRight="@dimen/_5sdp" />
         </FrameLayout>
 
     </LinearLayout>

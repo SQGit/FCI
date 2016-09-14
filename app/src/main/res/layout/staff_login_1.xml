@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:weightSum="4">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
 
 
             <TextView
+                android:id="@+id/tv_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center|center_vertical"
@@ -27,7 +30,6 @@
                 android:background="@drawable/background_tv"
                 android:drawableLeft="@drawable/back_ico"
                 android:drawablePadding="@dimen/_10sdp"
-                android:id="@+id/tv_header"
                 android:paddingBottom="@dimen/_6sdp"
                 android:paddingLeft="@dimen/_20sdp"
                 android:paddingRight="@dimen/_15sdp"
@@ -53,15 +55,25 @@
             android:background="@drawable/newone">
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/dr_img" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/dr_img"
+                android:rotation="180" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/imageView"
+                android:layout_toRightOf="@+id/imageView"
                 android:gravity="center_vertical">
 
 
@@ -70,40 +82,40 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center">
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/staff_name_ico" />
+
                     <Spinner
                         android:id="@+id/spn_staff_name"
                         android:layout_width="@dimen/_197sdp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:paddingLeft="@dimen/_28sdp"
+                        android:background="@null"
+                        android:dropDownWidth="@dimen/_170sdp"
+                        android:paddingLeft="@dimen/_13sdp"
                         android:paddingRight="@dimen/_20sdp"
                         android:spinnerMode="dropdown">
-
                     </Spinner>
 
                     <ImageView
+                        android:id="@+id/imageView_loc_country"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/_11sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/staff_name_ico" />
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
 
-
-
+                        android:src="@drawable/drop_ico" />
 
 
                 </FrameLayout>
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/dr_img"
-                android:rotation="180" />
         </RelativeLayout>
-
 
 
         <RelativeLayout
@@ -127,20 +139,21 @@
 
 
                 <EditText
+                    android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:hint="Phone"
-                    android:maxLength="15"
-                    android:id="@+id/et_phone"
-                    android:drawableLeft="@drawable/phone_ico"
-                    android:paddingLeft="@dimen/_12sdp"
-                    android:inputType="phone"
-                    android:textColor="@color/textColorGray"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:textSize="@dimen/_13sdp"
                     android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/phone_ico"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:hint="Phone"
+                    android:inputType="phone"
+
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/_12sdp"
                     android:singleLine="true"
+                    android:textColor="@color/textColorGray"
+                    android:textSize="@dimen/_13sdp"
                     />
             </LinearLayout>
 
@@ -153,9 +166,6 @@
         </RelativeLayout>
 
 
-
-
-
         <RelativeLayout
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_30sdp"
@@ -177,20 +187,21 @@
 
 
                 <EditText
+                    android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:hint="Password"
-                    android:id="@+id/et_password"
+                    android:background="@android:color/transparent"
                     android:drawableLeft="@drawable/pass_ico"
-                    android:paddingLeft="@dimen/_12sdp"
-                    android:maxLength="8"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:hint="Password"
+                    android:imeOptions="actionDone"
                     android:inputType="numberPassword"
-                    android:drawablePadding="@dimen/_5sdp"
+                    android:maxLength="4"
+                    android:paddingLeft="@dimen/_12sdp"
+                    android:singleLine="true"
                     android:textColor="@color/textColorGray"
                     android:textSize="@dimen/_13sdp"
-                    android:background="@android:color/transparent"
-                    android:singleLine="true"
                     />
             </LinearLayout>
 
@@ -278,14 +289,14 @@
             android:textSize="@dimen/_14sdp" />-->
 
         <TextView
+            android:id="@+id/tv_repassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_repassword"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_70sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:textColor="@color/textColorGray"
             android:text="Forgot Password?"
+            android:textColor="@color/textColorGray"
             android:textSize="@dimen/_8sdp" />
 
         <LinearLayout
@@ -303,22 +314,26 @@
 
         </LinearLayout>
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"
+        android:layout_weight="0.5"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/tv_terms"
-            android:textColor="@color/textColorGray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|center_vertical"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="For login account,you have to agree to FCI's terms and conditions,privacy policies \n                                                     and Content Policies."
+            android:gravity="center"
+            android:text="For login account,you have to agree to FCI's terms and conditions,\nprivacy policies and Content Policies."
+            android:textColor="@color/textColorGray"
             android:textSize="@dimen/_6sdp" />
 
     </LinearLayout>

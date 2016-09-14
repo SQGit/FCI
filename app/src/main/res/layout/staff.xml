@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:weightSum="4">
+    android:weightSum="5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,7 +78,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="3.7"
         android:orientation="vertical">
 
         <LinearLayout
@@ -94,10 +93,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Company:"
                 android:singleLine="true"
+                android:text="Company:"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />
 
             <TextView
                 android:id="@+id/tv_comp1"
@@ -105,11 +104,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Hertz"
                 android:singleLine="true"
+                android:text="Hertz"
 
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />
 
             <View
                 android:layout_width="2dp"
@@ -125,9 +124,9 @@
                 android:gravity="center"
                 android:text="Manager:"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/tv_manager1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -136,19 +135,25 @@
                 android:singleLine="true"
                 android:text="Dizoz"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />-->
+
+            <Spinner
+                android:id="@+id/spinn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp" />
 
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_45sdp"
-                android:singleLine="true"
+                android:layout_marginLeft="@dimen/_40sdp"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="Date:"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />
 
             <TextView
                 android:id="@+id/tv_date1"
@@ -159,25 +164,25 @@
                 android:singleLine="true"
                 android:text="22/06/2016"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />
 
             <View
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:singleLine="true"
                 android:layout_marginLeft="@dimen/_5sdp"
-                android:background="@color/bg2" />
+                android:background="@color/bg2"
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
-                android:singleLine="true"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="Time:"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />
 
             <TextView
                 android:id="@+id/tv_time1"
@@ -188,7 +193,7 @@
                 android:singleLine="true"
                 android:text="09:25"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_8sdp" />
 
 
         </LinearLayout>
@@ -197,7 +202,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_80sdp"
             android:layout_marginRight="@dimen/_15sdp"
             android:background="@drawable/listview_bg"
@@ -224,7 +229,7 @@
                     android:id="@+id/tv_make"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_25sdp"
+                    android:layout_marginLeft="@dimen/_30sdp"
                     android:layout_weight="1"
                     android:ems="6"
                     android:gravity="center"
@@ -236,9 +241,10 @@
                     android:id="@+id/tv_startgug"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_25sdp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Start Guage"
+                    android:text="Start Gauge"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_10sdp" />
 
@@ -246,7 +252,7 @@
                     android:id="@+id/tv_endgug"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_1sdp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="End Gauge"
@@ -258,64 +264,76 @@
             <ListView
                 android:id="@+id/listview"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_115sdp">
 
             </ListView>
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
 
-                <TextView
-                    android:id="@+id/tv_note"
+                <LinearLayout
+                    android:id="@+id/lll"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:paddingBottom="@dimen/_5sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="bottom"
-                    android:text="Note: Max Capacity - 240 gallons"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_5sdp" />
+                    android:layout_marginTop="@dimen/_5sdp">
 
+                    <TextView
+                        android:id="@+id/tv_gallon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Total gallons"
+                        android:textColor="@color/error_stroke_color"
+                        android:textSize="@dimen/_8sdp" />
 
-                <TextView
-                    android:id="@+id/tv_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|center_horizontal|center_vertical"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:drawableLeft="@drawable/save_ico"
-                    android:layout_centerHorizontal="true"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:text="Save &amp; Submit"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_12sdp" />
+                    <EditText
+                        android:id="@+id/editText"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_14sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:background="@drawable/entry_bg"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:text="240" />
+                </LinearLayout>
 
 
                 <TextView
                     android:id="@+id/tv_add_another"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/_15sdp"
                     android:drawableLeft="@drawable/add_ico"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="center"
                     android:text="Add Another"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_8sdp" />
 
+
+                <TextView
+                    android:id="@+id/tv_note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lll"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/_1sdp"
+                    android:text="Note: Max Capacity - 240 gallons"
+                    android:textColor="@color/textColorDark"
+                    android:textSize="@dimen/_5sdp" />
+
+
             </RelativeLayout>
-
-
 
 
         </LinearLayout>
@@ -326,8 +344,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.6"
+        android:gravity="center"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:drawableLeft="@drawable/save_ico"
+            android:drawablePadding="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="Save &amp; Submit"
+            android:textColor="@color/textColorDark"
+            android:textSize="@dimen/_12sdp" />
 
 
     </LinearLayout>

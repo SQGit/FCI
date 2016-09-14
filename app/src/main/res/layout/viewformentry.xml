@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:weightSum="4">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -55,6 +56,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -84,10 +86,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_100sdp"
             android:orientation="horizontal">
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/tv_comp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,16 +139,16 @@
                 android:visibility="invisible"
                 android:text="raman"
                 android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_10sdp" />-->
 
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_45sdp"
+                android:layout_marginLeft="@dimen/_105sdp"
                 android:gravity="center"
-                android:text="Date:"
+                android:text="Created :"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -162,6 +163,7 @@
                 android:textSize="@dimen/_10sdp" />
 
             <View
+                android:id="@+id/views"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/_5sdp"
@@ -173,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Time:"
+                android:text="Reviewed :"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -204,36 +206,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:weightSum="4">
+                android:paddingTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_formno"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_110sdp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
+
                     android:text="Vin No"
                     android:textColor="@color/textColorDark"
                     android:textSize="@dimen/_10sdp" />
 
                 <TextView
                     android:id="@+id/tv_staff"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_110sdp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="4"
                     android:gravity="center"
                     android:text="Make/Model"
-                    android:paddingLeft="@dimen/_25sdp"
                     android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_11sdp" />
+                    android:textSize="@dimen/_10sdp" />
 
                 <TextView
                     android:id="@+id/tv_total"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:gravity="center"
                     android:text="Start Gauge"
                     android:textColor="@color/textColorDark"
@@ -241,10 +239,10 @@
 
                 <TextView
                 android:id="@+id/tv_view"
-                android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:gravity="center"
                 android:text="End Gauge"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
@@ -260,14 +258,11 @@
             </ListView>
 
 
-
-
-
-
         </LinearLayout>
 
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
