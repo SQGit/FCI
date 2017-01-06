@@ -204,36 +204,60 @@ public class AdminCompanyEdit extends Activity {
 
                 JSONObject jo = new JSONObject(jsonStr);
                 String status = jo.getString("status");
-                String msg = jo.getString("message");
+                String count = jo.getString("count");
 
 
                 if (status.equals("success")) {
-                    JSONArray staff_datas = jo.getJSONArray("company");
-                    Log.d("tag", "<-----company----->" + "" + staff_datas);
-                    for (int i = 0; i < staff_datas.length(); i++) {
-                        JSONObject datas = staff_datas.getJSONObject(i);
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        map.put("company_name", datas.getString("company_name"));
-                        map.put("company_location", datas.getString("company_location"));
-                        map.put("company_email", datas.getString("company_email"));
-                        map.put("mgr_name", datas.getString("mgr_name"));
-                        map.put("mgr_phone", datas.getString("mgr_phone"));
-                        map.put("alt_mgr_name", datas.getString("alt_mgr_name"));
-                        map.put("alt_mgr_phone", datas.getString("alt_mgr_phone"));
 
-                        ar_com_name.add(i,datas.getString("company_name"));
-                        ar_com_loc.add(i,datas.getString("company_location"));
-                        ar_com_phone.add(i,datas.getString("mgr_phone"));
-                        ar_com_email.add(i,datas.getString("company_email"));
-                        ar_com_managerName.add(i,datas.getString("mgr_name"));
-                        alt_managerName.add(i, datas.getString("alt_mgr_name"));
-                        alt_phone.add(i, datas.getString("alt_mgr_phone"));
 
-                        Log.e("tag", "" + alt_managerName + alt_phone);
+                    if(Integer.valueOf(count)>0) {
+
+
+                        JSONArray staff_datas = jo.getJSONArray("company");
+                        Log.d("tag", "<-----company----->" + "" + staff_datas);
+                        for (int i = 0; i < staff_datas.length(); i++) {
+                            JSONObject datas = staff_datas.getJSONObject(i);
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("company_name", datas.getString("company_name"));
+                            map.put("company_location", datas.getString("company_location"));
+                            map.put("company_email", datas.getString("company_email"));
+                            map.put("mgr_name", datas.getString("mgr_name"));
+                            map.put("mgr_phone", datas.getString("mgr_phone"));
+                            map.put("alt_mgr_name", datas.getString("alt_mgr_name"));
+                            map.put("alt_mgr_phone", datas.getString("alt_mgr_phone"));
+
+                            ar_com_name.add(i, datas.getString("company_name"));
+                            ar_com_loc.add(i, datas.getString("company_location"));
+                            ar_com_phone.add(i, datas.getString("mgr_phone"));
+                            ar_com_email.add(i, datas.getString("company_email"));
+                            ar_com_managerName.add(i, datas.getString("mgr_name"));
+                            alt_managerName.add(i, datas.getString("alt_mgr_name"));
+                            alt_phone.add(i, datas.getString("alt_mgr_phone"));
+
+                            Log.e("tag", "" + alt_managerName + alt_phone);
+                        }
+
+                        AdapterCompanyEdit staff_adapter = new AdapterCompanyEdit(AdminCompanyEdit.this, ar_com_name, ar_com_loc, ar_com_email, ar_com_phone, ar_com_managerName, alt_managerName, alt_phone);
+                        lv_staffsList.setAdapter(staff_adapter);
+
+                    }
+                    else{
+                        new SweetAlertDialog(AdminCompanyEdit.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("No Data Found")
+                                .setContentText("Companies not Added,Please Add Company")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
+                                        startActivity(i);
+                                        AdminCompanyEdit.this.finish();
+                                    }
+                                })
+                                .show();
+
                     }
 
-                    AdapterCompanyEdit staff_adapter = new AdapterCompanyEdit(AdminCompanyEdit.this, ar_com_name, ar_com_loc, ar_com_email, ar_com_phone, ar_com_managerName, alt_managerName, alt_phone);
-                    lv_staffsList.setAdapter(staff_adapter);
 
                 }
                 else {

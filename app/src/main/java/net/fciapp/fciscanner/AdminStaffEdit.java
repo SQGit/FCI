@@ -158,7 +158,7 @@ public class AdminStaffEdit extends Activity {
 
 
             try {
-                String virtual_url = Data_Service.SERVICE_URL + "staff/fetch";
+                String virtual_url = Data_Service.SERVICE_URL_NEW + "staff/fetch";
                 JSONObject jsonobject = PostService.getStaffs(virtual_url);
                 Log.e("tag_", "0" + jsonobject.toString());
 
@@ -193,35 +193,62 @@ public class AdminStaffEdit extends Activity {
 
                 JSONObject jo = new JSONObject(jsonStr);
                 String status = jo.getString("status");
-                String msg = jo.getString("message");
+                String count = jo.getString("count");
 
 
                 if (status.equals("success")) {
-                    JSONArray staff_datas = jo.getJSONArray("staff");
-                    Log.e("tag_", "<-----staff_datas----->" + "" + staff_datas);
 
-                    for (int i = 0; i < staff_datas.length(); i++) {
-
-                        JSONObject datas = staff_datas.getJSONObject(i);
+                    if(Integer.valueOf(count)>0){
 
 
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        map.put("staff_name", datas.getString("name"));
-                        map.put("staff_phone", datas.getString("phone"));
-                        map.put("staff_password", datas.getString("password"));
+                        JSONArray staff_datas = jo.getJSONArray("staff");
+                        Log.e("tag_", "<-----staff_datas----->" + "" + staff_datas);
 
-                        Log.d("tag", "" + map.get("staff_name"));
-                        Log.d("tag", "" + map.get("staff_phone"));
-                        Log.d("tag", "" + map.get("staff_password"));
+                        for (int i = 0; i < staff_datas.length(); i++) {
 
-                        ar_staff_name.add(i,datas.getString("name"));
-                        ar_staff_phone.add(i,datas.getString("phone"));
-                        ar_staff_pass.add(i,datas.getString("password"));
+                            JSONObject datas = staff_datas.getJSONObject(i);
+
+
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("staff_name", datas.getString("name"));
+                            map.put("staff_phone", datas.getString("phone"));
+                            map.put("staff_password", datas.getString("password"));
+
+                            Log.d("tag", "" + map.get("staff_name"));
+                            Log.d("tag", "" + map.get("staff_phone"));
+                            Log.d("tag", "" + map.get("staff_password"));
+
+                            ar_staff_name.add(i, datas.getString("name"));
+                            ar_staff_phone.add(i, datas.getString("phone"));
+                            ar_staff_pass.add(i, datas.getString("password"));
+
+                        }
+
+                        AdapterStaffEdit staff_adapter = new AdapterStaffEdit(AdminStaffEdit.this, ar_staff_name, ar_staff_phone, ar_staff_pass);
+                        lv_staffsList.setAdapter(staff_adapter);
+                    }
+
+                    else{
+
+
+                        new SweetAlertDialog(AdminStaffEdit.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("No Data Found")
+                                .setContentText("Staff not created. Please Add Staff")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
+                                        startActivity(i);
+                                        AdminStaffEdit.this.finish();
+                                    }
+                                })
+                                .show();
 
                     }
 
-                    AdapterStaffEdit staff_adapter = new AdapterStaffEdit(AdminStaffEdit.this,ar_staff_name,ar_staff_phone,ar_staff_pass);
-                    lv_staffsList.setAdapter(staff_adapter);
+
+
                 }
                 else {
                     Log.e("tag_", "error");

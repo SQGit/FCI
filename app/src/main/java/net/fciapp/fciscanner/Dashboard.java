@@ -3,6 +3,7 @@ package net.fciapp.fciscanner;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -76,7 +77,8 @@ public class Dashboard extends AppCompatActivity {
                         i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i1);
-                        finish();
+                        Dashboard.this.finish();
+                        ActivityCompat.finishAffinity(Dashboard.this);
                         sDialog.dismiss();
                     }
                 })

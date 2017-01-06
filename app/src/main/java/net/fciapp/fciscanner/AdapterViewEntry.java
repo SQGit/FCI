@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class AdapterViewEntry extends BaseAdapter {
 
     Context context;
-    TextView form_no_tv, staff_name_tv, total_galoons_tv, view_tv, status_tv;
+    TextView form_no_tv, staff_name_tv, total_galoons_tv, view_tv, status_tv,tv_tot;
 
     Typeface tf;
     ArrayList<HashMap<String, String>> data;
@@ -72,6 +72,8 @@ public class AdapterViewEntry extends BaseAdapter {
         // view_tv = (TextView) convertView.findViewById(R.id.tv_endgug);
         status_tv = (TextView) convertView.findViewById(R.id.tv_endgug2);
 
+        tv_tot = (TextView) convertView.findViewById(R.id.tv_tot_veh);
+
         llt = (LinearLayout) convertView.findViewById(R.id.llayout);
 
         ll = (LinearLayout) convertView.findViewById(R.id.ll);
@@ -80,12 +82,17 @@ public class AdapterViewEntry extends BaseAdapter {
         status_tv.setTypeface(tf, 1);
         staff_name_tv.setTypeface(tf);
         total_galoons_tv.setTypeface(tf);
+        tv_tot.setTypeface(tf);
 //        view_tv.setTypeface(tf);
 
         form_no_tv.setText(resultp.get(StaffViewEntry.FCI_FORM));
         staff_name_tv.setText(resultp.get(StaffViewEntry.STAFF_NAME));
         total_galoons_tv.setText(resultp.get(StaffViewEntry.TOTAL_GALOONS));
         status_tv.setText(resultp.get(StaffViewEntry.ENTRY_STATUS));
+
+        tv_tot.setText(resultp.get("total_vehicles"));
+
+
         String status = status_tv.getText().toString();
         if (status.equals("APPROVED")) {
             //status_tv.setTextColor(Color.parseColor("#5EB50D"));

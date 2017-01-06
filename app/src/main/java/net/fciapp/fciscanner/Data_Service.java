@@ -9,8 +9,11 @@ import android.net.NetworkInfo;
  */
 public class Data_Service {
 
-    static final String SERVICE_URL = "http://fci.sqindia.net/";
-    static final String SERVICE_URL_NEW = "http://androidtesting.newlogics.in/";
+   // static final String SERVICE_URL = "http://fci.sqindia.net/";
+   // static final String SERVICE_URL_NEW = "http://androidtesting.newlogics.in/";
+
+
+    static final String SERVICE_URL_NEW = "http://ec2-54-174-246-193.compute-1.amazonaws.com/";
 
 
     public static boolean isNetworkAvailable(Context c1) {

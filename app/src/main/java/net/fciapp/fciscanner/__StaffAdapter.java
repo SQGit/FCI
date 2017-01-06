@@ -1,15 +1,20 @@
 package net.fciapp.fciscanner;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -31,8 +36,11 @@ public class __StaffAdapter extends BaseAdapter {
     Typeface tf;
     ArrayList<String> asd;
 
+    Dialog dialog1;
 
-    public __StaffAdapter(Context context, ArrayList array_list, int count, int limit) {
+
+    public __StaffAdapter(Context context, ArrayList
+            array_list, int count, int limit) {
 
         this.context = context;
         this.myList = array_list;
@@ -170,13 +178,79 @@ public class __StaffAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Log.e("tag", "click " + position);
 
-                Intent goScan = new Intent(context, ScanActivity.class);
+
+
+
+                dialog1 = new Dialog(context);
+                dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog1.setCancelable(true);
+                dialog1.setContentView(R.layout.choos);
+
+                final RelativeLayout button_barcode = (RelativeLayout) dialog1.findViewById(R.id.layout_barcode);
+                final RelativeLayout button_vinnumber = (RelativeLayout) dialog1.findViewById(R.id.layout_vinnumber);
+
+                TextView txtscan = (TextView) dialog1.findViewById(R.id.tv_scan);
+                TextView txtvin = (TextView) dialog1.findViewById(R.id.tv_vin);
+
+
+                button_barcode.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent goScan = new Intent(context, BarcodeCaptureActivity.class);
+                        goScan.putExtra("pos", position);
+                        goScan.putExtra("start", spin_start.getSelectedItemPosition());
+                        goScan.putExtra("end", spin_end.getSelectedItemPosition());
+                        goScan.putExtra("make", tv_vin_make.getText().toString());
+                        goScan.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        goScan.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+                        goScan.putExtra(BarcodeCaptureActivity.UseFlash, false);
+                        context.startActivity(goScan);
+
+                        dialog1.dismiss();
+
+                    }
+                });
+
+
+                button_vinnumber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent goScan = new Intent(context, OcrCaptureActivity.class);
+                        goScan.putExtra("pos", position);
+                        goScan.putExtra("start", spin_start.getSelectedItemPosition());
+                        goScan.putExtra("end", spin_end.getSelectedItemPosition());
+                        goScan.putExtra("make", tv_vin_make.getText().toString());
+                        goScan.putExtra(OcrCaptureActivity.AutoFocus, true);
+                        goScan.putExtra(OcrCaptureActivity.UseFlash, false);
+                        goScan.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(goScan);
+
+                        dialog1.dismiss();
+                    }
+                });
+
+                txtscan.setTypeface(tf);
+                txtvin.setTypeface(tf);
+
+                dialog1.show();
+
+
+
+
+              /*  Intent goScan = new Intent(context, BarcodeCaptureActivity.class);
                 goScan.putExtra("pos", position);
                 goScan.putExtra("start", spin_start.getSelectedItemPosition());
                 goScan.putExtra("end", spin_end.getSelectedItemPosition());
                 goScan.putExtra("make", tv_vin_make.getText().toString());
                 goScan.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(goScan);
+*/
+             /*   Intent intent = new Intent(context, BarcodeCaptureActivity.class);
+                intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+                intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
+                costartActivityForResult(intent, RC_BARCODE_CAPTURE);*/
 
             }
         });

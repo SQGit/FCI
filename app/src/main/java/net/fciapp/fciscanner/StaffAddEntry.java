@@ -50,7 +50,7 @@ StaffAddEntry extends Activity {
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
 
-    Adapter_Add staff_add_adapter;
+    //Adapter_Add staff_add_adapter;
     SweetAlertDialog sweetDialog;
 
 

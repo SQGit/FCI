@@ -42,7 +42,7 @@ public class StaffViewEntry extends Activity {
     static String TOTAL_GALOONS = "total_gallons";
     static String ENTRY_STATUS = "entry_status";
     static String MANAGER_SIGN = "mgr_sign_url";
-    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_formno, tv_staffname, tv_tot_gal, tv_view, tv_status;
+    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_formno, tv_staffname, tv_tot_gal, tv_view, tv_status,tv_total_veh;
     Typeface tf;
     ListView lv_entries;
     AdapterViewEntry avw;
@@ -130,6 +130,8 @@ public class StaffViewEntry extends Activity {
         tv_status = (TextView) findViewById(R.id.tv_status);
         tv_staff = (TextView) findViewById(R.id.staff_id);
         tv_logout = (TextView) findViewById(R.id.logout_tv);
+        tv_total_veh = (TextView) findViewById(R.id.tv_tot);
+
         tv_logout.setTypeface(tf);
 
         tv_date.setText(dateFrom);
@@ -148,6 +150,7 @@ public class StaffViewEntry extends Activity {
         tv_view.setTypeface(tf);
         tv_status.setTypeface(tf);
         tv_staff.setTypeface(tf);
+        tv_total_veh.setTypeface(tf);
         tv_staff.setText("Hi " + staffname);
 
 
@@ -279,8 +282,8 @@ public class StaffViewEntry extends Activity {
                             map.put("create_date", datas.getString("create_date"));
                             map.put("review_date", datas.getString("review_date"));
                             map.put("entry_status", datas.getString("entry_status"));
+                            map.put("total_vehicles",datas.getString("total_vehicles"));
                             contactList.add(map);
-
 
                         }
 

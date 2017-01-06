@@ -216,12 +216,12 @@ public class Adapter_Add extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                Intent goScan = new Intent(context, ScanActivity.class);
+               /* Intent goScan = new Intent(context, ScanActivity.class);
                 goScan.putExtra("pos", position);
                 goScan.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(goScan);
 
-                vin_positions.add(String.valueOf(position));
+                vin_positions.add(String.valueOf(position));*/
 
 
 

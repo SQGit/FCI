@@ -155,7 +155,7 @@ public class ViewFormEntry extends Activity {
 
         tv_date.setText(cr_date);
 
-        if (rv_date.equals(null) || rv_date == "null" || rv_date == null) {
+        if (rv_date.equals(null) || rv_date == "null" || rv_date == null || rv_date ==""|| rv_date.equals("null")) {
             tv_time.setVisibility(View.GONE);
             tv_timetxt.setVisibility(View.GONE);
             views.setVisibility(View.GONE);

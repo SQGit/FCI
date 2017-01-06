@@ -40,7 +40,7 @@ public class __Staff extends Activity {
 
     public int count = 3;
     ListView lview;
-    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon;
+    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon,tv_purchase_txt;
     DbHelper dbclass;
     Context context = this;
     ArrayList myList = new ArrayList();
@@ -56,12 +56,12 @@ public class __Staff extends Activity {
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
     Typeface tf;
-    String managername, managerphone, companyname, staffname, dateFrom, staffphone, total_gallon, alt_mgr, alt_phone;
-    EditText et_gallon;
+    String managername, managerphone, companyname, staffname, dateFrom, staffphone, total_gallon, alt_mgr, alt_phone,purchase_order;
+    EditText et_gallon,et_purchase;
     LinearLayout lt_logout;
 
     __StaffAdapter adapter;
-    Adapter_Add staff_add_adapter;
+    //Adapter_Add staff_add_adapter;
 
     Spinner spin;
 
@@ -159,6 +159,9 @@ public class __Staff extends Activity {
         tv_gallon = (TextView) findViewById(R.id.tv_gallon);
         et_gallon = (EditText) findViewById(R.id.editText);
 
+        tv_purchase_txt = (TextView) findViewById(R.id.tv_purchase);
+        et_purchase = (EditText) findViewById(R.id.et_po);
+
         lt_logout = (LinearLayout) findViewById(R.id.layout_logout);
 
         spin = (Spinner) findViewById(R.id.spinn);
@@ -203,7 +206,8 @@ public class __Staff extends Activity {
         tv_logout.setTypeface(tf);
         tv_gallon.setTypeface(tf);
         et_gallon.setTypeface(tf);
-
+        tv_purchase_txt.setTypeface(tf);
+        et_purchase.setTypeface(tf);
 
         tv_comp_name.setText(companyname);
         // tv_manag_name.setText(managername);
@@ -317,7 +321,7 @@ public class __Staff extends Activity {
 
                         new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
                                 .setTitleText("Warning")
-                                .setContentText("Total Gallons should not exceed max capacity limit. \n Please Check on Settings.")
+                                .setContentText("Total Gallons should not exceed max capacity limit. \n Please Check in Settings.")
                                 .setConfirmText("OK")
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
@@ -347,12 +351,55 @@ public class __Staff extends Activity {
 
                     } else {
 
-                        editor.putString("gallon", et_gallon.getText().toString());
-                        editor.commit();
 
-                        choosen = spin.getSelectedItem().toString();
-                        Log.e("tag", "" + choosen);
-                        new staff_AddEntry().execute();
+                        if (!(et_purchase.getText().toString().trim().isEmpty())) {
+
+                            if(et_purchase.getText().toString().trim().length()<3){
+
+                                new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                                        .setTitleText("Warning")
+                                        .setContentText("Purchase Order not less then 3 Charcters")
+                                        .setConfirmText("OK")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismiss();
+                                            }
+                                        })
+                                        .show();
+                            }
+                            else{
+
+                                editor.putString("gallon", et_gallon.getText().toString());
+                                editor.commit();
+
+                                choosen = spin.getSelectedItem().toString();
+
+                                purchase_order = et_purchase.getText().toString().trim();
+
+                                purchase_order = "PO"+purchase_order;
+
+                                Log.e("tag", "or " + choosen+ purchase_order);
+
+                                new staff_AddEntry().execute();
+                            }
+
+                        }
+                        else{
+
+                            new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                                    .setTitleText("Warning")
+                                    .setContentText("No Input Found, Enter Purchase Order")
+                                    .setConfirmText("OK")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                        }
+                                    })
+                                    .show();
+                        }
+
 
                     }
                 } else {
@@ -691,15 +738,17 @@ public class __Staff extends Activity {
                 jsonObject.accumulate("company_name", companyname);
                 jsonObject.accumulate("company_mgr", choosen);
                 jsonObject.accumulate("mgr_phone", managerphone);
+                Log.e("tag", "purchase order" + purchase_order);
                 jsonObject.accumulate("staff_phone", staffphone);
                 jsonObject.accumulate("staff_name", staffname);
+                jsonObject.accumulate("purchase_order", purchase_order);
                 jsonObject.accumulate("total_gallons", total_gallon);
                 jsonObject.accumulate("entrydetail", jsonArray);
 
 
                 json = jsonObject.toString();
                 Log.e("tag", "" + json);
-                return jsonStr = PostService.makeRequest(adr, json);
+                return jsonStr = PostService.makeRequest(Data_Service.SERVICE_URL_NEW + "newentry", json);
 
                 //   }
 

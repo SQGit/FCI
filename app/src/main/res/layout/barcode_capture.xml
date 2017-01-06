@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <net.fciapp.fciscanner.camera.CameraSourcePreview
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <net.fciapp.fciscanner.camera.GraphicOverlay
+                android:id="@+id/graphicOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </net.fciapp.fciscanner.camera.CameraSourcePreview>
+
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal|center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:hint="Enter Vin Number   "
+                    android:inputType="textCapCharacters"
+                    android:maxLength="17"
+                    android:singleLine="true"
+                    android:textColor="@color/whit"
+                    android:textColorHint="@color/whit"
+                    android:textSize="@dimen/_18sdp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/listbg_storke" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:background="#5DB1F1"
+                android:paddingLeft="@dimen/_2sdp"
+                android:paddingRight="@dimen/_2sdp"
+                android:text="Submit"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/_13sdp" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/flash"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="#5DB1F1"
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:text="Flash On"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_10sdp" />
+
+        <Button
+            android:id="@+id/focus"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:background="#5DB1F1"
+            android:text="Focus Off"
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_10sdp" />
+
+
+    </FrameLayout>
+
+</LinearLayout>

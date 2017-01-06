@@ -39,6 +39,7 @@
             android:ems="10"
             android:gravity="left"
             android:padding="@dimen/_5sdp"
+            android:singleLine="true"
             android:text="paul"
             android:textColor="@color/textColorDark"
             android:textSize="@dimen/_8sdp" />

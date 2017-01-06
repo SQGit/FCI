@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -159,6 +160,9 @@ public class StaffLogin extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(i);
                 StaffLogin.this.finish();
+
+
+
             }
         });
 
@@ -272,7 +276,10 @@ public class StaffLogin extends AppCompatActivity {
 
                 //return jsonStr = PostService.makeRequest(URL, json);
                 Log.e("tag_", "started");
-                JSONObject jsonobject = PostService.getStaffs(URL);
+                //JSONObject jsonobject = PostService.getStaffs(URL);
+
+                JSONObject jsonobject = PostService.getData(URL);
+
                 Log.e("tag_", "0" + jsonobject.toString());
                 if (jsonobject.toString() == "sam") {
                     new SweetAlertDialog(StaffLogin.this, SweetAlertDialog.WARNING_TYPE)
@@ -304,50 +311,72 @@ public class StaffLogin extends AppCompatActivity {
             try {
                 JSONObject jo = new JSONObject(s);
                 String status = jo.getString("status");
-                String msg = jo.getString("message");
+                String count = jo.getString("count");
                 Log.e("tag", "<-----Status----->" + status);
                 if (status.equals("success")) {
-                    JSONArray jsonarray = jo.getJSONArray("staff");
-                    for (int i = 0; i < jsonarray.length(); i++) {
-                        JSONObject jsonobject = jsonarray.getJSONObject(i);
-                        StaffFetchList bl = new StaffFetchList();
-                        bl.setName(jsonobject.optString("name"));
-                        bl.setPhone(jsonobject.optString("phone"));
-                        bl.setPassword(jsonobject.optString("password"));
-                        baL.add(bl);
-                        boardlist.add(jsonobject.optString("name"));
-                        phones.add(jsonobject.optString("phone"));
-                        Log.d("tag", "<----worldlist----->" + boardlist);
+
+                    if (Integer.valueOf(count) > 0) {
+
+
+                        JSONArray jsonarray = jo.getJSONArray("staff");
+                        for (int i = 0; i < jsonarray.length(); i++) {
+                            JSONObject jsonobject = jsonarray.getJSONObject(i);
+                            StaffFetchList bl = new StaffFetchList();
+                            bl.setName(jsonobject.optString("name"));
+                            bl.setPhone(jsonobject.optString("phone"));
+                            bl.setPassword(jsonobject.optString("password"));
+                            baL.add(bl);
+                            boardlist.add(jsonobject.optString("name"));
+                            phones.add(jsonobject.optString("phone"));
+                            Log.d("tag", "<----worldlist----->" + boardlist);
+                        }
+                        //   Collections.sort(boardlist);
+                        // Collections.sort(phones);
+
+                        final CustomAdapter arrayAdapter = new CustomAdapter(getApplicationContext(), R.layout.list, boardlist) {
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                View view = super.getDropDownView(position, convertView, parent);
+
+                                TextView staff = (TextView) view.findViewById(R.id.text1);
+                                staff.setTypeface(tf, 1);
+
+                                return view;
+                            }
+
+                            @Override
+                            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                                View view = super.getDropDownView(position, convertView, parent);
+
+                                TextView staff_dropdown = (TextView) view.findViewById(R.id.text1);
+                                staff_dropdown.setTypeface(tf);
+                                view.setBackgroundColor(getResources().getColor(R.color.bg2));
+
+                                return view;
+                            }
+                        };
+
+
+                        spn_staffname.setAdapter(arrayAdapter);
+                    } else {
+                        new SweetAlertDialog(StaffLogin.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("No Data Found")
+                                .setContentText("Staff not created. Please Add Staff")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        Intent i = new Intent(getApplicationContext(), Dashboard.class);
+                                        startActivity(i);
+                                        StaffLogin.this.finish();
+                                    }
+                                })
+                                .show();
+
+
                     }
-                    //   Collections.sort(boardlist);
-                    // Collections.sort(phones);
 
-                    final CustomAdapter arrayAdapter = new CustomAdapter(getApplicationContext(), R.layout.list, boardlist) {
-
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            View view = super.getDropDownView(position, convertView, parent);
-
-                            TextView staff = (TextView) view.findViewById(R.id.text1);
-                            staff.setTypeface(tf, 1);
-
-                            return view;
-                        }
-
-                        @Override
-                        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                            View view = super.getDropDownView(position, convertView, parent);
-
-                            TextView staff_dropdown = (TextView) view.findViewById(R.id.text1);
-                            staff_dropdown.setTypeface(tf);
-                            view.setBackgroundColor(getResources().getColor(R.color.bg2));
-
-                            return view;
-                        }
-                    };
-
-
-                    spn_staffname.setAdapter(arrayAdapter);
 
                 } else {
 

@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Reviewed :"
+                android:text="Signed :"
                 android:textColor="@color/textColorDark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -238,14 +238,14 @@
                     android:textSize="@dimen/_10sdp" />
 
                 <TextView
-                android:id="@+id/tv_view"
+                    android:id="@+id/tv_view"
                     android:layout_width="@dimen/_70sdp"
-                android:layout_height="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:gravity="center"
-                android:text="End Gauge"
-                android:textColor="@color/textColorDark"
-                android:textSize="@dimen/_10sdp" />
+                    android:text="End Gauge"
+                    android:textColor="@color/textColorDark"
+                    android:textSize="@dimen/_10sdp" />
 
 
             </LinearLayout>

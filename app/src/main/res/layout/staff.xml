@@ -301,7 +301,65 @@
                         android:maxLength="3"
                         android:paddingLeft="@dimen/_10sdp"
                         android:text="240" />
+
+
+                    <TextView
+                        android:id="@+id/tv_purchase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:text="Purchase Order"
+                        android:textColor="@color/error_stroke_color"
+                        android:textSize="@dimen/_8sdp" />
+
+                    <EditText
+                        android:id="@+id/et_po"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_14sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:background="@drawable/entry_bg"
+                        android:paddingRight="@dimen/_3sdp"
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:paddingLeft="@dimen/_4sdp"
+                        android:text="" />
+
+
                 </LinearLayout>
+
+               <!-- <LinearLayout
+                    android:id="@+id/lll1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignLeft="@id/lll"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_gallons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Purchase Order"
+                        android:textColor="@color/error_stroke_color"
+                        android:textSize="@dimen/_8sdp" />
+
+                    <EditText
+                        android:id="@+id/editTexts"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_14sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:background="@drawable/entry_bg"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:text="465566" />
+                </LinearLayout>-->
 
 
                 <TextView

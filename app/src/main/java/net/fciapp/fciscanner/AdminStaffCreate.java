@@ -97,13 +97,13 @@ public class AdminStaffCreate extends AppCompatActivity {
         if (sss == 0) {
             et_phone.setEnabled(true);
             Log.d("tag", "fromdash");
-            str_address = Data_Service.SERVICE_URL + "staff/add";
+            str_address = Data_Service.SERVICE_URL_NEW + "staff/add";
             tv_header.setText("Create Staff");
         } else if (sss == 1) {
             String name = get_intent.getStringExtra("name");
             String phone = get_intent.getStringExtra("phone");
             String pass = get_intent.getStringExtra("pass");
-            str_address = Data_Service.SERVICE_URL + "staff/update";
+            str_address = Data_Service.SERVICE_URL_NEW + "staff/update";
             Log.e("tag", "fromUpdate" + pass);
             et_name.setText(name);
             et_phone.setText(phone);

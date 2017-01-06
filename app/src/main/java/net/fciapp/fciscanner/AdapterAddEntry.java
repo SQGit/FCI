@@ -315,9 +315,9 @@ public class AdapterAddEntry extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Log.e("tag", "vinno_clicked"+pos_view);
-                    Intent goScan = new Intent(context, ScanActivity.class);
+                  /*  Intent goScan = new Intent(context, ScanActivity.class);
                     goScan.putExtra("pos", pos_view);
-                    context.startActivity(goScan);
+                    context.startActivity(goScan);*/
 
                     //activity.finish();
 

@@ -100,14 +100,14 @@ public class PostService {
             Log.e("tag_", "stsL_" + response.getStatusLine().getStatusCode());*/
 
 
-            HttpParams params = new BasicHttpParams();
-            HttpConnectionParams.setConnectionTimeout(params, 40000);
-            HttpConnectionParams.setSoTimeout(params, 40000);
+       //     HttpParams params = new BasicHttpParams();
+         //   HttpConnectionParams.setConnectionTimeout(params, 40000);
+         //   HttpConnectionParams.setSoTimeout(params, 40000);
 
 
             DefaultHttpClient client = new DefaultHttpClient();
 
-            client.setParams(params);
+           // client.setParams(params);
 
             HttpResponse response = null;
             String text;
@@ -173,6 +173,75 @@ public class PostService {
         return jArray;
         // return jArray;
         // }
+
+    }
+
+
+
+
+    public static JSONObject getData(String url) throws JSONException {
+        InputStream is = null;
+        String result = "";
+        JSONObject jArray = null;
+
+        // Download JSON data from URL
+        try {
+
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(url);
+            httppost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+
+        } catch (Exception e) {
+            Log.e("tag", "Error in http connection " + e.toString());
+            result = "sam";
+            is = null;
+            return jArray;
+
+        }
+
+        // Convert response to string
+
+        if (is.equals(null)) {
+
+            result = "sam";
+            jArray = new JSONObject(result);
+            return jArray;
+
+        } else {
+
+
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        is, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                is.close();
+                result = sb.toString();
+            } catch (Exception e) {
+                Log.e("tag", "Error converting result " + e.toString());
+                result = "sam";
+            }
+
+            try {
+
+                jArray = new JSONObject(result);
+            } catch (JSONException e) {
+                Log.e("tag", result);
+                Log.e("tag", jArray.toString());
+                Log.e("tag", "Error parsing data " + e.toString());
+
+
+            }
+
+            return jArray;
+        }
 
     }
 

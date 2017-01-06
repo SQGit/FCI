@@ -99,14 +99,26 @@
             android:name="net.fciapp.fciscanner.__Staff"
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
-        <activity
-            android:name="net.fciapp.fciscanner.ScanActivity"
-            android:screenOrientation="sensorLandscape"
-            android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
+
         <activity
             android:name="net.fciapp.fciscanner.SettingsPage"
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
+
+        <activity
+            android:name="net.fciapp.fciscanner.MainActivity"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
+
+        <activity android:name=".BarcodeCaptureActivity"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustPan"
+            android:label="Read Barcode"/>
+
+       <activity android:name=".OcrCaptureActivity"
+        android:screenOrientation="sensorLandscape"
+        android:windowSoftInputMode="adjustPan|stateHidden|adjustPan"
+        android:label="Read VinNumber"/>
 
 
     </application>
