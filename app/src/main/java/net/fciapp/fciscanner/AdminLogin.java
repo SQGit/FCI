@@ -72,6 +72,11 @@ public class AdminLogin extends AppCompatActivity {
                 str_phone = et_phone.getText().toString().trim();
                 str_pass = et_pass.getText().toString().trim();
                 if (Util.Operations.isOnline(AdminLogin.this)) {
+
+                    /*Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
+                    startActivity(i);
+                    AdminLogin.this.finish();*/
+
                     if (!(str_phone.isEmpty())) {
                         if (!(str_pass.isEmpty()))
                         {
@@ -103,6 +108,8 @@ public class AdminLogin extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Phone Number cannot be blank", Toast.LENGTH_LONG).show();
 
                     }
+
+
 
 
                 } else {

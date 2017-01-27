@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -352,11 +353,23 @@ public class __Staff extends Activity {
                     } else {
 
 
-                        if (!(et_purchase.getText().toString().trim().isEmpty())) {
 
-                            if(et_purchase.getText().toString().trim().length()<3){
+                        if ((!(et_purchase.getText().toString().trim().isEmpty()))  && et_purchase.getText().toString().trim().length()>3 ) {
+                            purchase_order = et_purchase.getText().toString().trim();
 
-                                new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                            purchase_order = "PO"+purchase_order;
+                        }
+                        else {
+                            Random r = new Random();
+                            int Low = 9999;
+                            int High = 79999;
+                            int Result = r.nextInt(High-Low) + Low;
+                            purchase_order = "PO"+String.valueOf(Result);
+                        }
+
+
+
+                            /*    new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
                                         .setTitleText("Warning")
                                         .setContentText("Purchase Order not less then 3 Charcters")
                                         .setConfirmText("OK")
@@ -368,23 +381,21 @@ public class __Staff extends Activity {
                                         })
                                         .show();
                             }
-                            else{
+                            else{*/
 
                                 editor.putString("gallon", et_gallon.getText().toString());
                                 editor.commit();
 
                                 choosen = spin.getSelectedItem().toString();
 
-                                purchase_order = et_purchase.getText().toString().trim();
 
-                                purchase_order = "PO"+purchase_order;
 
                                 Log.e("tag", "or " + choosen+ purchase_order);
 
                                 new staff_AddEntry().execute();
                             }
 
-                        }
+                      /*  }
                         else{
 
                             new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
@@ -398,10 +409,15 @@ public class __Staff extends Activity {
                                         }
                                     })
                                     .show();
-                        }
+                        }*/
 
 
-                    }
+
+
+
+
+
+                    //}
                 } else {
                     // Toast.makeText(getApplicationContext(), "Enter Total Gallons", Toast.LENGTH_SHORT).show();
 

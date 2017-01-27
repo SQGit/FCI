@@ -317,9 +317,12 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
                 if (graphic != null) {
                     text = graphic.getTextBlock();
-                    if (text != null && text.getValue().replaceAll("\\s+","").trim() != null && text.getValue().replaceAll("\\s+","").trim().length() == 17 ) {
+                    value = text.getValue().trim();
 
-                        value = text.getValue().trim();
+                    value = value.replaceAll("\\s+","").trim();
+                    value = value.replaceAll("[\\w\\s\\-\\_\\<.*?>]","");
+
+                    if (!value.trim().isEmpty() &&  value.length() == 17 ) {
                         Log.e("tag","aaa::"+value);
                         et_vinscan.setText(value);
                     }

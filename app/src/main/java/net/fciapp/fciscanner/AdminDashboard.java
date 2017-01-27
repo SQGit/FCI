@@ -49,7 +49,7 @@ public class AdminDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(getApplicationContext(),AdminStaffCreate.class);
+                Intent i=new Intent(getApplicationContext(),AdminStaffCreate1.class);
                 i.putExtra("sts",0);
                 startActivity(i);
                 //  AdminDashboard.this.finish();

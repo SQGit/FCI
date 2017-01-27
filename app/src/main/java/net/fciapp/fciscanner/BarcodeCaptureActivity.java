@@ -765,8 +765,11 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
         //https://api.edmunds.com/api/vehicle/v2/vins/3G5DB03E32S518612?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
         //https://api.edmunds.com/api/vehicle/v2/vins/2G1FC3D33C9165616?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
-        String web_p1 = "https://api.edmunds.com/api/vehicle/v2/vins/";
-        String web_p2 = "?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9";
+       // String web_p1 = "https://api.edmunds.com/api/vehicle/v2/vins/";
+        //String web_p2 = "?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9";
+
+        String web_p1 = "https://api.edmunds.com/api/v1/vehicle/vin/";
+        String web_p2 = "/configuration?api_key=26svh9z83ybumwkc3a45bkhu";
 
         public getVin_Make(String vinno) {
 

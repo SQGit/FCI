@@ -128,7 +128,7 @@ public class AdapterStaffEdit extends BaseAdapter {
             public void onClick(View v) {
                 Log.d("tag", "-" + ar_phone.get(position) + "-" + ar_name.get(position) + "-" + ar_pass.get(position));
 
-                Intent goupdate = new Intent(context, AdminStaffCreate.class);
+                Intent goupdate = new Intent(context, AdminStaffCreate1.class);
                 goupdate.putExtra("sts",1);
                 goupdate.putExtra("name",ar_name.get(position));
                 goupdate.putExtra("phone",ar_phone.get(position) );
@@ -166,7 +166,7 @@ public class AdapterStaffEdit extends BaseAdapter {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.accumulate("phone", phone);
                 json = jsonObject.toString();
-                return jsonStr = PostService.makeRequest(Data_Service.SERVICE_URL + "staff/delete", json);
+                return jsonStr = PostService.makeRequest(Data_Service.SERVICE_URL_NEW + "staff/delete", json);
             } catch (Exception e) {
                 Log.d("InputStream", e.getLocalizedMessage());
                 sweetDialog.dismiss();

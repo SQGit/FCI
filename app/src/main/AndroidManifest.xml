@@ -48,7 +48,7 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
         <activity
-            android:name="net.fciapp.fciscanner.AdminStaffCreate"
+            android:name="net.fciapp.fciscanner.AdminStaffCreate1"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
