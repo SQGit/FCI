@@ -111,12 +111,12 @@
             android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
 
         <activity android:name=".BarcodeCaptureActivity"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="locked"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustPan"
             android:label="Read Barcode"/>
 
        <activity android:name=".OcrCaptureActivity"
-        android:screenOrientation="sensorLandscape"
+        android:screenOrientation="locked"
         android:windowSoftInputMode="adjustPan|stateHidden|adjustPan"
         android:label="Read VinNumber"/>
 

@@ -300,6 +300,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
 
                 value = barcode.displayValue.trim();
+               value = value.replaceAll("\\s+","").trim();
+                value = value.replaceAll("%","");
+
+                Log.e("tag", "afterchang: :" + value);
 
                 Log.e("tag",value.length()+"())"+value);
                 int i;

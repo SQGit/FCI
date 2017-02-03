@@ -319,8 +319,14 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                     text = graphic.getTextBlock();
                     value = text.getValue().trim();
 
+                    Log.e("tag","befor::"+value);
+
+                    //value = value.replaceAll("\\s+","").trim();
+                    //value = value.replaceAll("[\\w\\s\\-\\_\\<.*?>]","");
+
                     value = value.replaceAll("\\s+","").trim();
-                    value = value.replaceAll("[\\w\\s\\-\\_\\<.*?>]","");
+                    value = value.replaceAll("%","");
+                    Log.e("tag","after::"+value);
 
                     if (!value.trim().isEmpty() &&  value.length() == 17 ) {
                         Log.e("tag","aaa::"+value);
