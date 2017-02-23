@@ -62,7 +62,7 @@ public class __Staff extends Activity {
     LinearLayout lt_logout;
 
     __StaffAdapter adapter;
-    //Adapter_Add staff_add_adapter;
+
 
     Spinner spin;
 
@@ -175,11 +175,6 @@ public class __Staff extends Activity {
         else tv_time.setText(shour + " : " + smin + " PM");
 
 
-
-       /* if (c == 0) tv_time.setText(hour + " : " + cMinute + " AM");
-        else tv_time.setText(hour + " : " + cMinute + " PM");*/
-
-
         dbclass = new DbHelper(context);
 
         lview = (ListView) findViewById(R.id.listview);
@@ -236,7 +231,7 @@ public class __Staff extends Activity {
             Log.e("tag", "1" + total_gallon);
         }
 
-        et_gallon.setText("0");
+        //et_gallon.setText("");
         //  et_gallon.setEnabled(false);
 
 
@@ -273,8 +268,7 @@ public class __Staff extends Activity {
         adapter = new __StaffAdapter(context, myList, count, myList.size());
         lview.setAdapter(adapter);
 
-       /* staff_add_adapter = new Adapter_Add(__Staff.this,getApplicationContext(),count);
-        lview.setAdapter(staff_add_adapter);*/
+
 
 
         tv_header.setOnClickListener(new View.OnClickListener() {
@@ -368,21 +362,6 @@ public class __Staff extends Activity {
                         }
 
 
-
-                            /*    new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
-                                        .setTitleText("Warning")
-                                        .setContentText("Purchase Order not less then 3 Charcters")
-                                        .setConfirmText("OK")
-                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                            @Override
-                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                sweetAlertDialog.dismiss();
-                                            }
-                                        })
-                                        .show();
-                            }
-                            else{*/
-
                                 editor.putString("gallon", et_gallon.getText().toString());
                                 editor.commit();
 
@@ -395,29 +374,6 @@ public class __Staff extends Activity {
                                 new staff_AddEntry().execute();
                             }
 
-                      /*  }
-                        else{
-
-                            new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
-                                    .setTitleText("Warning")
-                                    .setContentText("No Input Found, Enter Purchase Order")
-                                    .setConfirmText("OK")
-                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                        @Override
-                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                            sweetAlertDialog.dismiss();
-                                        }
-                                    })
-                                    .show();
-                        }*/
-
-
-
-
-
-
-
-                    //}
                 } else {
                     // Toast.makeText(getApplicationContext(), "Enter Total Gallons", Toast.LENGTH_SHORT).show();
 
@@ -721,13 +677,6 @@ public class __Staff extends Activity {
                         end_gauge = "Full Tank";
                     }
 
-
-                  /*  if(Integer.valueOf(vin_end_guage.get(i))<Integer.valueOf(vin_start_guage.get(i)))
-                    {
-                        Log.e("tag","not matched");
-                        return "data";
-                    }
-                    else {*/
                     Log.e("tag", "endbh " + end_gauge);
 
                     JSONObject jsonObject1 = new JSONObject();
@@ -742,14 +691,6 @@ public class __Staff extends Activity {
                 }
                 asd = jsonArray.toString();
                 Log.e("tag", "valueee" + asd);
-         /*       if(asd.equals("[]")){
-                    Log.e("tag", "ss" + asd);
-                    return null;
-
-                }
-
-
-                else {*/
 
                 jsonObject.accumulate("company_name", companyname);
                 jsonObject.accumulate("company_mgr", choosen);
@@ -766,7 +707,7 @@ public class __Staff extends Activity {
                 Log.e("tag", "" + json);
                 return jsonStr = PostService.makeRequest(Data_Service.SERVICE_URL_NEW + "newentry", json);
 
-                //   }
+
 
             } catch (Exception e) {
                 Log.e("InputStream", e.getLocalizedMessage());
@@ -783,13 +724,6 @@ public class __Staff extends Activity {
             sweetDialog.dismiss();
             super.onPostExecute(s);
 
-          /*  if(s.equals("data")){
-                Log.e("tag","data");
-            }
-            else if(s.equals("empty")){
-                Log.e("tag","empty");
-            }
-            else {*/
             try {
                 JSONObject jo = new JSONObject(s);
                 String status = jo.getString("status");
@@ -873,7 +807,7 @@ public class __Staff extends Activity {
                         })
                         .show();
             }
-            //}
+
 
         }
 

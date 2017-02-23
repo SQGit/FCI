@@ -28,9 +28,7 @@ public class AdapterViewFormEntry extends BaseAdapter {
         data = arraylist;
     }
 
-    AdapterViewFormEntry(Context c1) {
-        this.context = c1;
-    }
+
 
 
     @Override

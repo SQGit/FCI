@@ -201,15 +201,6 @@ public class AdminCreateCompany extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(AdminCreateCompany.this);
-                String code = sharedPreferences.getString("tag", "");
-                if ((code == "")) {
-                    managername = et_manag_name.getText().toString();
-                    managerphone = et_manag_phone.getText().toString();
-                } else {
-                    altermanagername = et_manag_name.getText().toString();
-                    altermanagerphone = et_manag_phone.getText().toString();
-                }*/
 
                 if (sss == 1) {
 
@@ -342,16 +333,6 @@ public class AdminCreateCompany extends AppCompatActivity {
         lt_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor edit = s_pref.edit();
-                edit.putString("tag", "1234");
-                edit.commit();
-                managername = et_manag_name.getText().toString();
-                managerphone = et_manag_phone.getText().toString();
-                et_manag_name.setText("");
-                et_manag_phone.setText("");
-                et_manag_name.requestFocus();*/
-
 
                 if (asd == 0) {
 

@@ -74,10 +74,6 @@ public class ViewFormEntry extends Activity {
         lv_entries = (ListView) findViewById(R.id.listview);
         tv_staff = (TextView) findViewById(R.id.staff_id);
         tv_header = (TextView) findViewById(R.id.tv_header);
-      /*  tv_comp_namtxt = (TextView) findViewById(R.id.tv_comp);
-        tv_comp_name = (TextView) findViewById(R.id.tv_comp1);
-        tv_manag_namtxt = (TextView) findViewById(R.id.tv_manager);
-        tv_manag_name = (TextView) findViewById(R.id.tv_manager1);*/
         tv_datetxt = (TextView) findViewById(R.id.tv_date);
         tv_date = (TextView) findViewById(R.id.tv_date1);
         tv_timetxt = (TextView) findViewById(R.id.tv_time);
@@ -94,10 +90,6 @@ public class ViewFormEntry extends Activity {
         views = findViewById(R.id.views);
 
         tv_header.setTypeface(tf, 1);
-      /*  tv_comp_namtxt.setTypeface(tf);
-        tv_comp_name.setTypeface(tf);
-        tv_manag_namtxt.setTypeface(tf);
-        tv_manag_name.setTypeface(tf);*/
         tv_datetxt.setTypeface(tf);
         tv_date.setTypeface(tf);
         tv_timetxt.setTypeface(tf);
@@ -163,10 +155,6 @@ public class ViewFormEntry extends Activity {
             tv_time.setText(rv_date);
         }
 
-
-/*        if (c == 0) tv_time.setText(hour + " : " + cMinute + " AM");
-        else tv_time.setText(hour + " : " + cMinute + " PM");*/
-
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {
             dateFrom = format.format(ca.getTime());
@@ -175,9 +163,6 @@ public class ViewFormEntry extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //  tv_date.setText(dateFrom);
-        //tv_time.setText(cHour + ":" + cMinute);
-
 
         if (Util.Operations.isOnline(ViewFormEntry.this)) {
             new staffViewEntry_Task().execute();
@@ -202,9 +187,6 @@ public class ViewFormEntry extends Activity {
         tv_header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent goStf = new Intent(getApplicationContext(), StaffViewEntry.class);
-                startActivity(goStf);
-                ViewFormEntry.this.finish();*/
                 onBackPressed();
             }
         });

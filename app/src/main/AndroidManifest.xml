@@ -105,11 +105,6 @@
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
 
-        <activity
-            android:name="net.fciapp.fciscanner.MainActivity"
-            android:screenOrientation="sensorLandscape"
-            android:windowSoftInputMode="adjustPan|stateHidden|adjustPan" />
-
         <activity android:name=".BarcodeCaptureActivity"
             android:screenOrientation="locked"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustPan"

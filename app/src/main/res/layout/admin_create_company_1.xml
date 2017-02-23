@@ -132,7 +132,7 @@
                             android:drawablePadding="@dimen/_5sdp"
                             android:hint="Company Name"
                             android:inputType="textPersonName"
-                            android:maxLength="15"
+                            android:maxLength="20"
                             android:paddingLeft="@dimen/_10sdp"
                             android:singleLine="true"
                             android:textSize="@dimen/_13sdp" />
@@ -176,7 +176,7 @@
                             android:drawablePadding="@dimen/_5sdp"
                             android:hint="Company Location"
                             android:inputType="textPersonName"
-                            android:maxLength="15"
+                            android:maxLength="20"
                             android:paddingLeft="@dimen/_10sdp"
                             android:singleLine="true"
                             android:textSize="@dimen/_13sdp" />
@@ -219,6 +219,7 @@
                             android:drawableLeft="@drawable/comp_loc_ico"
                             android:drawablePadding="@dimen/_5sdp"
                             android:hint="Company Email"
+                            android:maxLength="30"
                             android:inputType="textEmailAddress"
                             android:paddingLeft="@dimen/_10sdp"
                             android:singleLine="true"
@@ -263,7 +264,7 @@
                             android:drawablePadding="@dimen/_5sdp"
                             android:hint="Manager Name"
                             android:inputType="textPersonName"
-                            android:maxLength="15"
+                            android:maxLength="23"
                             android:paddingLeft="@dimen/_10sdp"
                             android:singleLine="true"
                             android:textSize="@dimen/_13sdp" />
@@ -379,7 +380,7 @@
                             android:drawablePadding="@dimen/_5sdp"
                             android:hint="Alt. Manager Name"
                             android:inputType="textPersonName"
-                            android:maxLength="15"
+                            android:maxLength="23"
                             android:paddingLeft="@dimen/_10sdp"
                             android:singleLine="true"
                             android:textSize="@dimen/_13sdp" />

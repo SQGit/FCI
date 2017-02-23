@@ -103,7 +103,6 @@
                     </Spinner>
 
                     <ImageView
-                        android:id="@+id/imageView_loc_country"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|right"

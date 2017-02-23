@@ -95,19 +95,14 @@ public class AdapterViewEntry extends BaseAdapter {
 
         String status = status_tv.getText().toString();
         if (status.equals("APPROVED")) {
-            //status_tv.setTextColor(Color.parseColor("#5EB50D"));
-            // llt.setBackgroundColor(Color.parseColor("#5EB50D"));
             llt.setBackgroundResource(R.drawable.aprov_dr);
             status_tv.setEnabled(false);
 
         } else if (status.equals("PENDING")) {
-            // status_tv.setTextColor(Color.parseColor("#F7AE7C"));
-            // llt.setBackgroundColor(Color.parseColor("#F7AE7C"));
             llt.setBackgroundResource(R.drawable.pending_dra);
             status_tv.setEnabled(true);
 
         } else {
-            //status_tv.setTextColor(Color.parseColor("#EB1543"));
             llt.setBackgroundColor(Color.parseColor("#EB1543"));
 
             llt.setBackgroundResource(R.drawable.reject_dr);

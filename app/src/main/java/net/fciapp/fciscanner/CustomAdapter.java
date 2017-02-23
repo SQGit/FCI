@@ -27,15 +27,8 @@ public class CustomAdapter extends ArrayAdapter<String> {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
         View view = super.getView(position, convertView, parent);
-
-
         TextView suggestion = (TextView) view.findViewById(R.id.text1);
-        //suggestion.setTextSize(30);
-
-
         return view;
     }
 }

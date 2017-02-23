@@ -31,7 +31,7 @@ public class AdapterAddEntry extends BaseAdapter {
     public HashMap<Integer, String> vin_make = new HashMap<>();
     public int p;
     Context context;
-    ArrayList<UserData> arrayList;
+
     LinearLayout lt_bg;
     ArrayList<String> ar_name = new ArrayList<>();
     ArrayList<String> ar_phone = new ArrayList<>();
@@ -74,30 +74,8 @@ public class AdapterAddEntry extends BaseAdapter {
 
             if (Integer.valueOf(sharedPreferences.getString("size", "")) > 3) {
                 sizz = Integer.valueOf(sharedPreferences.getString("size", ""));
-            } /*else {
-                sizz = 3;
-            }*/
+            }
         }
-       /* else{
-            sizz = 3;
-        }*/
-
-    }
-
-    public static String getAllValues() {
-
-        for (int i = 0; i < sizz; i++) {
-            ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
-            HashMap<String, String> row1 = new HashMap<String, String>();
-            data.add(row1);
-
-        }
-
-        return "";
-    }
-
-    public void getData() {
-
     }
 
     @Override
@@ -189,44 +167,6 @@ public class AdapterAddEntry extends BaseAdapter {
             }
 
 
-
-      /*  if(vin_positions.size()>0){
-
-            notifyDataSetChanged();
-            Log.e("tag","adatpter_settext");
-
-            for (int i =0; i<sizz;i++){
-               // Log.e("tag__","<0>"+i);
-//                Log.e("tag__","<1>"+pos_view +"--|--"+Integer.valueOf(vin_positions.get(i)));
-                if(i<vin_positions.size()) {
-                    if (pos_view == Integer.valueOf(vin_positions.get(i))) {
-                        Log.e("tag__", "<2>" + pos_view + "--|--" + Integer.valueOf(vin_positions.get(i)));
-                        Log.e("tag__", "data" + i + "\t" + pos_view + "\t" + vin_no.get(i) + "\t" + vin_makemodel.get(i) + "\t" + vin_start_guage.get(i) + "\t" + vin_start_guage.get(i));
-
-                        holder.tv_vinno.setText(vin_no.get(i));
-                        holder.tv_make.setText(vin_makemodel.get(i));
-                        holder.tv_startgug.setSelection(Integer.parseInt(vin_start_guage.get(i)));
-                        holder.tv_endgug.setSelection(Integer.parseInt(vin_end_guage.get(i)));
-                        //  Log.e("tag","data"+i+"\t"+pos_view+"\t"+vin_no.get(i)+"\t"+vin_makemodel.get(i)+"\t"+vin_start_guage.get(i)+"\t"+vin_start_guage.get(i));
-                    }
-                }
-                else{
-                    holder.tv_vinno.setText("Scan Vin");
-                    holder.tv_make.setText("");
-                }
-
-            }
-        }*/
-
-
-
-
-
-
-
-
-
-
            holder.tv_startgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -256,90 +196,10 @@ public class AdapterAddEntry extends BaseAdapter {
             });
 
 
-
-
-           /* holder.tv_endgug.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   // spn = String.valueOf(holder.tv_startgug.getSelectedItemPosition());
-                    //  Log.d("tag", "spn_position" + spn + "POSSSSSSSSSSSSS" + String.valueOf(pos_view));
-                    int pio = holder.tv_endgug.getSelectedItemPosition();
-                    dbclass.insertIntoDB2(p, pio);
-                    Log.e("tag","click_end "+ p+pio);
-                }
-            });*/
-
-         /*   tv_add_another.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                  //  Log.e("tag","insideclidk "+sizz);
-                    sizz = sizz+1;
-
-                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("size",String.valueOf(sizz));
-                    // editor.putString("vv_make" + pos_view, holder.tv_make.getText().toString());
-                    editor.commit();
-
-                   // getFromDb();
-
-
-                    notifyDataSetChanged();
-
-                    Log.e("tag","adapter_insideclidk1 "+sizz);
-
-                    Log.e("tag","adapter_size1: "+Integer.valueOf(sharedPreferences.getString("size","")));
-                }
-            });*/
-
-
-            /*holder.tv_endgug.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    spn = String.valueOf(holder.tv_endgug.getSelectedItemPosition());
-
-                    dbclass.insertIntoDB3(p, position);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });*/
-
-
-         //   staffaddEntry.name.put(pos_view, holder.tv_make.getText().toString());
-
-
             holder.tv_vinno.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.e("tag", "vinno_clicked"+pos_view);
-                  /*  Intent goScan = new Intent(context, ScanActivity.class);
-                    goScan.putExtra("pos", pos_view);
-                    context.startActivity(goScan);*/
-
-                    //activity.finish();
-
-
-                 /*   for (int i = 0; i < sizz; i++) {
-                        if (!(holder.tv_vinno.getText().toString().contains("Scan Vin"))) {
-                            // SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                            //  SharedPreferences.Editor editor = sharedPreferences.edit();
-                            // editor.putString("vv_vin" + pos_view, holder.tv_vinno.getText().toString());
-                            // editor.putString("vv_make" + pos_view, holder.tv_make.getText().toString());
-                            //  editor.commit();
-
-
-                        }
-                    }
-                    //post = pos_view;
-                    if (!(dddd == null)) {
-                        if (!(dddd.isEmpty())) {
-                            Log.e("tag", "" + dddd);
-                        }
-                    }*/
-
 
                 }
             });
@@ -386,9 +246,6 @@ public class AdapterAddEntry extends BaseAdapter {
 
         Log.e("tag", "adapter_length: " + vin_positions.size());
 
-        //   Log.e("tag", "getfromdb" + vin_positions.size() + vin_no.size() + vin_makemodel.size());
-        // Log.e("tag", "starttt" + getStart.size() + getStart);
-        // putData(p);
     }
 
     private void putData(int position) {

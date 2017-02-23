@@ -73,10 +73,6 @@ public class AdminLogin extends AppCompatActivity {
                 str_pass = et_pass.getText().toString().trim();
                 if (Util.Operations.isOnline(AdminLogin.this)) {
 
-                    /*Intent i = new Intent(getApplicationContext(), AdminDashboard.class);
-                    startActivity(i);
-                    AdminLogin.this.finish();*/
-
                     if (!(str_phone.isEmpty())) {
                         if (!(str_pass.isEmpty()))
                         {
@@ -89,10 +85,12 @@ public class AdminLogin extends AppCompatActivity {
                                     startActivity(i);
                                     AdminLogin.this.finish();
 
+                                    //new adminLogin_Task().execute();
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
                                 }
-                                //new adminLogin_Task().execute();
+
                             }
                             else
                             {

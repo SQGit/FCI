@@ -146,12 +146,6 @@ public class Dialog_ChooseCompany extends Dialog {
             progress.setVisibility(View.VISIBLE);
             submit.setEnabled(false);
 
-         /*   sweetDialog = new SweetAlertDialog(activity, SweetAlertDialog.PROGRESS_TYPE);
-            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
-            sweetDialog.setTitleText("Loading");
-            sweetDialog.setCancelable(false);
-            sweetDialog.show();*/
-
         }
 
         @Override

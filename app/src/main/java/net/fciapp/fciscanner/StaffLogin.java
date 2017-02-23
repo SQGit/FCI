@@ -37,6 +37,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class StaffLogin extends AppCompatActivity {
     public String URL = Data_Service.SERVICE_URL_NEW + "staff/fetch";
+
+    //http://ec2-54-174-246-193.compute-1.amazonaws.com/staff/fetch
     public String URL_LOGIN = Data_Service.SERVICE_URL_NEW + "staff/login";
     ImageView submit;
     Spinner spn_staffname;
@@ -274,10 +276,7 @@ public class StaffLogin extends AppCompatActivity {
 
             try {
 
-                //return jsonStr = PostService.makeRequest(URL, json);
                 Log.e("tag_", "started");
-                //JSONObject jsonobject = PostService.getStaffs(URL);
-
                 JSONObject jsonobject = PostService.getData(URL);
 
                 Log.e("tag_", "0" + jsonobject.toString());
@@ -330,8 +329,6 @@ public class StaffLogin extends AppCompatActivity {
                             phones.add(jsonobject.optString("phone"));
                             Log.d("tag", "<----worldlist----->" + boardlist);
                         }
-                        //   Collections.sort(boardlist);
-                        // Collections.sort(phones);
 
                         final CustomAdapter arrayAdapter = new CustomAdapter(getApplicationContext(), R.layout.list, boardlist) {
 

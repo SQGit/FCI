@@ -28,10 +28,7 @@ import com.scandit.base.camera.camera2.TorchLogic;
 
 import net.fciapp.fciscanner.camera.GraphicOverlay;
 
-/**
- * Graphic instance for rendering barcode position, size, and ID within an associated graphic
- * overlay view.
- */
+
 public class BarcodeGraphic extends GraphicOverlay.Graphic {
 
 
@@ -84,10 +81,6 @@ public class BarcodeGraphic extends GraphicOverlay.Graphic {
 
     }
 
-    /**
-     * Updates the barcode instance from the detection of the most recent frame.  Invalidates the
-     * relevant portions of the overlay to trigger a redraw.
-     */
     void updateItem(Barcode barcode) {
         mBarcode = barcode;
       //  Log.e("tag","33bar"+mBarcode.displayValue);

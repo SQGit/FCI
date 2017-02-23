@@ -55,10 +55,6 @@ public class __StaffAdapter extends BaseAdapter {
         return count;
     }
 
-   /* @Override
-    public Object getItem(int position) {
-        return null;
-    }*/
 
     @Override
     public Object getItem(int position) {
@@ -105,17 +101,6 @@ public class __StaffAdapter extends BaseAdapter {
 
 
             final CustomAdapter arrayAdapter = new CustomAdapter(context, R.layout.list, asd) {
-
-             /*   @Override
-                public boolean isEnabled(int position) {
-                    if (position <2) {
-                        // Disable the first item from Spinner
-                        // First item will be use for hint
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }*/
 
 
                 @Override
@@ -237,21 +222,6 @@ public class __StaffAdapter extends BaseAdapter {
                 dialog1.show();
 
 
-
-
-              /*  Intent goScan = new Intent(context, BarcodeCaptureActivity.class);
-                goScan.putExtra("pos", position);
-                goScan.putExtra("start", spin_start.getSelectedItemPosition());
-                goScan.putExtra("end", spin_end.getSelectedItemPosition());
-                goScan.putExtra("make", tv_vin_make.getText().toString());
-                goScan.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(goScan);
-*/
-             /*   Intent intent = new Intent(context, BarcodeCaptureActivity.class);
-                intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
-                intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
-                costartActivityForResult(intent, RC_BARCODE_CAPTURE);*/
-
             }
         });
 
@@ -286,21 +256,6 @@ public class __StaffAdapter extends BaseAdapter {
                 int a = spin_start.getSelectedItemPosition();
                 int b = spin_end.getSelectedItemPosition();
 
-             /*   if(spin_start.getSelectedItemPosition() != 4) {
-
-
-                    if (spin_end.getSelectedItemPosition() < spin_start.getSelectedItemPosition() || spin_end.getSelectedItemPosition() ==4) {
-                        Toast.makeText(context, "End Gauge not less than Start Gauge", Toast.LENGTH_SHORT).show();
-                        spin_end.setSelection(spin_start.getSelectedItemPosition());
-                    }
-
-
-                }
-                else {*/
-                   /* if(spin_end.getSelectedItemPosition() ==4){
-                        Toast.makeText(context, "End Gauge not less than Start Gauge", Toast.LENGTH_SHORT).show();
-                    }
-                    else {*/
                 spin_end.setSelection(pos);
 
                 if (position < limit) {
@@ -309,8 +264,6 @@ public class __StaffAdapter extends BaseAdapter {
                     currentListData.setVin_end(pos);
                     notifyDataSetChanged();
                 }
-                // }
-                //}
 
 
             }

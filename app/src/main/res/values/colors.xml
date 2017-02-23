@@ -3,8 +3,6 @@
     <color name="colorPrimary">#5DB1F1</color>
     <color name="colorPrimaryDark">#5DB1F1</color>
     <color name="colorAccent">#2d7fbe</color>
-    <color name="colorDark">#5cb2ef</color>
-    <color name="colorLight">#edf7ff</color>
 
     <color name="textColorDark">#34466a</color>
     <color name="textColorGray">#596782</color>
@@ -16,8 +14,6 @@
     <color name="listbg_storke">#acd7f7</color>
 
     <color name="orange">#ff7c44</color>
-    <color name="black">#000000</color>
-    <color name="darkblk">#c80c0c0c</color>
     <color name="whit">#FFFFFF</color>
     <color name="bgg">#5DB1F1</color>
 

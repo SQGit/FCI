@@ -134,11 +134,6 @@ public int id_data;
             et_phone.setEnabled(false);
             et_name.requestFocus();
 
-            //mPinHiddenEditText.setText(String.valueOf(pass.charAt(0))+ String.valueOf(pass.charAt(1))+ String.valueOf(pass.charAt(2))+ String.valueOf(pass.charAt(3)));
-
-
-            //mPinHiddenEditText1.setText(String.valueOf(pass.charAt(0))+ String.valueOf(pass.charAt(1))+ String.valueOf(pass.charAt(2))+ String.valueOf(pass.charAt(3)));
-
             et_name.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
             frm_edit = name;
@@ -204,13 +199,6 @@ public int id_data;
                         et_repin1.requestFocus();
                     }
 
-                   /* if (sss == 0) {
-                        Log.e("tag","0");
-                        et_phone.requestFocus();
-                    } else {
-                        Log.e("tag","1");
-                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-                    }*/
                 }
                 return false;
             }
@@ -528,16 +516,11 @@ public int id_data;
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-       // Log.e("tagbf","bf: "+s.toString()+s.length()+count);
+
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-       // Log.e("tagtc","af: "+s.toString()+s.length()+count);
-
-
-       // Log.e("tag","click_id:"+id_data);
 
         if(id_data == R.id.et_pin1 || id_data == R.id.et_pin2 || id_data == R.id.et_pin3 || id_data == R.id.et_pin4){
 
@@ -619,7 +602,7 @@ public int id_data;
 
     @Override
     public void afterTextChanged(Editable s) {
-       // Log.e("tagtc","aff: "+s.toString()+s.length());
+
     }
 
     @Override
@@ -978,19 +961,6 @@ public int id_data;
                         return false;
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         }
 

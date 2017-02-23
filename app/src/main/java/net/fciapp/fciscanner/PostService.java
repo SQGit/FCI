@@ -80,46 +80,23 @@ public class PostService {
         String result = "";
         JSONObject jArray = null;
         Log.e("tag_", "started");
-        // Download JSON data from URL
         try {
 
             HttpPost httppost = new HttpPost(url);
             httppost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
 
-
-            // HttpClient httpclient = new DefaultHttpClient(httpParams);
-
-/*            HttpClient httpclient = new DefaultHttpClient();
-            HttpParams params = httpclient.getParams();
-            HttpConnectionParams.setConnectionTimeout(params, 2000);
-            HttpConnectionParams.setSoTimeout(params, 2000);
-            HttpResponse response = httpclient.execute(httppost);
-
-            Log.e("tag_", "stsL_" + response.getStatusLine());
-            Log.e("tag_", "stsL_" + response.getStatusLine().getReasonPhrase());
-            Log.e("tag_", "stsL_" + response.getStatusLine().getStatusCode());*/
-
-
-       //     HttpParams params = new BasicHttpParams();
-         //   HttpConnectionParams.setConnectionTimeout(params, 40000);
-         //   HttpConnectionParams.setSoTimeout(params, 40000);
-
-
             DefaultHttpClient client = new DefaultHttpClient();
 
-           // client.setParams(params);
 
             HttpResponse response = null;
             String text;
             try {
-                //Execute the request (here it blocks the execution until finished or a timeout)
                 response = client.execute(httppost);
 
                 Log.e("tag_", "stsL_" + response.getStatusLine());
                 Log.e("tag_", "stsL_" + response.getStatusLine().getReasonPhrase());
                 Log.e("tag_", "stsL_" + response.getStatusLine().getStatusCode());
             } catch (IOException e) {
-                //If you hit this probably the connection timed out
                 Log.e("INFO", e.getMessage());
             }
 
@@ -132,19 +109,6 @@ public class PostService {
             Log.e("tag", "Error in http connection " + e.toString());
 
         }
-
-        // Convert response to string
-
-    /*    if (is.equals(null)) {
-
-
-            result = "sam";
-            jArray = new JSONObject(result);
-            Log.e("tag_", "stsL20if_" + result);
-            return jArray;
-
-        } else {*/
-
 
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -169,10 +133,7 @@ public class PostService {
             Log.e("tag0", result);
             Log.e("tag2", "Error parsing data " + e.toString());
         }
-
         return jArray;
-        // return jArray;
-        // }
 
     }
 
@@ -184,7 +145,6 @@ public class PostService {
         String result = "";
         JSONObject jArray = null;
 
-        // Download JSON data from URL
         try {
 
 
@@ -202,8 +162,6 @@ public class PostService {
             return jArray;
 
         }
-
-        // Convert response to string
 
         if (is.equals(null)) {
 
@@ -270,8 +228,6 @@ public class PostService {
             is = null;
 
         }
-
-        // Convert response to string
 
 
         try {

@@ -299,8 +299,7 @@
                         android:background="@drawable/entry_bg"
                         android:inputType="number"
                         android:maxLength="3"
-                        android:paddingLeft="@dimen/_10sdp"
-                        android:text="240" />
+                        android:paddingLeft="@dimen/_10sdp" />
 
 
                     <TextView

@@ -52,7 +52,6 @@ public class AdminDashboard extends AppCompatActivity {
                 Intent i=new Intent(getApplicationContext(),AdminStaffCreate1.class);
                 i.putExtra("sts",0);
                 startActivity(i);
-                //  AdminDashboard.this.finish();
             }
         });
         lt_stf_ed.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +59,6 @@ public class AdminDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(),AdminStaffEdit.class);
                 startActivity(i);
-                //  AdminDashboard.this.finish();
             }
         });
         lt_comp_cr.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +67,6 @@ public class AdminDashboard extends AppCompatActivity {
             {
                 Intent i=new Intent(getApplicationContext(),AdminCreateCompany.class);
                 startActivity(i);
-                // AdminDashboard.this.finish();
             }
         });
 
@@ -79,7 +76,6 @@ public class AdminDashboard extends AppCompatActivity {
             {
                 Intent i=new Intent(getApplicationContext(),AdminCompanyEdit.class);
                 startActivity(i);
-                // AdminDashboard.this.finish();
             }
         });
 

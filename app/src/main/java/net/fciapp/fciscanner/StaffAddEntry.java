@@ -50,7 +50,6 @@ StaffAddEntry extends Activity {
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
 
-    //Adapter_Add staff_add_adapter;
     SweetAlertDialog sweetDialog;
 
 
@@ -75,11 +74,6 @@ StaffAddEntry extends Activity {
         }
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-
-/*
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("size","3");
-        editor.commit();*/
 
 
         companyname = sharedPreferences.getString("companyname", "");
@@ -125,7 +119,6 @@ StaffAddEntry extends Activity {
         tv_save.setTypeface(tf);
         tv_note.setTypeface(tf);
         tv_staff.setTypeface(tf);
-        //  tv_add_another.setTypeface(tf);
         tv_logout.setTypeface(tf);
         tv_comp_name.setText(companyname);
         tv_manag_name.setText(managername);
@@ -137,8 +130,7 @@ StaffAddEntry extends Activity {
         staff_adapter = new AdapterAddEntry(StaffAddEntry.this, StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
         lv_entries.setAdapter(staff_adapter);
 
-      /* staff_add_adapter = new Adapter_Add(StaffAddEntry.this,getApplicationContext(),siz_da);
-        lv_entries.setAdapter(staff_add_adapter);*/
+
         Log.e("tag", "" + siz_da);
 
 
@@ -150,7 +142,6 @@ StaffAddEntry extends Activity {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("size", String.valueOf(siz_da));
-                // editor.putString("vv_make" + pos_view, holder.tv_make.getText().toString());
                 editor.commit();
 
                 getFromDb();
@@ -231,10 +222,6 @@ StaffAddEntry extends Activity {
     protected void onRestart() {
         super.onRestart();
         Log.e("tag_", "restart");
-
-        // getFromDb();
-        /*staff_adapter = new AdapterAddEntry(StaffAddEntry.this, StaffAddEntry.this, vin_make, v_pos, v_mk, siz_da);
-        lv_entries.setAdapter(staff_adapter);*/
     }
 
 
@@ -323,8 +310,6 @@ StaffAddEntry extends Activity {
 
         Log.e("tag", "length: " + vin_positions.size());
 
-        //   Log.e("tag", "getfromdb" + vin_positions.size() + vin_no.size() + vin_makemodel.size());
-        // Log.e("tag", "starttt" + getStart.size() + getStart);
     }
 
 
