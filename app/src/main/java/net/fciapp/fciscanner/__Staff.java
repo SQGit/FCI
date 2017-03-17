@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -41,7 +42,7 @@ public class __Staff extends Activity {
 
     public int count = 3;
     ListView lview;
-    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon,tv_purchase_txt;
+    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon;
     DbHelper dbclass;
     Context context = this;
     ArrayList myList = new ArrayList();
@@ -57,18 +58,22 @@ public class __Staff extends Activity {
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
     Typeface tf;
-    String managername, managerphone, companyname, staffname, dateFrom, staffphone, total_gallon, alt_mgr, alt_phone,purchase_order;
+    String managername, managerphone, companyname, staffname, dateFrom, staffphone, total_gallon, alt_mgr, alt_phone,purchase_order,staffname2 ="Choose Assist";
     EditText et_gallon,et_purchase;
     LinearLayout lt_logout;
 
     __StaffAdapter adapter;
+    ArrayList<StaffFetchList> baL;
 
 
-    Spinner spin;
+    Spinner spin,spin2;
 
     ArrayList<String> asd = new ArrayList<>();
     String choosen;
     SharedPreferences.Editor editor;
+
+    ArrayList<String> boardlist;
+    public String URL = Data_Service.SERVICE_URL_NEW + "staff/fetch";
 
 
     @Override
@@ -107,6 +112,25 @@ public class __Staff extends Activity {
         int hour = ccc.get(Calendar.HOUR);
         //24 hour format
         int hourofday = ccc.get(Calendar.HOUR_OF_DAY);
+
+        if (Util.Operations.isOnline(__Staff.this)) {
+            new staffFetch_Task().execute();
+        } else {
+            new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("WARNING MESSAGE!!!")
+                    .setContentText("No Internet Connectivity")
+                    .setConfirmText("Ok")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismiss();
+                            __Staff.this.finish();
+                        }
+                    })
+                    .show();
+
+
+        }
 
 
         Log.e("tag", "time" + millisecond + "cc" + second + "cc" + minute + "cc" + hour % 12 + "cc" + hourofday);
@@ -160,12 +184,13 @@ public class __Staff extends Activity {
         tv_gallon = (TextView) findViewById(R.id.tv_gallon);
         et_gallon = (EditText) findViewById(R.id.editText);
 
-        tv_purchase_txt = (TextView) findViewById(R.id.tv_purchase);
+        //tv_purchase_txt = (TextView) findViewById(R.id.tv_purchase);
         et_purchase = (EditText) findViewById(R.id.et_po);
 
         lt_logout = (LinearLayout) findViewById(R.id.layout_logout);
 
         spin = (Spinner) findViewById(R.id.spinn);
+        spin2 = (Spinner) findViewById(R.id.spinn2);
 
 
         String shour = String.format("%02d", hour);
@@ -202,7 +227,7 @@ public class __Staff extends Activity {
         tv_logout.setTypeface(tf);
         tv_gallon.setTypeface(tf);
         et_gallon.setTypeface(tf);
-        tv_purchase_txt.setTypeface(tf);
+       // tv_purchase_txt.setTypeface(tf);
         et_purchase.setTypeface(tf);
 
         tv_comp_name.setText(companyname);
@@ -269,6 +294,28 @@ public class __Staff extends Activity {
         lview.setAdapter(adapter);
 
 
+        spin2.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                if (position > 0) {
+                   // staffname2 = baL.get(position).getName();
+                    staffname2 = spin2.getSelectedItem().toString();
+                    Log.e("tag","s:"+staffname2);
+                }
+                else{
+                    staffname2 = "Choose Assist";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
 
         tv_header.setOnClickListener(new View.OnClickListener() {
@@ -282,6 +329,8 @@ public class __Staff extends Activity {
                 Intent goStf = new Intent(getApplicationContext(), StaffDashboard.class);
                 startActivity(goStf);
                 __Staff.this.finish();
+
+
             }
         });
 
@@ -702,6 +751,13 @@ public class __Staff extends Activity {
                 jsonObject.accumulate("total_gallons", total_gallon);
                 jsonObject.accumulate("entrydetail", jsonArray);
 
+                    if(staffname2 != "Choose Assist") {
+                        Log.e("tag",staffname2);
+
+                        jsonObject.accumulate("assist", staffname2);
+                    }
+
+
 
                 json = jsonObject.toString();
                 Log.e("tag", "" + json);
@@ -809,6 +865,174 @@ public class __Staff extends Activity {
             }
 
 
+        }
+
+    }
+
+
+    class staffFetch_Task extends AsyncTask<String, Void, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            sweetDialog = new SweetAlertDialog(__Staff.this, SweetAlertDialog.PROGRESS_TYPE);
+            sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#5DB2EF"));
+            sweetDialog.setTitleText("Loading");
+            sweetDialog.setCancelable(false);
+            sweetDialog.show();
+
+            baL = new ArrayList<StaffFetchList>();
+            boardlist = new ArrayList<>();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String json = "", jsonStr = "";
+
+
+            try {
+
+                Log.e("tag_", "started");
+                JSONObject jsonobject = PostService.getData(URL);
+
+                Log.e("tag_", "0" + jsonobject.toString());
+                if (jsonobject.toString() == "sam") {
+                    new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Oops!")
+                            .setContentText("Try Check your Network")
+                            .setConfirmText("OK")
+                            .show();
+                    Log.e("tag_", "1" + jsonobject.toString());
+                }
+
+                json = jsonobject.toString();
+
+                return json;
+
+            } catch (Exception e) {
+                Log.e("InputStream", "2" + e.toString());
+                jsonStr = "";
+                sweetDialog.dismiss();
+            }
+            return jsonStr;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.e("tag", "<-----result---->" + s);
+            sweetDialog.dismiss();
+            super.onPostExecute(s);
+            try {
+                JSONObject jo = new JSONObject(s);
+                String status = jo.getString("status");
+                String count = jo.getString("count");
+                Log.e("tag", "<-----Status----->" + status);
+                if (status.equals("success")) {
+
+                    if (Integer.valueOf(count) > 0) {
+
+
+                        boardlist.add("Choose Assist");
+                        JSONArray jsonarray = jo.getJSONArray("staff");
+                        for (int i = 0; i < jsonarray.length(); i++) {
+                            JSONObject jsonobject = jsonarray.getJSONObject(i);
+                            StaffFetchList bl = new StaffFetchList();
+                            bl.setName(jsonobject.optString("name"));
+                            bl.setPhone(jsonobject.optString("phone"));
+                            bl.setPassword(jsonobject.optString("password"));
+                            baL.add(bl);
+                            boardlist.add(jsonobject.optString("name"));
+                            Log.d("tag", "<----worldlist----->" + boardlist);
+                        }
+
+                        final CustomAdapter arrayAdapter = new CustomAdapter(getApplicationContext(),R.layout.list3, boardlist) {
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                View view = super.getDropDownView(position, convertView, parent);
+
+                                TextView staff = (TextView) view.findViewById(R.id.text1);
+                                staff.setTextSize(15);
+                                staff.setTypeface(tf,1);
+
+                                return view;
+                            }
+
+                            @Override
+                            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                                View view = super.getDropDownView(position, convertView, parent);
+
+                                TextView staff_dropdown = (TextView) view.findViewById(R.id.text1);
+                                staff_dropdown.setTypeface(tf);
+                                staff_dropdown.setTextSize(14);
+                                staff_dropdown.setPadding(0,5,0,5);
+                                view.setBackgroundColor(getResources().getColor(R.color.bg2));
+
+                                return view;
+                            }
+                        };
+
+
+                        spin2.setAdapter(arrayAdapter);
+                    } else {
+                        new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("No Data Found")
+                                .setContentText("Staff not created. Please Add Staff")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        Intent i = new Intent(getApplicationContext(), Dashboard.class);
+                                        startActivity(i);
+                                        __Staff.this.finish();
+                                    }
+                                })
+                                .show();
+
+
+                    }
+
+
+                } else {
+
+                    Log.e("tag_", "error");
+
+                    new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("No Network!!!")
+                            .setContentText("Please Try Again Later.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    Intent i = new Intent(getApplicationContext(), Dashboard.class);
+                                    startActivity(i);
+                                    __Staff.this.finish();
+                                }
+                            })
+                            .show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+
+                Log.e("tag_", "" + e.toString());
+
+                new SweetAlertDialog(__Staff.this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("No Network!")
+                        .setContentText("Please Try Again Later.")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                                Intent i = new Intent(getApplicationContext(), Dashboard.class);
+                                startActivity(i);
+                                __Staff.this.finish();
+                            }
+                        })
+                        .show();
+            }
         }
 
     }

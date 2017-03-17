@@ -21,7 +21,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class AdapterAddEntry extends BaseAdapter {
@@ -37,7 +36,6 @@ public class AdapterAddEntry extends BaseAdapter {
     ArrayList<String> ar_phone = new ArrayList<>();
     ArrayList<String> ar_pass = new ArrayList<>();
     Typeface tf;
-    SweetAlertDialog sweetDialog;
     Holder holder;
     ArrayList<Integer> v_pos = new ArrayList<>();
     ArrayList<String> v_mm = new ArrayList<>();

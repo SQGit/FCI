@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,6 +143,8 @@ public class AdapterViewEntry extends BaseAdapter {
                 String rv_date = resultp.get(StaffViewEntry.REVIEW_DATE);
                 String mgr = resultp.get(StaffViewEntry.MANAGER_NAME);
                 String comp = resultp.get(StaffViewEntry.COMPANY_NAME);
+                String assis = resultp.get("assist");
+                Log.e("tag","asdr :"+assis);
                 SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(context);
                 SharedPreferences.Editor edit = s_pref.edit();
                 edit.putString("viewformId", form);
@@ -149,6 +152,7 @@ public class AdapterViewEntry extends BaseAdapter {
                 edit.putString("rv_date", rv_date);
                 edit.putString("mgr", mgr);
                 edit.putString("comp", comp);
+                edit.putString("assist", assis);
 
                 edit.commit();
                 Intent intent = new Intent(context, ViewFormEntry.class);

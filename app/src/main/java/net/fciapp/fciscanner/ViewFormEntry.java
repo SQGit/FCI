@@ -38,7 +38,7 @@ public class ViewFormEntry extends Activity {
     static String MAKE_MODEL = "make_model";
     static String START_GUAGE = "start_gauge";
     static String END_GAUGE = "end_gauge";
-    TextView tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_formno, tv_staffname, tv_tot_gal, tv_view, tv_logout;
+    TextView tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt,tv_as,tv_as1, tv_time, tv_formno, tv_staffname, tv_tot_gal, tv_view, tv_logout;
     Typeface tf;
     ListView lv_entries;
     AdapterViewFormEntry avw;
@@ -48,7 +48,7 @@ public class ViewFormEntry extends Activity {
     LinearLayout lt_logout;
     View views;
 
-    String mgr_name, comp_name, cr_date, rv_date;
+    String mgr_name, comp_name, cr_date, rv_date,assis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,8 @@ public class ViewFormEntry extends Activity {
         cr_date = sharedPreferences.getString("cr_date", "");
         rv_date = sharedPreferences.getString("rv_date", "");
 
+        assis = sharedPreferences.getString("assist","");
+
 
 
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
@@ -82,6 +84,9 @@ public class ViewFormEntry extends Activity {
         tv_staffname = (TextView) findViewById(R.id.tv_staff);
         tv_tot_gal = (TextView) findViewById(R.id.tv_total);
         tv_view = (TextView) findViewById(R.id.tv_view);
+
+        tv_as = (TextView) findViewById(R.id.tv_ass);
+        tv_as1 = (TextView) findViewById(R.id.tv_ass1);
 
         tv_logout = (TextView) findViewById(R.id.tv_logout);
 
@@ -100,6 +105,12 @@ public class ViewFormEntry extends Activity {
         tv_view.setTypeface(tf);
         tv_staff.setTypeface(tf);
         tv_logout.setTypeface(tf);
+        tv_as.setTypeface(tf);
+        tv_as1.setTypeface(tf);
+
+        tv_as.setVisibility(View.GONE);
+        tv_as1.setVisibility(View.GONE);
+
         tv_staff.setText("Hi " + staffname);
         SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
         //String currentDateandTime = datef.format(new Date(date));
@@ -146,6 +157,16 @@ public class ViewFormEntry extends Activity {
         Log.e("tag", "date :" + mgr_name + cr_date + comp_name + rv_date);
 
         tv_date.setText(cr_date);
+
+        if(assis != "null"){
+            tv_as.setVisibility(View.VISIBLE);
+            tv_as1.setVisibility(View.VISIBLE);
+            tv_as1.setText(assis);
+        }
+        else{
+            tv_as.setVisibility(View.GONE);
+            tv_as1.setVisibility(View.GONE);
+        }
 
         if (rv_date.equals(null) || rv_date == "null" || rv_date == null || rv_date ==""|| rv_date.equals("null")) {
             tv_time.setVisibility(View.GONE);

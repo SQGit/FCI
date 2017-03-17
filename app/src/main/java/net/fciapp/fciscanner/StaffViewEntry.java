@@ -283,6 +283,7 @@ public class StaffViewEntry extends Activity {
                             map.put("review_date", datas.getString("review_date"));
                             map.put("entry_status", datas.getString("entry_status"));
                             map.put("total_vehicles",datas.getString("total_vehicles"));
+                            map.put("assist",datas.getString("assist"));
                             contactList.add(map);
 
                         }

@@ -267,6 +267,7 @@ public class DialogSignature extends Dialog {
 
         @Override
         protected void onPreExecute() {
+            Log.e("Tag",formId);
             super.onPreExecute();
         }
 
@@ -279,7 +280,7 @@ public class DialogSignature extends Dialog {
 
         @SuppressWarnings("deprecation")
         private String uploadFile() {
-            Log.e("tag", "status"+ status);
+            Log.e("tag", "status"+ formId);
             String responseString = null;
             HttpClient httpclient = new DefaultHttpClient();
             String virtual_url = Data_Service.SERVICE_URL_NEW + "api/review";
@@ -290,9 +291,9 @@ public class DialogSignature extends Dialog {
             //   httppost.setHeader("Content-type", "multipart/form-data");
             try {
                 MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-                Log.e("tag", "pathhhh" + String.valueOf(photo));
+                Log.e("tag", "pathhhh: " + String.valueOf(photo));
                 File sourceFile = new File(String.valueOf(photo));
-                entity.addPart("fileUpload", new FileBody(photo));
+                entity.addPart("fileUpload", new FileBody(photo,"images/jpeg"));
                 httppost.setEntity(entity);
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity r_entity = response.getEntity();
