@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FCI_PROJECT.iml" filepath="$PROJECT_DIR$/FCI_PROJECT.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fci.iml" filepath="$PROJECT_DIR$/fci.iml" />
     </modules>
   </component>
 </project>

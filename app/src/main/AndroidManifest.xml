@@ -29,12 +29,12 @@
         <activity
             android:name="net.fciapp.fciscanner.Dashboard"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name="net.fciapp.fciscanner.AdminLogin"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
         <activity
             android:name="net.fciapp.fciscanner.StaffLogin"
             android:screenOrientation="landscape"
@@ -46,28 +46,28 @@
             android:name="net.fciapp.fciscanner.AdminDashboard"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
         <activity
             android:name="net.fciapp.fciscanner.AdminStaffCreate1"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
         <activity
             android:name="net.fciapp.fciscanner.AdminCreateCompany"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
         <activity
             android:name="net.fciapp.fciscanner.StaffDashboard"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
 
         <activity
             android:name="net.fciapp.fciscanner.AdminStaffEdit"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
 
         <activity
             android:name="net.fciapp.fciscanner.StaffAddEntry"
@@ -81,19 +81,19 @@
             android:name="net.fciapp.fciscanner.StaffViewEntry"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
         <activity
             android:name="net.fciapp.fciscanner.AdminCompanyEdit"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
 
 
         <activity
             android:name="net.fciapp.fciscanner.ViewFormEntry"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
 
         <activity
             android:name="net.fciapp.fciscanner.__Staff"

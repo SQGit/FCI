@@ -96,7 +96,6 @@ public class DialogSignature extends Dialog {
         reject_tv.setTypeface(tf);
 
 
-
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,13 +107,13 @@ public class DialogSignature extends Dialog {
 
 
                     Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                    newPath = String.valueOf(photo);
-                    status = "APPROVED";
-                    new UploadImageToServer(newPath).execute();
-                    Log.e("tag", "sigpath" + photo);
-                } else {
-                }
+                    if (addJpgSignatureToGallery(signatureBitmap)) {
+                        newPath = String.valueOf(photo);
+                        status = "APPROVED";
+                        new UploadImageToServer(newPath).execute();
+                        Log.e("tag", "sigpath" + photo);
+                    } else {
+                    }
 
                     Log.e("tag", "not empty");
                 }
@@ -218,7 +217,7 @@ public class DialogSignature extends Dialog {
 
         boolean result = false;
         try {
-            photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
+            photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.JPG", System.currentTimeMillis()));
             saveBitmapToJPG(signatureBitmap, photo);
             scanMediaFile(photo);
             Log.e("tag", "%%%%" + photo);
@@ -267,7 +266,7 @@ public class DialogSignature extends Dialog {
 
         @Override
         protected void onPreExecute() {
-            Log.e("Tag",formId);
+            Log.e("Tag", formId);
             super.onPreExecute();
         }
 
@@ -280,7 +279,7 @@ public class DialogSignature extends Dialog {
 
         @SuppressWarnings("deprecation")
         private String uploadFile() {
-            Log.e("tag", "status"+ formId);
+            Log.e("tag", "status" + formId);
             String responseString = null;
             HttpClient httpclient = new DefaultHttpClient();
             String virtual_url = Data_Service.SERVICE_URL_NEW + "api/review";
@@ -291,9 +290,10 @@ public class DialogSignature extends Dialog {
             //   httppost.setHeader("Content-type", "multipart/form-data");
             try {
                 MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-                Log.e("tag", "pathhhh: " + String.valueOf(photo));
+                Log.e("tag", "img: " + String.valueOf(photo));
                 File sourceFile = new File(String.valueOf(photo));
-                entity.addPart("fileUpload", new FileBody(photo,"images/jpeg"));
+                Log.e("tag", "file: " + String.valueOf(sourceFile));
+                entity.addPart("fileUpload", new FileBody(photo, "images/jpeg"));
                 httppost.setEntity(entity);
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity r_entity = response.getEntity();
