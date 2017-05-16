@@ -141,7 +141,9 @@ public class __StaffAdapter extends BaseAdapter {
             tv_vin_make = mViewHolder.tv_vin_make;
             spin_start = mViewHolder.spin_start;
             spin_end = mViewHolder.spin_end;
+
         }
+
 
 
         if (position < limit) {
@@ -153,8 +155,8 @@ public class __StaffAdapter extends BaseAdapter {
         } else {
             tv_vin_no.setText("Scan VinNo");
             tv_vin_make.setText("");
-            spin_start.setSelection(0);
-            spin_end.setSelection(0);
+            spin_start.setSelection(5);
+            spin_end.setSelection(1);
         }
 
 
@@ -165,19 +167,27 @@ public class __StaffAdapter extends BaseAdapter {
 
 
 
+                Intent goScan = new Intent(context, BarcodeCaptureActivity.class);
+                goScan.putExtra("pos", position);
+                goScan.putExtra("start", spin_start.getSelectedItemPosition());
+                goScan.putExtra("end", spin_end.getSelectedItemPosition());
+                goScan.putExtra("make", tv_vin_make.getText().toString());
+                goScan.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                goScan.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+                goScan.putExtra(BarcodeCaptureActivity.UseFlash, false);
+                context.startActivity(goScan);
 
-                dialog1 = new Dialog(context);
+
+
+
+                /*dialog1 = new Dialog(context);
                 dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog1.setCancelable(true);
                 dialog1.setContentView(R.layout.choos);
-
                 final RelativeLayout button_barcode = (RelativeLayout) dialog1.findViewById(R.id.layout_barcode);
                 final RelativeLayout button_vinnumber = (RelativeLayout) dialog1.findViewById(R.id.layout_vinnumber);
-
                 TextView txtscan = (TextView) dialog1.findViewById(R.id.tv_scan);
                 TextView txtvin = (TextView) dialog1.findViewById(R.id.tv_vin);
-
-
                 button_barcode.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -196,7 +206,6 @@ public class __StaffAdapter extends BaseAdapter {
 
                     }
                 });
-
 
                 button_vinnumber.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -219,7 +228,7 @@ public class __StaffAdapter extends BaseAdapter {
                 txtscan.setTypeface(tf);
                 txtvin.setTypeface(tf);
 
-                dialog1.show();
+                dialog1.show();*/
 
 
             }
@@ -244,6 +253,7 @@ public class __StaffAdapter extends BaseAdapter {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
 
             }
         });
@@ -270,7 +280,6 @@ public class __StaffAdapter extends BaseAdapter {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 

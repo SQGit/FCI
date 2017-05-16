@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -19,7 +20,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by Salman on 8/24/2016.
  */
 public class SettingsPage extends Activity {
-    TextView tv_header, tv_submit, tv_gallon;
+    TextView tv_header, tv_submit, tv_gallon,tv_sounds,tv_edit_fetch;
+    ToggleButton tb_sound,tb_editfetch;
     EditText et_gallon;
     Typeface tf;
     SharedPreferences.Editor editor;
@@ -39,6 +41,11 @@ public class SettingsPage extends Activity {
         tv_gallon = (TextView) findViewById(R.id.tv_gallon);
         et_gallon = (EditText) findViewById(R.id.et_gallon);
 
+        tv_sounds = (TextView) findViewById(R.id.tv_sounds);
+        tv_edit_fetch = (TextView) findViewById(R.id.tv_edit_fetch);
+        tb_sound = (ToggleButton) findViewById(R.id.tog_sound);
+        tb_editfetch = (ToggleButton) findViewById(R.id.tog_fetch_button);
+
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -49,6 +56,10 @@ public class SettingsPage extends Activity {
         tv_submit.setTypeface(tf);
         tv_gallon.setTypeface(tf);
         et_gallon.setTypeface(tf);
+        tv_sounds.setTypeface(tf);
+        tv_edit_fetch.setTypeface(tf);
+        tb_sound.setTypeface(tf);
+        tb_editfetch.setTypeface(tf);
 
 
         if (sharedPreferences.getString("max_gallon", "") == "") {

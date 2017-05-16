@@ -48,8 +48,8 @@ public class __Staff extends Activity {
     ArrayList myList = new ArrayList();
     String[] ar_vin_no = new String[]{"Scan VinNo", "Scan VinNo", "Scan VinNo"};
     String[] ar_vin_make = new String[]{"", "", ""};
-    int[] ar_start = new int[]{0, 0, 0};
-    int[] ar_end = new int[]{0, 0, 0};
+    int[] ar_start = new int[]{5, 5, 5};
+    int[] ar_end = new int[]{1, 1, 1};
     SweetAlertDialog sweetDialog;
 
     ArrayList<String> vin_positions = new ArrayList<>();
