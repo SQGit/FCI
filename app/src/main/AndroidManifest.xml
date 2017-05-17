@@ -26,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="net.fciapp.fciscanner.Dashboard"
             android:screenOrientation="landscape"
@@ -39,9 +40,8 @@
             android:name="net.fciapp.fciscanner.StaffLogin"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan">
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
 
-        </activity>
         <activity
             android:name="net.fciapp.fciscanner.AdminDashboard"
             android:screenOrientation="landscape"
@@ -73,9 +73,9 @@
             android:name="net.fciapp.fciscanner.StaffAddEntry"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan">
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
 
-        </activity>
+
 
         <activity
             android:name="net.fciapp.fciscanner.StaffViewEntry"

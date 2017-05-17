@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -62,6 +63,10 @@ public class SettingsPage extends Activity {
         tb_editfetch.setTypeface(tf);
 
 
+        Log.e("tag","ss: "+sharedPreferences.getString("sound_option", ""));
+        Log.e("tag","eb: "+sharedPreferences.getString("edit_button", ""));
+
+
         if (sharedPreferences.getString("max_gallon", "") == "") {
             total_gallon = "240";
             Log.e("tag", "0" + total_gallon);
@@ -69,6 +74,45 @@ public class SettingsPage extends Activity {
             total_gallon = sharedPreferences.getString("max_gallon", "");
             Log.e("tag", "1" + total_gallon);
         }
+
+
+
+        if (sharedPreferences.getString("sound_option", "").equals("")) {
+            editor.putString("sound_option", "on");
+            editor.apply();
+            tb_sound.setChecked(false);
+        } else {
+            if(sharedPreferences.getString("sound_option", "").equals("on")) {
+                tb_sound.setChecked(false);
+            }
+            else if(sharedPreferences.getString("sound_option", "").equals("off")) {
+                tb_sound.setChecked(true);
+            }
+        }
+
+
+
+        if (sharedPreferences.getString("edit_button", "").equals("")) {
+            editor.putString("edit_button", "off");
+            editor.apply();
+            tb_editfetch.setChecked(true);
+        } else {
+            if(sharedPreferences.getString("edit_button", "").equals("on")) {
+                tb_editfetch.setChecked(false);
+            }
+            else if(sharedPreferences.getString("edit_button", "").equals("off")) {
+                tb_editfetch.setChecked(true);
+            }
+        }
+
+
+
+
+
+
+
+
+
 
         et_gallon.setText(total_gallon);
 
@@ -132,6 +176,78 @@ public class SettingsPage extends Activity {
 
                 }
 
+            }
+        });
+
+
+
+    /*    tb_sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.e("tag","sound: "+isChecked);
+                if(isChecked){
+                    Log.e("tag","ss_tr: "+buttonView.getText()+" is ");
+                    editor.putString("sound_option","off");
+                    editor.apply();
+                }
+                else{
+                    Log.e("tag","ss_fl: "+buttonView.getText()+" is ");
+                    editor.putString("sound_option","on");
+                    editor.apply();
+                }
+            }
+        });*/
+
+     /*   tb_editfetch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.e("tag","edit_button: "+isChecked);
+                if(isChecked){
+
+                    Log.e("tag","eb_tr: "+buttonView.getText()+" is ");
+                    editor.putString("edit_button","on");
+                    editor.apply();
+                }
+                else{
+                    Log.e("tag","eb_fl: "+buttonView.getText()+" is ");
+                    editor.putString("edit_button","off");
+                    editor.apply();
+                }
+            }
+        });*/
+
+        tb_editfetch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tb_editfetch.getText().equals("OFF")){
+                    Log.e("tag","eb_tr: on");
+
+                    editor.putString("edit_button","on");
+                    editor.apply();
+                }
+                else{
+                    Log.e("tag","eb_tr: off");
+
+
+                    editor.putString("edit_button","off");
+                    editor.apply();
+                }
+            }
+        });
+
+        tb_sound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tb_sound.getText().equals("OFF")){
+                    Log.e("tag","eb_tr: on");
+                    editor.putString("sound_option","on");
+                    editor.apply();
+                }
+                else{
+                    Log.e("tag","eb_tr: off");
+                    editor.putString("sound_option","off");
+                    editor.apply();
+                }
             }
         });
 

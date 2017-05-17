@@ -2,9 +2,14 @@ package net.fciapp.fciscanner;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -52,8 +57,22 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(getApplicationContext(),StaffLogin.class);
+               Intent i=new Intent(getApplicationContext(),StaffLogin.class);
                 startActivity(i);
+
+
+
+/* try {
+                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                    r.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }*/
+
+
+
+
             }
         });
     }

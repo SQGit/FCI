@@ -29,6 +29,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.hardware.Camera;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,16 +50,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
-
 import net.fciapp.fciscanner.camera.CameraSource;
 import net.fciapp.fciscanner.camera.CameraSourcePreview;
 import net.fciapp.fciscanner.camera.GraphicOverlay;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,27 +71,16 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * size, and ID of each barcode.
  */
 public final class BarcodeCaptureActivity extends AppCompatActivity {
-    private static final String TAG = "tagBarcode-reader";
-
-    // intent request code to handle updating play services if needed.
-    private static final int RC_HANDLE_GMS = 9001;
-
-    // permission request codes need to be < 256
-    private static final int RC_HANDLE_CAMERA_PERM = 2;
-
     // constants used to pass extra data in the intent
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String BarcodeObject = "Barcode";
-
-    private CameraSource mCameraSource;
-    private CameraSourcePreview mPreview;
-    private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
-
-    // helper objects for detecting taps and pinches.
-    private ScaleGestureDetector scaleGestureDetector;
-    private GestureDetector gestureDetector;
-
+    protected static final long TIME_DELAY = 1000;
+    private static final String TAG = "tagBarcode-reader";
+    // intent request code to handle updating play services if needed.
+    private static final int RC_HANDLE_GMS = 9001;
+    // permission request codes need to be < 256
+    private static final int RC_HANDLE_CAMERA_PERM = 2;
     Typeface tf;
     EditText et_vinscan;
     Button btn_submit;
@@ -101,26 +88,122 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     ProgressDialog mProgressDialog;
     DbHelper dbclass;
     Context context = this;
-    Button btn_flash,btn_focus;
-
-    String make, data, check,value;
+    Button btn_flash, btn_focus;
+    String make, data, check, value, duplicate;
     int position, start, end;
     String aaa;
-    int i =0,j=0;
-    boolean autoFocus,useFlash;
-
-    protected static final long TIME_DELAY = 1000;
+    int i = 0, j = 0;
+    boolean autoFocus, useFlash;
+    Handler handler = new Handler();
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    boolean dup_sts;
+    private CameraSource mCameraSource;
+    private CameraSourcePreview mPreview;
+    String api_key;
     //the default update interval for your text, this is in your hand , just run this sample
+    private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
+    Runnable updateTextRunnable = new Runnable() {
+        public void run() {
 
-    Handler handler=new Handler();
+
+            for (BarcodeGraphic graphic : mGraphicOverlay.getGraphics()) {
+                Barcode barcode = graphic.getBarcode();
+                //  Log.e("tag", "0grapickbarcode:" + barcode.displayValue);
+
+                value = barcode.displayValue.trim();
+                value = value.replaceAll("\\s+", "").trim();
+                value = value.replaceAll("%", "");
+
+                // Log.e("tag", "afterchang: :" + value);
+
+                //  Log.e("tag", value.length() + "())" + value);
+                int i;
+                i = value.length();
+
+                if (value.length() == 18) {
+                    data = value.substring(1);
+                    i = value.length();
+                    Log.e("tag", i + "<0> " + data);
 
 
+                    if (!dup_sts) {
+                        et_vinscan.setText(data);
+                        if (sharedPreferences.getString("edit_button", "").equals("off")) {
+                            btn_submit.setVisibility(View.GONE);
+                            new getVin_Make(data).execute();
+                            Log.e("tag", i + "data(18) " + data);
+                            dup_sts = true;
+                        }
+                        else{
+                            btn_submit.setVisibility(View.VISIBLE);
+                            if (sharedPreferences.getString("sound_option", "").equals("on")) {
+                                MediaPlayer true_mp3 = null;
+                                try {
+                                    true_mp3 = MediaPlayer.create(BarcodeCaptureActivity.this, R.raw.ass);
+                                    true_mp3.start();
+                                } catch (Exception e) {
+                                    Log.e("tag", "s:" + e.toString());
+                                }
+
+                            }
+                            dup_sts = true;
+                        }
+
+                    }
+
+
+                } else if (value.length() == 17) {
+                    data = value;
+                    Log.e("tag", i + "<1> " + data);
+
+
+                    if (!dup_sts) {
+                        et_vinscan.setText(data);
+                        if (sharedPreferences.getString("edit_button", "").equals("off")) {
+                            btn_submit.setVisibility(View.GONE);
+                            new getVin_Make(data).execute();
+                            Log.e("tag", i + "data(17) " + data);
+                            dup_sts = true;
+                        }
+                        else{
+                            btn_submit.setVisibility(View.VISIBLE);
+                            if (sharedPreferences.getString("sound_option", "").equals("on")) {
+                                MediaPlayer true_mp3 = null;
+                                try {
+                                    true_mp3 = MediaPlayer.create(BarcodeCaptureActivity.this, R.raw.ass);
+                                    true_mp3.start();
+                                } catch (Exception e) {
+                                    Log.e("tag", "s:" + e.toString());
+                                }
+
+                            }
+                            dup_sts = true;
+                        }
+
+                    }
+
+                } else {
+
+                    Log.e("tag", i + "<2> " + data);
+
+                }
+
+
+            }
+
+            handler.postDelayed(this, TIME_DELAY);
+        }
+    };
+    // helper objects for detecting taps and pinches.
+    private ScaleGestureDetector scaleGestureDetector;
+    private GestureDetector gestureDetector;
 
     /**
      * Initializes the UI and creates the detector pipeline.
      */
     @Override
-    public void onCreate(Bundle  icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.barcode_capture);
 
@@ -134,12 +217,14 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         btn_flash = (Button) findViewById(R.id.flash);
         btn_focus = (Button) findViewById(R.id.focus);
 
-        // read parameters from the intent used to launch the activity.
-          autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
-          useFlash = getIntent().getBooleanExtra(UseFlash, false);
-        Log.e("tag",""+autoFocus+useFlash);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(BarcodeCaptureActivity.this);
 
-        Log.e(TAG, "barcode oncreate");
+        // read parameters from the intent used to launch the activity.
+        autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
+        useFlash = getIntent().getBooleanExtra(UseFlash, false);
+        //  Log.e("tag", "" + autoFocus + useFlash);
+
+        //  Log.e(TAG, "barcode oncreate");
 
         dbclass = new DbHelper(context);
 
@@ -178,23 +263,21 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         btn_flash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(useFlash == false) {
-
+                if (!useFlash) {
                     useFlash = true;
                     mPreview.stop();
                     createCameraSource(autoFocus, useFlash);
                     startCameraSource();
                     btn_flash.setText("Flash Off");
-                    i =1;
-                }
-                else{
+                    i = 1;
+                } else {
 
                     useFlash = false;
                     mPreview.stop();
                     createCameraSource(autoFocus, useFlash);
                     startCameraSource();
                     btn_flash.setText("Flash On");
-                    i =0;
+                    i = 0;
                 }
             }
         });
@@ -203,25 +286,23 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         btn_focus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(autoFocus ==true) {
+                if (autoFocus == true) {
                     autoFocus = false;
                     mPreview.stop();
                     createCameraSource(autoFocus, useFlash);
                     startCameraSource();
                     btn_focus.setText("Focus On");
-                    j =1;
-                }
-                else{
+                    j = 1;
+                } else {
                     autoFocus = true;
                     mPreview.stop();
                     createCameraSource(autoFocus, useFlash);
                     startCameraSource();
-                    j =0;
+                    j = 0;
                     btn_focus.setText("Focus Off");
                 }
             }
         });
-
 
 
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
@@ -232,16 +313,13 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                 .show();
 
 
-
-
         for (BarcodeGraphic graphic : mGraphicOverlay.getGraphics()) {
             Barcode barcode = graphic.getBarcode();
-            Log.e("tag", "000asdfioe:"+barcode.displayValue);
+            Log.e("tag", "000asdfioe:" + barcode.displayValue);
         }
 
 
         handler.post(updateTextRunnable);
-
 
 
     }
@@ -252,7 +330,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
      * sending the request.
      */
     private void requestCameraPermission() {
-        Log.e(TAG, "Camera permission is not granted. Requesting permission");
+        //  Log.e(TAG, "Camera permission is not granted. Requesting permission");
 
         final String[] permissions = new String[]{Manifest.permission.CAMERA};
 
@@ -287,53 +365,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         return b || c || super.onTouchEvent(e);
     }
 
-
-
-    Runnable updateTextRunnable=new Runnable(){
-        public void run() {
-
-
-            for (BarcodeGraphic graphic : mGraphicOverlay.getGraphics()) {
-                Barcode barcode = graphic.getBarcode();
-                Log.e("tag", "0grapickbarcode:" + barcode.displayValue);
-
-                value = barcode.displayValue.trim();
-               value = value.replaceAll("\\s+","").trim();
-                value = value.replaceAll("%","");
-
-                Log.e("tag", "afterchang: :" + value);
-
-                Log.e("tag",value.length()+"())"+value);
-                int i;
-                i = value.length();
-
-                if (value.length() == 18) {
-                    data = value.substring(1);
-                    i = value.length();
-                    Log.e("tag", i + "<0> " + data);
-
-                    et_vinscan.setText(data);
-
-                } else if (value.length() == 17) {
-                    data = value;
-                    Log.e("tag", i + "<1> " + data);
-
-                    et_vinscan.setText(data);
-
-                } else {
-
-                    Log.e("tag", i + "<2> " + data);
-
-                }
-
-
-            }
-
-            handler.postDelayed(this, TIME_DELAY);
-        }
-    };
-
-
     @SuppressLint("InlinedApi")
     private void createCameraSource(boolean autoFocus, boolean useFlash) {
         Context context = getApplicationContext();
@@ -356,8 +387,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.low_storage_error, Toast.LENGTH_LONG).show();
                 Log.e(TAG, getString(R.string.low_storage_error));
             }
-        }
-        else{
+        } else {
 
             Log.e(TAG, "else barcode detector working");
         }
@@ -425,7 +455,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "Camera permission granted - initialize the camera source");
             // we have permission, so create the camerasource
-            boolean autoFocus = getIntent().getBooleanExtra(AutoFocus,false);
+            boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
             boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
             createCameraSource(autoFocus, useFlash);
             return;
@@ -446,7 +476,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.ok, listener)
                 .show();
     }
-
 
     private void startCameraSource() throws SecurityException {
         // check that the device has play services available.
@@ -487,11 +516,11 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         float bestDistance = Float.MAX_VALUE;
         for (BarcodeGraphic graphic : mGraphicOverlay.getGraphics()) {
             Barcode barcode = graphic.getBarcode();
-            Log.e("tag", "0grapickbarcode:"+barcode.displayValue);
+            Log.e("tag", "0grapickbarcode:" + barcode.displayValue);
             if (barcode.getBoundingBox().contains((int) x, (int) y)) {
                 // Exact hit, no need to keep looking.
                 best = barcode;
-                Log.e("tag", "1bestbarco:"+best.displayValue);
+                Log.e("tag", "1bestbarco:" + best.displayValue);
                 break;
             }
             float dx = x - barcode.getBoundingBox().centerX();
@@ -499,19 +528,18 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             float distance = (dx * dx) + (dy * dy);  // actually squared distance
             if (distance < bestDistance) {
                 best = barcode;
-                Log.e("tag", "2bess barco:"+best.displayValue);
+                Log.e("tag", "2bess barco:" + best.displayValue);
                 bestDistance = distance;
             }
         }
 
         if (best != null) {
 
-            Log.e("tag", "3.barcodevalu :"+best.displayValue);
-
+            Log.e("tag", "3.barcodevalu :" + best.displayValue);
 
 
             value = best.displayValue.trim();
-            Log.e("tag",value.length()+"())"+value);
+            Log.e("tag", value.length() + "())" + value);
             int i;
             i = value.length();
 
@@ -530,16 +558,13 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
             } else {
 
-              //  Toast.makeText(getApplicationContext(), "Please Adjust Your Camera and Try Again", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(getApplicationContext(), "Please Adjust Your Camera and Try Again", Toast.LENGTH_LONG).show();
                 Log.e("tag", i + "<2> " + data);
 
                 Intent intent = getIntent();
                 BarcodeCaptureActivity.this.finish();
                 startActivity(intent);
             }
-
-
-
 
 
             return true;
@@ -574,19 +599,20 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         }
     }
 
-
-
     class getVin_Make extends AsyncTask<String, Void, String> {
         String vin_no;
         int pos;
 
         //https://api.edmunds.com/api/vehicle/v2/vins/3G5DB03E32S518612?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
         //https://api.edmunds.com/api/vehicle/v2/vins/2G1FC3D33C9165616?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
-       // String web_p1 = "https://api.edmunds.com/api/vehicle/v2/vins/";
+        // String web_p1 = "https://api.edmunds.com/api/vehicle/v2/vins/";
         //String web_p2 = "?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9";
 
+        String api_key = "bka9rsmkb8snppu7efzqtjfs";
+
         String web_p1 = "https://api.edmunds.com/api/v1/vehicle/vin/";
-        String web_p2 = "/configuration?api_key=26svh9z83ybumwkc3a45bkhu";
+        String web_p2 = "/configuration?api_key=";
+        String old_api = "26svh9z83ybumwkc3a45bkhu";
 
         public getVin_Make(String vinno) {
 
@@ -614,7 +640,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             //   https://api.edmunds.com/api/vehicle/v2/makes?fmt=json&api_key=zucnv9yrgtcgqdnxk7f5xzx9
             try {
                 //  vin_no = "2G1FC3D33C9165616";
-                String virtual_url = web_p1 + vin_no + web_p2;
+                String virtual_url = web_p1 + vin_no + web_p2+api_key;
                 Log.e("tag", "<---urlll--->" + vin_no);
                 Log.e("tag", "<---urlll--->" + virtual_url);
                 JSONObject jsonobject = PostService.getVin(virtual_url);
@@ -640,7 +666,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String jsonStr) {
 
-            Log.e("tag", "<-----outttttt---->" + jsonStr);
+            //  Log.e("tag", "<-----outttttt---->" + jsonStr);
             mProgressDialog.dismiss();
             super.onPostExecute(jsonStr);
             Log.e("tag", "service: " + jsonStr);
@@ -651,6 +677,18 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
                 if (jo.has("make")) {
                     if (!(jo.getString("make").isEmpty())) {
+
+                        if (sharedPreferences.getString("sound_option", "").equals("on")) {
+                            MediaPlayer true_mp3 = null;
+                            try {
+                                true_mp3 = MediaPlayer.create(BarcodeCaptureActivity.this, R.raw.ass);
+                                true_mp3.start();
+                            } catch (Exception e) {
+                                Log.e("tag", "s:" + e.toString());
+                            }
+
+                        }
+
                         Log.e("tag", "<---1111--->");
                         // stopScan();
                         String msg = jo.getString("make");
@@ -692,6 +730,20 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
                     }
                 } else {
+
+
+                    if (sharedPreferences.getString("sound_option", "").equals("on")) {
+                        MediaPlayer false_mp3 = null;
+                        try {
+                            false_mp3 = MediaPlayer.create(BarcodeCaptureActivity.this, R.raw.off);
+                            false_mp3.start();
+                        } catch (Exception e) {
+                            Log.e("tag", "s:" + e.toString());
+                        }
+
+                    }
+
+
                     if (jo.has("message")) {
                         if (jo.getString("message").contains("Information not found for this Squish VIN")) {
                             //  stopScan();
@@ -723,11 +775,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         }
 
     }
-
-
-
-
-
 
 
 }

@@ -55,6 +55,10 @@ public class __StaffAdapter extends BaseAdapter {
         return count;
     }
 
+    public void goFocus(int count) {
+
+    }
+
 
     @Override
     public Object getItem(int position) {

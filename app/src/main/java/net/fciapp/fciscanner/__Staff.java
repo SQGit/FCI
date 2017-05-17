@@ -249,11 +249,20 @@ public class __Staff extends Activity {
 
         if (sharedPreferences.getString("max_gallon", "") == "") {
             editor.putString("max_gallon", "240");
-            editor.commit();
+            editor.apply();
             total_gallon = "0";
         } else {
             total_gallon = sharedPreferences.getString("max_gallon", "");
             Log.e("tag", "1" + total_gallon);
+        }
+
+        if (sharedPreferences.getString("edit_button", "").equals("")) {
+            editor.putString("edit_button", "off");
+            editor.apply();
+        }
+        if (sharedPreferences.getString("sound_option", "").equals("")) {
+            editor.putString("sound_option", "on");
+            editor.apply();
         }
 
         //et_gallon.setText("");
@@ -344,6 +353,9 @@ public class __Staff extends Activity {
                 lview.setAdapter(adapter);
 
                 Toast.makeText(getApplicationContext(), "1 Row Added", Toast.LENGTH_SHORT).show();
+                lview.setSelection(count);
+                lview.requestFocus();
+
 
                 adapter.notifyDataSetChanged();
                 // Log.e("tag_class", "add_click" + count);
