@@ -591,9 +591,9 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
 
                         if (check.length() > 0) {
-                            dbclass.updateIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2");
+                            dbclass.updateIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2", String.valueOf(end));
                         } else {
-                            dbclass.insertIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2");
+                            dbclass.insertIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2", String.valueOf(end));
                         }
 
 

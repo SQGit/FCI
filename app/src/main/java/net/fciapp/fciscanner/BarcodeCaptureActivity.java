@@ -90,7 +90,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     Context context = this;
     Button btn_flash, btn_focus;
     String make, data, check, value, duplicate;
-    int position, start, end;
+    int position, start, end,mva;
     String aaa;
     int i = 0, j = 0;
     boolean autoFocus, useFlash;
@@ -233,6 +233,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         position = asdf.getIntExtra("pos", 0);
         start = asdf.getIntExtra("start", 0);
         end = asdf.getIntExtra("end", 0);
+        mva = asdf.getIntExtra("mva", 0);
+        Log.e("tag","sl: "+mva);
         check = asdf.getStringExtra("make");
         aaa = String.valueOf(position);
 
@@ -708,9 +710,9 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
 
                         if (check.length() > 0) {
-                            dbclass.updateIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2");
+                            dbclass.updateIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2",String.valueOf(mva));
                         } else {
-                            dbclass.insertIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2");
+                            dbclass.insertIntoDB(position, vin_no, name, String.valueOf(start), String.valueOf(end), "1/2", "1/2",String.valueOf(mva));
                         }
 
 

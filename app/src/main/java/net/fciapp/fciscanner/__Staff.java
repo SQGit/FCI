@@ -42,7 +42,7 @@ public class __Staff extends Activity {
 
     public int count = 3;
     ListView lview;
-    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon;
+    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon,tv_mva;
     DbHelper dbclass;
     Context context = this;
     ArrayList myList = new ArrayList();
@@ -50,6 +50,7 @@ public class __Staff extends Activity {
     String[] ar_vin_make = new String[]{"", "", ""};
     int[] ar_start = new int[]{5, 5, 5};
     int[] ar_end = new int[]{1, 1, 1};
+    int[] ar_mva = new int[]{0, 0, 0};
     SweetAlertDialog sweetDialog;
 
     ArrayList<String> vin_positions = new ArrayList<>();
@@ -57,6 +58,7 @@ public class __Staff extends Activity {
     ArrayList<String> vin_makemodel = new ArrayList<>();
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
+    ArrayList<String> vin_mva = new ArrayList<>();
     Typeface tf;
     String managername, managerphone, companyname, staffname, dateFrom, staffphone, total_gallon, alt_mgr, alt_phone,purchase_order,staffname2 ="Choose Assist";
     EditText et_gallon,et_purchase;
@@ -64,7 +66,7 @@ public class __Staff extends Activity {
 
     __StaffAdapter adapter;
     ArrayList<StaffFetchList> baL;
-
+    int comp_sts;
 
     Spinner spin,spin2;
 
@@ -85,6 +87,22 @@ public class __Staff extends Activity {
         setContentView(R.layout.staff);
 
         Log.e("tag_class", "oncreate");
+
+        Intent getInts = getIntent();
+
+        comp_sts = getInts.getIntExtra("comp_sts",0);
+
+        Log.e("tag","co: "+comp_sts);
+
+        tv_mva = (TextView) findViewById(R.id.tv_mva_barcode);
+
+
+        if(comp_sts ==1){
+            tv_mva.setVisibility(View.VISIBLE);
+        }
+        else{
+            tv_mva.setVisibility(View.GONE);
+        }
 
 
         tf = Typeface.createFromAsset(getAssets(), "fonts/asin.TTF");
@@ -181,6 +199,8 @@ public class __Staff extends Activity {
         tv_save = (TextView) findViewById(R.id.tv_save);
         tv_note = (TextView) findViewById(R.id.tv_note);
 
+
+
         tv_gallon = (TextView) findViewById(R.id.tv_gallon);
         et_gallon = (EditText) findViewById(R.id.editText);
 
@@ -227,7 +247,7 @@ public class __Staff extends Activity {
         tv_logout.setTypeface(tf);
         tv_gallon.setTypeface(tf);
         et_gallon.setTypeface(tf);
-       // tv_purchase_txt.setTypeface(tf);
+        tv_mva.setTypeface(tf);
         et_purchase.setTypeface(tf);
 
         tv_comp_name.setText(companyname);
@@ -299,7 +319,7 @@ public class __Staff extends Activity {
 
         getDataInList();
 
-        adapter = new __StaffAdapter(context, myList, count, myList.size());
+        adapter = new __StaffAdapter(context, myList, count, myList.size(),comp_sts);
         lview.setAdapter(adapter);
 
 
@@ -349,7 +369,7 @@ public class __Staff extends Activity {
             public void onClick(View v) {
 
                 count = count + 1;
-                adapter = new __StaffAdapter(context, myList, count, myList.size());
+                adapter = new __StaffAdapter(context, myList, count, myList.size(),comp_sts);
                 lview.setAdapter(adapter);
 
                 Toast.makeText(getApplicationContext(), "1 Row Added", Toast.LENGTH_SHORT).show();
@@ -500,6 +520,8 @@ public class __Staff extends Activity {
                 ld.setVin_make(ar_vin_make[i]);
                 ld.setVin_start(ar_start[i]);
                 ld.setVin_end(ar_end[i]);
+                ld.setVin_mva(ar_mva[i]);
+
                 myList.add(ld);
             }
         } else if (vin_positions.size() == 1) {
@@ -511,12 +533,14 @@ public class __Staff extends Activity {
                     ld.setVin_make(vin_makemodel.get(0));
                     ld.setVin_start(Integer.valueOf(vin_start_guage.get(0)));
                     ld.setVin_end(Integer.valueOf(vin_end_guage.get(0)));
+                    ld.setVin_mva(Integer.valueOf(vin_mva.get(0)));
 
                 } else {
                     ld.setVin_no(ar_vin_no[i]);
                     ld.setVin_make(ar_vin_make[i]);
                     ld.setVin_start(ar_start[i]);
                     ld.setVin_end(ar_end[i]);
+                    ld.setVin_mva(ar_mva[i]);
                 }
                 myList.add(ld);
             }
@@ -530,6 +554,7 @@ public class __Staff extends Activity {
                     ld.setVin_make(vin_makemodel.get(0));
                     ld.setVin_start(Integer.valueOf(vin_start_guage.get(0)));
                     ld.setVin_end(Integer.valueOf(vin_end_guage.get(0)));
+                    ld.setVin_mva(Integer.valueOf(vin_mva.get(0)));
 
                 }
                 if (i == 1) {
@@ -537,6 +562,7 @@ public class __Staff extends Activity {
                     ld.setVin_make(vin_makemodel.get(1));
                     ld.setVin_start(Integer.valueOf(vin_start_guage.get(1)));
                     ld.setVin_end(Integer.valueOf(vin_end_guage.get(1)));
+                    ld.setVin_mva(Integer.valueOf(vin_mva.get(1)));
 
                 }
                 if (i == 2) {
@@ -544,6 +570,7 @@ public class __Staff extends Activity {
                     ld.setVin_make("");
                     ld.setVin_start(0);
                     ld.setVin_end(0);
+                    ld.setVin_mva(0);
                 }
                 myList.add(ld);
             }
@@ -555,6 +582,7 @@ public class __Staff extends Activity {
                 ld.setVin_make(vin_makemodel.get(i));
                 ld.setVin_start(Integer.valueOf(vin_start_guage.get(i)));
                 ld.setVin_end(Integer.valueOf(vin_end_guage.get(i)));
+                ld.setVin_mva(Integer.valueOf(vin_mva.get(i)));
                 myList.add(ld);
             }
 
@@ -571,6 +599,7 @@ public class __Staff extends Activity {
         vin_makemodel.clear();
         vin_start_guage.clear();
         vin_end_guage.clear();
+        vin_mva.clear();
         // Log.e("tag_class", "getfromdb_class");
         Cursor cursor = dbclass.getFromDb();
         if (cursor != null) {
@@ -581,11 +610,13 @@ public class __Staff extends Activity {
                     String make = cursor.getString(cursor.getColumnIndex("make"));
                     String start = cursor.getString(cursor.getColumnIndex("st_g"));
                     String end = cursor.getString(cursor.getColumnIndex("ed_g"));
+                    String mva = cursor.getString(cursor.getColumnIndex("mva"));
                     vin_positions.add(id);
                     vin_no.add(vin_nos);
                     vin_makemodel.add(make);
                     vin_start_guage.add(start);
                     vin_end_guage.add(end);
+                    vin_mva.add(mva);
 
                 } while (cursor.moveToNext());
 
@@ -655,7 +686,7 @@ public class __Staff extends Activity {
         }
 
         getDataInList();
-        adapter = new __StaffAdapter(context, myList, count, myList.size());
+        adapter = new __StaffAdapter(context, myList, count, myList.size(),comp_sts);
         lview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         Log.e("tag_class", "restart_count" + count);
@@ -698,7 +729,7 @@ public class __Staff extends Activity {
         @Override
         protected String doInBackground(String... params) {
             String json = "", jsonStr = "";
-            String start_gauge = "1/3", end_gauge = "1/3";
+            String start_gauge = "Full Tank", end_gauge = "1/4",mva = "Salvaged                  " ;
             try {
                 JSONObject jsonObject = new JSONObject();
 
@@ -738,6 +769,12 @@ public class __Staff extends Activity {
                         end_gauge = "Full Tank";
                     }
 
+                    if (vin_mva.get(i).equals("0")) {
+                        mva = "Salvaged";
+                    } else if (vin_mva.get(i).equals("1")) {
+                        mva = "Shop";
+                    }
+
                     Log.e("tag", "endbh " + end_gauge);
 
                     JSONObject jsonObject1 = new JSONObject();
@@ -745,6 +782,9 @@ public class __Staff extends Activity {
                     jsonObject1.accumulate("make_model", vin_makemodel.get(i));
                     jsonObject1.accumulate("start_gauge", start_gauge);
                     jsonObject1.accumulate("end_gauge", end_gauge);
+
+                    if(comp_sts == 1 )
+                    jsonObject1.accumulate("mva_barcode", mva);
 
                     jsonArray.put(jsonObject1);
                     // }

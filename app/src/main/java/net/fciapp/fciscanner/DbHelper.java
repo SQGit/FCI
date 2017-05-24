@@ -19,7 +19,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS fci_entry(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,pos VARCHAR, vinno VARCHAR, make VARCHAR, st_g VARCHAR, ed_g VARCHAR,start VARCHAR,end VARCHAR );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS fci_entry(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,pos VARCHAR, vinno VARCHAR, make VARCHAR, st_g VARCHAR, ed_g VARCHAR, mva VARCHAR, start VARCHAR, end VARCHAR  );");
     }
 
     @Override
@@ -44,18 +44,25 @@ public class DbHelper extends SQLiteOpenHelper {
         String query = "UPDATE fci_entry set ed_g = \"" + b + "\" where pos = " + a;
         Log.e("tag", "insertdb_end_guage  " + query);
         sdb1.execSQL(query);
+    }
 
+    protected void insertIntoDB4(int a, int b) {
+        SQLiteDatabase sdb1;
+        sdb1 = getWritableDatabase();
+        String query = "UPDATE fci_entry set mva = \"" + b + "\" where pos = " + a;
+        Log.e("tag", "insertdb_mva  " + query);
+        sdb1.execSQL(query);
     }
 
 
-    public void updateIntoDB(int position, String vin_no, String make, String start, String end, String s2, String s3) {
+    public void updateIntoDB(int position, String vin_no, String make, String start, String end, String s2, String s3,String mva) {
 
         //(pos,vinno,make,st_g,ed_g,start,end) VALUES('" +
 
         SQLiteDatabase sdb1;
         sdb1 = getWritableDatabase();
         //String query = "INSERT INTO fci_entry (st_g) VALUES(\"" + b + "\") Where pos ="+a+";";
-        String query = "UPDATE fci_entry set  vinno = \"" + vin_no + "\", make = \""+make+"\", st_g = \""+start+"\", ed_g = \""+end+"\" where pos = " + position;
+        String query = "UPDATE fci_entry set  vinno = \"" + vin_no + "\", make = \""+make+"\", st_g = \""+start+"\", ed_g = \""+end+"\", mva = \"" + mva + "\" where pos = " + position;
         Log.e("tag", "insertdb_end_guage  " + query);
         sdb1.execSQL(query);
 
@@ -79,14 +86,24 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    protected void insertIntoDB(int a, String b, String c, String d, String e, String f, String g) {
+    protected void insertIntoDB(int a, String b, String c, String d, String e, String f, String g,String h) {
         Log.d("tag", "insertdb " + a + b + c + d + e + f + g);
 
-        SQLiteDatabase sdb1;
-        sdb1 = getWritableDatabase();
 
-        String query = "INSERT INTO fci_entry (pos,vinno,make,st_g,ed_g,start,end) VALUES('" + a + "', '" + b + "', '" + c + "', '" + d + "', '" + e + "', '" + f + "', '" + g + "');";
-        sdb1.execSQL(query);
+
+        try {
+
+            SQLiteDatabase sdb1;
+            sdb1 = getWritableDatabase();
+
+            String query = "INSERT INTO fci_entry (pos,vinno,make,st_g,ed_g,start,end,mva) VALUES('" + a + "', '" + b + "', '" + c + "', '" + d + "', '" + e + "', '" + f + "', '"  + g + "', '" + h + "');";
+            Log.e("tag", "insertdb_end_guage  " + query);
+            sdb1.execSQL(query);
+
+        } catch (Exception ee) {
+            System.out.println("DATABASE ERROR " + ee);
+
+        }
     }
 
 

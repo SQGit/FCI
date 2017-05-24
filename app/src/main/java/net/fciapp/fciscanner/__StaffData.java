@@ -9,6 +9,7 @@ public class __StaffData {
     public String vin_make;
     public int vin_start;
     public int vin_end;
+    public int vin_mva;
 
     public String getVin_no() {
         return vin_no;
@@ -40,5 +41,13 @@ public class __StaffData {
 
     public void setVin_end(int vin_end) {
         this.vin_end = vin_end;
+    }
+
+    public int getVin_mva() {
+        return vin_mva;
+    }
+
+    public void setVin_mva(int vin_mva) {
+        this.vin_mva = vin_mva;
     }
 }

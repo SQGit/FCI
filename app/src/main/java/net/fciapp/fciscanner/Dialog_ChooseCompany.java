@@ -49,6 +49,7 @@ public class Dialog_ChooseCompany extends Dialog {
     TextView header;
     ArrayList<String> alt_managerName = new ArrayList<>();
     ArrayList<String> alt_phone = new ArrayList<>();
+    int comp_sts;
 
 
     public Dialog_ChooseCompany(Activity activity) {
@@ -117,9 +118,20 @@ public class Dialog_ChooseCompany extends Dialog {
                     edit.putString("alt_managerphone", alt_ph);
                 edit.commit();
 
+                    if(company_name.contains("avis") || company_name.contains("AVIS") || company_name.contains("Avis")){
+                        comp_sts= 1;
+                        Log.e("tag",comp_sts+" av: "+company_name);
+                    }
+                    else{
+                        comp_sts =0;
+                        Log.e("tag",comp_sts+" anfv: "+company_name);
+                    }
+
+
                 Intent goEntry = new Intent(activity, __Staff.class);
+                    goEntry.putExtra("comp_sts",comp_sts);
                 activity.startActivity(goEntry);
-                dismiss();
+                    dismiss();
                 }
                 else{
                     Toast.makeText(activity,"Please Wait",Toast.LENGTH_LONG).show();
