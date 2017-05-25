@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
-            android:text="Version 2.65"
+            android:text="Version 2.67"
             android:textSize="@dimen/_5sdp" />
 
     </LinearLayout>
