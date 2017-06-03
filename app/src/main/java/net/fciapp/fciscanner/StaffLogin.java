@@ -1,8 +1,10 @@
 package net.fciapp.fciscanner;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -53,6 +55,8 @@ public class StaffLogin extends AppCompatActivity {
     SweetAlertDialog sweetDialog;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    Configuration config;
+    boolean hardwareKeyboardPlugged=false;
 
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
@@ -61,6 +65,26 @@ public class StaffLogin extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        Toast.makeText(this, "CONFIG "+newConfig, Toast.LENGTH_SHORT).show();
+
+        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+            Toast.makeText(this, "HIDDEN", Toast.LENGTH_SHORT).show();
+
+        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO){
+            Toast.makeText(this, "SHOWING", Toast.LENGTH_SHORT).show();
+            config.hardKeyboardHidden= 2;
+            ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).showInputMethodPicker();
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+
+        }
+    }
+
 
     @Override
 
@@ -88,9 +112,43 @@ public class StaffLogin extends AppCompatActivity {
 
         tv_repass.setVisibility(View.GONE);
 
+         config = getResources().getConfiguration();
+
+
+
+        InputMethodManager imm = (InputMethodManager)getApplicationContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+         /*       hardwareKeyboardPlugged=(getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO);
+
+            if(  config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO){
+                Toast.makeText(getApplicationContext(),"hardkeyboar hidden",Toast.LENGTH_LONG).show();
+                config.hardKeyboardHidden= 0;
+                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).showInputMethodPicker();
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "hardkeyboar shown", Toast.LENGTH_LONG).show();
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+            }*/
+
+
+
+
+
+
+
+
+
+
+
                 phone = et_phone.getText().toString().trim();
                 password = et_pass.getText().toString().trim();
                 Log.e("tag", "ph+ " + sharedPreferences.getString("phoneno", ""));
@@ -163,6 +221,9 @@ public class StaffLogin extends AppCompatActivity {
                 startActivity(i);
                 StaffLogin.this.finish();
 
+               /* InputMethodManager imm = (InputMethodManager)getApplicationContext().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);*/
 
 
             }

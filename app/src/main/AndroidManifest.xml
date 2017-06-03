@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.fciapp.fciscanner">
 
+
+    <uses-feature android:name="android.hardware.usb.host" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -10,6 +13,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
+    <uses-configuration android:reqHardKeyboard="false" />
 
     <application
         android:allowBackup="true"
@@ -39,6 +43,7 @@
         <activity
             android:name="net.fciapp.fciscanner.StaffLogin"
             android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustPan"/>
 
@@ -114,6 +119,13 @@
         android:screenOrientation="locked"
         android:windowSoftInputMode="adjustPan|stateHidden|adjustPan"
         android:label="Read VinNumber"/>
+
+
+        <intent-filter>
+            <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+        </intent-filter>
+
+
 
 
     </application>

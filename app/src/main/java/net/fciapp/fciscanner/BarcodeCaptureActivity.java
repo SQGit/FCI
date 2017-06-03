@@ -39,6 +39,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -247,6 +249,27 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+
+        et_vinscan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.e("tag",count+" before "+s);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e("tag",count+" textchange "+s);
+                if(s.length() ==17){
+
+                    new getVin_Make(s.toString()).execute();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.e("tag"," changed "+s);
+            }
+        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override

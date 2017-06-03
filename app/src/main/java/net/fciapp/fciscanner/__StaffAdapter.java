@@ -42,6 +42,7 @@ public class __StaffAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(this.context);
         this.limit = limit;
         this.comp_sts  = comp_sts;
+        dbclass = new DbHelper(context);
 
     }
 
@@ -76,6 +77,7 @@ public class __StaffAdapter extends BaseAdapter {
         tf = Typeface.createFromAsset(context.getAssets(), "fonts/asin.TTF");
         //font
 
+
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.staff_adapter, parent, false);
             mViewHolder = new MyViewHolder(convertView);
@@ -86,6 +88,8 @@ public class __StaffAdapter extends BaseAdapter {
             spin_end = (Spinner) convertView.findViewById(R.id.spinner_end);
 
             lt_mva = (LinearLayout) convertView.findViewById(R.id.mva_layout);
+
+
 
             tv_vin_no.setTypeface(tf);
             tv_vin_make.setTypeface(tf);
@@ -174,7 +178,7 @@ public class __StaffAdapter extends BaseAdapter {
             }
 
 
-            dbclass = new DbHelper(context);
+
 
             convertView.setTag(mViewHolder);
         } else {
