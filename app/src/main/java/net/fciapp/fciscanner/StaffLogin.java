@@ -30,7 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -56,7 +55,7 @@ public class StaffLogin extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Configuration config;
-    boolean hardwareKeyboardPlugged=false;
+    boolean hardwareKeyboardPlugged = false;
 
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
@@ -71,15 +70,15 @@ public class StaffLogin extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        Toast.makeText(this, "CONFIG "+newConfig, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, "CONFIG " + newConfig, Toast.LENGTH_SHORT).show();
 
         if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-            Toast.makeText(this, "HIDDEN", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "HIDDEN", Toast.LENGTH_SHORT).show();
 
-        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO){
-            Toast.makeText(this, "SHOWING", Toast.LENGTH_SHORT).show();
-            config.hardKeyboardHidden= 2;
-            ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).showInputMethodPicker();
+        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+            Toast.makeText(this, "Please Turn off Physical Keyboard from popup window", Toast.LENGTH_SHORT).show();
+            config.hardKeyboardHidden = 2;
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).showInputMethodPicker();
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
 
         }
@@ -112,40 +111,35 @@ public class StaffLogin extends AppCompatActivity {
 
         tv_repass.setVisibility(View.GONE);
 
-         config = getResources().getConfiguration();
+        config = getResources().getConfiguration();
 
+        if (config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+           // Toast.makeText(this, "HIDDEN", Toast.LENGTH_SHORT).show();
 
+        } else if (config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+            Toast.makeText(this, "Please Turn off Physical Keyboard from popup window", Toast.LENGTH_SHORT).show();
+            config.hardKeyboardHidden = 2;
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).showInputMethodPicker();
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
 
-        InputMethodManager imm = (InputMethodManager)getApplicationContext().getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        }
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
+              /*  hardwareKeyboardPlugged = (getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO);
 
-         /*       hardwareKeyboardPlugged=(getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO);
-
-            if(  config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO){
-                Toast.makeText(getApplicationContext(),"hardkeyboar hidden",Toast.LENGTH_LONG).show();
-                config.hardKeyboardHidden= 0;
-                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).showInputMethodPicker();
-                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-            }
-            else {
-                Toast.makeText(getApplicationContext(), "hardkeyboar shown", Toast.LENGTH_LONG).show();
-                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-            }*/
-
-
-
-
-
-
-
-
+                if (config.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+                    Toast.makeText(getApplicationContext(), "hardkeyboar hidden", Toast.LENGTH_LONG).show();
+                    config.hardKeyboardHidden = 0;
+                    ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).showInputMethodPicker();
+                    ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                } else {
+                    Toast.makeText(getApplicationContext(), "hardkeyboar shown", Toast.LENGTH_LONG).show();
+                    ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInputFromWindow(et_phone.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                }*/
 
 
 
