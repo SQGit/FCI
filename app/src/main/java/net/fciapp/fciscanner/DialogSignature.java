@@ -1,9 +1,11 @@
 package net.fciapp.fciscanner;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -55,6 +58,8 @@ public class DialogSignature extends Dialog {
     String staffname, s, newPath, formId, status;
     Typeface tf;
     SweetAlertDialog sweetDialog;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     public DialogSignature(Activity act) {
         super(act);
@@ -96,6 +101,9 @@ public class DialogSignature extends Dialog {
         reject_tv.setTypeface(tf);
 
 
+        verifyStoragePermissions(activity);
+
+
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +118,7 @@ public class DialogSignature extends Dialog {
                     if (addJpgSignatureToGallery(signatureBitmap)) {
                         newPath = String.valueOf(photo);
                         status = "APPROVED";
-                        new UploadImageToServer(newPath).execute();
+                        new UploadImageToServer(photo).execute();
                         Log.e("tag", "sigpath" + photo);
                     } else {
                     }
@@ -134,8 +142,10 @@ public class DialogSignature extends Dialog {
                     if (addJpgSignatureToGallery(signatureBitmap)) {
                         status = "REJECTED";
                         newPath = String.valueOf(photo);
-                        new UploadImageToServer(newPath).execute();
+                        Log.e("tag","final");
+                        new UploadImageToServer(photo).execute();
                     } else {
+                        Log.e("tag","errr");
                     }
                 }
 
@@ -184,26 +194,9 @@ public class DialogSignature extends Dialog {
     }
 
 
-    private boolean addSvgSignatureToGallery(String signatureSvg) {
-
-        boolean result = false;
-        try {
-            File svgFile = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.svg", System.currentTimeMillis()));
-            OutputStream stream = new FileOutputStream(svgFile);
-            OutputStreamWriter writer = new OutputStreamWriter(stream);
-            writer.write(signatureSvg);
-            writer.close();
-            stream.flush();
-            stream.close();
-            scanMediaFile(svgFile);
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 
     public void saveBitmapToJPG(Bitmap bitmap, File photo) throws IOException {
+        Log.e("tag","savebitmap");
         Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(newBitmap);
         canvas.drawColor(Color.WHITE);
@@ -213,15 +206,21 @@ public class DialogSignature extends Dialog {
         stream.close();
     }
 
+
     private boolean addJpgSignatureToGallery(Bitmap signatureBitmap) {
+
+        Log.e("tag","addjpegtogal");
 
         boolean result = false;
         try {
-            photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.JPG", System.currentTimeMillis()));
+            photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
             saveBitmapToJPG(signatureBitmap, photo);
             scanMediaFile(photo);
-            Log.e("tag", "%%%%" + photo);
+            Log.e("tag", "poto " + photo);
             result = true;
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -232,7 +231,7 @@ public class DialogSignature extends Dialog {
 
         File file = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), signaturePad);
-        Log.d("tag", "file" + file);
+        Log.d("tag", "file " + file);
         if (!file.mkdirs()) {
             Log.e("SignaturePad", "Directory not created");
             // file.mkdir();
@@ -241,21 +240,24 @@ public class DialogSignature extends Dialog {
     }
 
     private void scanMediaFile(File photo) {
+        Log.e("tag","scan media");
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(photo);
         mediaScanIntent.setData(contentUri);
         s = contentUri.toString();
-        Log.e("tag", "contentUri*" + s);
+        Log.e("tag", "contentUri: " + s);
         activity.sendBroadcast(mediaScanIntent);
     }
 
     private class UploadImageToServer extends AsyncTask<Void, Integer, String> {
 
         String img_path;
+        File photo;
 
-        public UploadImageToServer(String path) {
+        public UploadImageToServer(File path) {
 
-            this.img_path = path;
+          //  this.img_path = path;
+            photo = path;
 
             sweetDialog = new SweetAlertDialog(activity, SweetAlertDialog.PROGRESS_TYPE);
             sweetDialog.getProgressHelper().setBarColor(Color.parseColor("#FFE64A19"));
@@ -283,17 +285,18 @@ public class DialogSignature extends Dialog {
             String responseString = null;
             HttpClient httpclient = new DefaultHttpClient();
             String virtual_url = Data_Service.SERVICE_URL_NEW + "api/review";
+            Log.e("tag",""+virtual_url);
             HttpPost httppost = new HttpPost(virtual_url);
             httppost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
             httppost.setHeader("formid", formId);
             httppost.setHeader("Action", status);
             //   httppost.setHeader("Content-type", "multipart/form-data");
             try {
-                MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+                MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT);
                 Log.e("tag", "img: " + String.valueOf(photo));
                 File sourceFile = new File(String.valueOf(photo));
                 Log.e("tag", "file: " + String.valueOf(sourceFile));
-                entity.addPart("fileUpload", new FileBody(photo, "images/jpeg"));
+                entity.addPart("fileUpload", new FileBody(photo,"image/jpeg"));
                 httppost.setEntity(entity);
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity r_entity = response.getEntity();
@@ -363,9 +366,24 @@ public class DialogSignature extends Dialog {
                         })
                         .show();
             }
-
-
         }
-
     }
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            Log.e("tag","permission denied");
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+
+
 }

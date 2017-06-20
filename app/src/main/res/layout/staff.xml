@@ -199,75 +199,131 @@
         </LinearLayout>
 
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_80sdp"
             android:layout_marginRight="@dimen/_15sdp"
+
             android:background="@drawable/listview_bg"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
+                android:paddingTop="10dp">
 
-                >
+                <LinearLayout
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lt_vin"
+                    android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tv_vinno"
+                    <TextView
+                        android:id="@+id/tv_vinno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VinNo"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="@dimen/_9sdp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="VinNo"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_10sdp" />
+                    android:id="@+id/lt_make"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_make"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:text="Make/Model"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="@dimen/_9sdp" />
+                </LinearLayout>
 
 
-
-                <TextView
-                    android:id="@+id/tv_make"
-                    android:layout_width="@dimen/_110sdp"
+                <LinearLayout
+                    android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
-                    android:ems="6"
-                    android:gravity="center"
-                    android:text="Make/Model"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_11sdp" />
+                    android:id="@+id/mva_layout"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tv_mva_barcode"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="MVA"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:id="@+id/tv_mva_barcode1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MVA"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="@dimen/_9sdp" />
 
-                <TextView
-                    android:id="@+id/tv_startgug"
-                    android:layout_width="@dimen/_70sdp"
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="@dimen/_40sdp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Start Gauge"
+                    android:id="@+id/mva1_layout"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_10sdp" />
+                    android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tv_endgug"
-                    android:layout_width="@dimen/_70sdp"
+                    <TextView
+                        android:id="@+id/tv_mva_barcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Slavage"
+                        android:gravity="center"
+                        android:layout_gravity="center|center_horizontal"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="@dimen/_9sdp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="End Gauge"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="@dimen/_10sdp" />
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_startgug"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start Gauge"
+                        android:gravity="center"
+                        android:layout_gravity="center|center_horizontal"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="@dimen/_8sdp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_endgug"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="End Gauge"
+                        android:gravity="center"
+                        android:layout_gravity="center|center_horizontal"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="@dimen/_8sdp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -297,8 +353,8 @@
                         android:id="@+id/tv_gallon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="Total gallons"
                         android:textColor="@color/error_stroke_color"
                         android:textSize="@dimen/_8sdp" />
@@ -307,8 +363,8 @@
                         android:id="@+id/editText"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_14sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
                         android:background="@drawable/entry_bg"
                         android:inputType="number"
                         android:maxLength="3"
@@ -329,17 +385,17 @@
                         android:id="@+id/et_po"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="@dimen/_14sdp"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_15sdp"
                         android:background="@drawable/entry_bg"
-                        android:paddingRight="@dimen/_3sdp"
-                        android:inputType="number"
-                        android:layout_gravity="center"
-                        android:maxLength="8"
                         android:hint="Purchase Order"
-                        android:textColorHint="@color/error_stroke_color"
-
+                        android:inputType="number"
+                        android:maxLength="8"
                         android:paddingLeft="@dimen/_4sdp"
-                        android:text="" />
+                        android:paddingRight="@dimen/_3sdp"
+
+                        android:text=""
+                        android:textColorHint="@color/error_stroke_color" />
 
 
                     <Spinner
@@ -347,44 +403,43 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_15sdp"
-                        />
+                        android:layout_marginLeft="@dimen/_15sdp" />
 
 
                 </LinearLayout>
 
-               <!-- <LinearLayout
-                    android:id="@+id/lll1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_16sdp"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignLeft="@id/lll"
-                    android:gravity="center"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    >
+                <!-- <LinearLayout
+                     android:id="@+id/lll1"
+                     android:layout_width="wrap_content"
+                     android:layout_height="@dimen/_16sdp"
+                     android:layout_centerInParent="true"
+                     android:layout_alignParentRight="true"
+                     android:layout_centerHorizontal="true"
+                     android:layout_alignLeft="@id/lll"
+                     android:gravity="center"
+                     android:layout_marginLeft="@dimen/_10sdp"
+                     >
 
-                    <TextView
-                        android:id="@+id/tv_gallons"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Purchase Order"
-                        android:textColor="@color/error_stroke_color"
-                        android:textSize="@dimen/_8sdp" />
+                     <TextView
+                         android:id="@+id/tv_gallons"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center"
+                         android:text="Purchase Order"
+                         android:textColor="@color/error_stroke_color"
+                         android:textSize="@dimen/_8sdp" />
 
-                    <EditText
-                        android:id="@+id/editTexts"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_14sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:background="@drawable/entry_bg"
-                        android:inputType="number"
-                        android:maxLength="3"
-                        android:paddingLeft="@dimen/_10sdp"
-                        android:text="465566" />
-                </LinearLayout>-->
+                     <EditText
+                         android:id="@+id/editTexts"
+                         android:layout_width="@dimen/_40sdp"
+                         android:layout_height="@dimen/_14sdp"
+                         android:layout_marginLeft="@dimen/_10sdp"
+                         android:background="@drawable/entry_bg"
+                         android:inputType="number"
+                         android:maxLength="3"
+                         android:paddingLeft="@dimen/_10sdp"
+                         android:text="465566" />
+                 </LinearLayout>-->
 
 
                 <TextView
@@ -420,7 +475,6 @@
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>

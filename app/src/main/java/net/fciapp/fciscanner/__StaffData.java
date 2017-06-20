@@ -10,6 +10,7 @@ public class __StaffData {
     public int vin_start;
     public int vin_end;
     public int vin_mva;
+    public String mva_barcode;
 
     public String getVin_no() {
         return vin_no;
@@ -49,5 +50,13 @@ public class __StaffData {
 
     public void setVin_mva(int vin_mva) {
         this.vin_mva = vin_mva;
+    }
+
+    public void setVin_mva_barcode(String vin_mva_barcode) {
+        this.mva_barcode = vin_mva_barcode;
+    }
+
+    public String getMva_barcode() {
+        return mva_barcode;
     }
 }

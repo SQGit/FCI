@@ -95,8 +95,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:gravity="center|bottom"
         android:layout_weight="0.8"
+        android:gravity="center|bottom"
         android:orientation="vertical">
 
         <TextView
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
-            android:text="Version 2.68"
+            android:text="Version 2.70"
             android:textSize="@dimen/_8sdp" />
 
     </LinearLayout>

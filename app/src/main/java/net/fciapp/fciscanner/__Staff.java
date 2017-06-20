@@ -42,11 +42,12 @@ public class __Staff extends Activity {
 
     public int count = 3;
     ListView lview;
-    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon,tv_mva;
+    TextView tv_logout, tv_staff, tv_header, tv_comp_namtxt, tv_comp_name, tv_manag_namtxt, tv_manag_name, tv_datetxt, tv_date, tv_timetxt, tv_time, tv_vinno, tv_make, tv_startgug, tv_endgug, tv_save, tv_note, tv_add_another, tv_gallon,tv_mva,tv_mva_barcode;
     DbHelper dbclass;
     Context context = this;
     ArrayList myList = new ArrayList();
     String[] ar_vin_no = new String[]{"Scan VinNo", "Scan VinNo", "Scan VinNo"};
+    String[] ar_mva_barcode = new String[]{"", "", ""};
     String[] ar_vin_make = new String[]{"", "", ""};
     int[] ar_start = new int[]{5, 5, 5};
     int[] ar_end = new int[]{1, 1, 1};
@@ -59,6 +60,7 @@ public class __Staff extends Activity {
     ArrayList<String> vin_start_guage = new ArrayList<>();
     ArrayList<String> vin_end_guage = new ArrayList<>();
     ArrayList<String> vin_mva = new ArrayList<>();
+    ArrayList<String> vin_mva_barcode = new ArrayList<>();
     Typeface tf;
     String managername, managerphone, companyname, staffname, dateFrom, staffphone, total_gallon, alt_mgr, alt_phone,purchase_order,staffname2 ="Choose Assist";
     EditText et_gallon,et_purchase;
@@ -76,6 +78,7 @@ public class __Staff extends Activity {
 
     ArrayList<String> boardlist;
     public String URL = Data_Service.SERVICE_URL_NEW + "staff/fetch";
+    LinearLayout lt_mva_barcode,lt_mva,lt_vin,lt_make;
 
 
     @Override
@@ -95,13 +98,27 @@ public class __Staff extends Activity {
         Log.e("tag","co: "+comp_sts);
 
         tv_mva = (TextView) findViewById(R.id.tv_mva_barcode);
+        tv_mva_barcode = (TextView) findViewById(R.id.tv_mva_barcode1);
+
+        lt_mva_barcode = (LinearLayout) findViewById(R.id.mva_layout);
+        lt_mva = (LinearLayout) findViewById(R.id.mva1_layout);
+
+        lt_vin = (LinearLayout) findViewById(R.id.lt_vin);
+        lt_make = (LinearLayout) findViewById(R.id.lt_make);
+
+
 
 
         if(comp_sts ==1){
-            tv_mva.setVisibility(View.VISIBLE);
+            lt_mva.setVisibility(View.VISIBLE);
+            lt_mva_barcode.setVisibility(View.VISIBLE);
+
+
         }
         else{
-            tv_mva.setVisibility(View.GONE);
+            lt_mva.setVisibility(View.GONE);
+            lt_mva_barcode.setVisibility(View.GONE);
+
         }
 
 
@@ -248,6 +265,7 @@ public class __Staff extends Activity {
         tv_gallon.setTypeface(tf);
         et_gallon.setTypeface(tf);
         tv_mva.setTypeface(tf);
+        tv_mva_barcode.setTypeface(tf);
         et_purchase.setTypeface(tf);
 
         tv_comp_name.setText(companyname);
@@ -521,6 +539,7 @@ public class __Staff extends Activity {
                 ld.setVin_start(ar_start[i]);
                 ld.setVin_end(ar_end[i]);
                 ld.setVin_mva(ar_mva[i]);
+                ld.setVin_mva_barcode(ar_mva_barcode[i]);
 
                 myList.add(ld);
             }
@@ -534,6 +553,7 @@ public class __Staff extends Activity {
                     ld.setVin_start(Integer.valueOf(vin_start_guage.get(0)));
                     ld.setVin_end(Integer.valueOf(vin_end_guage.get(0)));
                     ld.setVin_mva(Integer.valueOf(vin_mva.get(0)));
+                    ld.setVin_mva_barcode(vin_mva_barcode.get(0));
 
                 } else {
                     ld.setVin_no(ar_vin_no[i]);
@@ -541,6 +561,7 @@ public class __Staff extends Activity {
                     ld.setVin_start(ar_start[i]);
                     ld.setVin_end(ar_end[i]);
                     ld.setVin_mva(ar_mva[i]);
+                    ld.setVin_mva_barcode(ar_mva_barcode[i]);
                 }
                 myList.add(ld);
             }
@@ -555,6 +576,7 @@ public class __Staff extends Activity {
                     ld.setVin_start(Integer.valueOf(vin_start_guage.get(0)));
                     ld.setVin_end(Integer.valueOf(vin_end_guage.get(0)));
                     ld.setVin_mva(Integer.valueOf(vin_mva.get(0)));
+                    ld.setVin_mva_barcode(vin_mva_barcode.get(0));
 
                 }
                 if (i == 1) {
@@ -563,6 +585,7 @@ public class __Staff extends Activity {
                     ld.setVin_start(Integer.valueOf(vin_start_guage.get(1)));
                     ld.setVin_end(Integer.valueOf(vin_end_guage.get(1)));
                     ld.setVin_mva(Integer.valueOf(vin_mva.get(1)));
+                    ld.setVin_mva_barcode(vin_mva_barcode.get(1));
 
                 }
                 if (i == 2) {
@@ -571,6 +594,7 @@ public class __Staff extends Activity {
                     ld.setVin_start(0);
                     ld.setVin_end(0);
                     ld.setVin_mva(0);
+                    ld.setVin_mva_barcode("");
                 }
                 myList.add(ld);
             }
@@ -583,6 +607,7 @@ public class __Staff extends Activity {
                 ld.setVin_start(Integer.valueOf(vin_start_guage.get(i)));
                 ld.setVin_end(Integer.valueOf(vin_end_guage.get(i)));
                 ld.setVin_mva(Integer.valueOf(vin_mva.get(i)));
+                ld.setVin_mva_barcode(vin_mva_barcode.get(i));
                 myList.add(ld);
             }
 
@@ -600,6 +625,7 @@ public class __Staff extends Activity {
         vin_start_guage.clear();
         vin_end_guage.clear();
         vin_mva.clear();
+        vin_mva_barcode.clear();
         // Log.e("tag_class", "getfromdb_class");
         Cursor cursor = dbclass.getFromDb();
         if (cursor != null) {
@@ -611,12 +637,14 @@ public class __Staff extends Activity {
                     String start = cursor.getString(cursor.getColumnIndex("st_g"));
                     String end = cursor.getString(cursor.getColumnIndex("ed_g"));
                     String mva = cursor.getString(cursor.getColumnIndex("mva"));
+                    String mva_barcode = cursor.getString(cursor.getColumnIndex("mva_barcode"));
                     vin_positions.add(id);
                     vin_no.add(vin_nos);
                     vin_makemodel.add(make);
                     vin_start_guage.add(start);
                     vin_end_guage.add(end);
                     vin_mva.add(mva);
+                    vin_mva_barcode.add(mva_barcode);
 
                 } while (cursor.moveToNext());
 
@@ -784,7 +812,7 @@ public class __Staff extends Activity {
                     jsonObject1.accumulate("end_gauge", end_gauge);
 
                     if(comp_sts == 1 )
-                    jsonObject1.accumulate("mva_barcode", mva);
+                    jsonObject1.accumulate("mva_barcode", vin_mva_barcode.get(i)+"  "+ mva);
 
                     jsonArray.put(jsonObject1);
                     // }

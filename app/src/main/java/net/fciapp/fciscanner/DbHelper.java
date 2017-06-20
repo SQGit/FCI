@@ -19,7 +19,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.e("tagdb","dbcreated");
-        db.execSQL("CREATE TABLE IF NOT EXISTS fci_entry(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,pos VARCHAR, vinno VARCHAR, make VARCHAR, st_g VARCHAR, ed_g VARCHAR, mva VARCHAR, start VARCHAR, end VARCHAR  );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS fci_entry(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,pos VARCHAR, vinno VARCHAR, make VARCHAR, st_g VARCHAR, ed_g VARCHAR, mva VARCHAR, mva_barcode VARCHAR, start VARCHAR, end VARCHAR  );");
     }
 
     @Override
@@ -59,6 +59,31 @@ public class DbHelper extends SQLiteOpenHelper {
                 sdb1.execSQL("ALTER TABLE fci_entry ADD COLUMN mva VARCHAR");
                 Log.e("tag", "ALTER TABLE");
             }
+        }
+    }
+
+
+    public void update_mva(int position, String mva_barcode) {
+        try {
+            SQLiteDatabase sdb1;
+            sdb1 = getWritableDatabase();
+            String query = "UPDATE fci_entry set  mva_barcode = \"" + mva_barcode + "\" where pos = " + position;
+            Log.e("tag", "update mva  " + query);
+            sdb1.execSQL(query);
+        } catch (Exception e) {
+            System.out.println("DATABASE ERROR " + e);
+        }
+    }
+
+    protected void insert_mva(int position, String mva_barcode) {
+        try {
+            SQLiteDatabase sdb1;
+            sdb1 = getWritableDatabase();
+            String query = "INSERT INTO fci_entry (pos,mva_barcode) VALUES('" + position + "','" + mva_barcode + "');";
+            Log.e("tag", "insert mva  " + query);
+            sdb1.execSQL(query);
+        } catch (Exception ee) {
+            System.out.println("DATABASE ERROR " + ee);
         }
     }
 

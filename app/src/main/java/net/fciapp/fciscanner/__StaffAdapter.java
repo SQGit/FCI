@@ -1,17 +1,29 @@
 package net.fciapp.fciscanner;
 
+import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -30,7 +42,9 @@ public class __StaffAdapter extends BaseAdapter {
     ArrayList<String> asd;
     ArrayList<String> ar_mva;
     int comp_sts;
-    LinearLayout lt_mva;
+    LinearLayout lt_mva,lt_mva_barcode;
+    Dialog mva_dialog;
+    EditText et_mva;
 
 
     public __StaffAdapter(Context context, ArrayList
@@ -71,8 +85,10 @@ public class __StaffAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         final MyViewHolder mViewHolder;
-        final TextView tv_vin_no, tv_vin_make, tv_add;
+        final TextView tv_vin_no, tv_vin_make;
         final Spinner spin_start, spin_end, spin_mva;
+        final TextView tv_mva_barcode,adsf ;
+
 
         tf = Typeface.createFromAsset(context.getAssets(), "fonts/asin.TTF");
         //font
@@ -84,15 +100,18 @@ public class __StaffAdapter extends BaseAdapter {
 
             tv_vin_no = (TextView) convertView.findViewById(R.id.textview_vin_no);
             tv_vin_make = (TextView) convertView.findViewById(R.id.textview_vin_make);
+            tv_mva_barcode = (TextView) convertView.findViewById(R.id.textview_vin_mva);
             spin_start = (Spinner) convertView.findViewById(R.id.spinner_start);
             spin_end = (Spinner) convertView.findViewById(R.id.spinner_end);
 
             lt_mva = (LinearLayout) convertView.findViewById(R.id.mva_layout);
+            lt_mva_barcode = (LinearLayout) convertView.findViewById(R.id.mva_barcode_layout);
 
 
 
             tv_vin_no.setTypeface(tf);
             tv_vin_make.setTypeface(tf);
+            tv_mva_barcode.setTypeface(tf);
 
             asd = new ArrayList<>();
             ar_mva = new ArrayList<>();
@@ -172,10 +191,25 @@ public class __StaffAdapter extends BaseAdapter {
             if(comp_sts == 1){
 
                 lt_mva.setVisibility(View.VISIBLE);
+                lt_mva_barcode.setVisibility(View.VISIBLE);
             }
             else{
                 lt_mva.setVisibility(View.GONE);
+                lt_mva_barcode.setVisibility(View.GONE);
             }
+
+
+
+
+            mva_dialog = new Dialog(context);
+            mva_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mva_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            mva_dialog.setCancelable(true);
+            mva_dialog.setContentView(R.layout.dialog_mva);
+
+            et_mva = (EditText) mva_dialog.findViewById(R.id.scan_mva);
+
+
 
 
 
@@ -186,9 +220,12 @@ public class __StaffAdapter extends BaseAdapter {
 
             tv_vin_no = mViewHolder.tv_vin_no;
             tv_vin_make = mViewHolder.tv_vin_make;
+            tv_mva_barcode = mViewHolder.tv_mva_barcode;
             spin_start = mViewHolder.spin_start;
             spin_end = mViewHolder.spin_end;
             spin_mva = mViewHolder.spin_mva;
+            lt_mva = mViewHolder.lt_mva;
+            lt_mva_barcode = mViewHolder.lt_mva_barcode;
 
         }
 
@@ -197,6 +234,7 @@ public class __StaffAdapter extends BaseAdapter {
             __StaffData currentListData = (__StaffData) getItem(position);
             tv_vin_no.setText(currentListData.getVin_no());
             tv_vin_make.setText(currentListData.getVin_make());
+            tv_mva_barcode.setText(currentListData.getMva_barcode());
             spin_start.setSelection(currentListData.getVin_start());
             spin_end.setSelection(currentListData.getVin_end());
             if(lt_mva.getVisibility()==View.VISIBLE)
@@ -205,6 +243,7 @@ public class __StaffAdapter extends BaseAdapter {
             tv_vin_no.setText("Scan VinNo");
             tv_vin_make.setText("");
             spin_start.setSelection(5);
+            tv_mva_barcode.setText("");
             spin_end.setSelection(1);
             if(lt_mva.getVisibility()==View.VISIBLE)
                 spin_mva.setSelection(0);
@@ -293,6 +332,8 @@ public class __StaffAdapter extends BaseAdapter {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
+
+
                 spin_start.setSelection(pos);
                 Log.e("tag_spin", "" + pos);
 
@@ -355,20 +396,95 @@ public class __StaffAdapter extends BaseAdapter {
         });
 
 
+        final TextView finalTv_mva_barcode = tv_mva_barcode;
+        lt_mva_barcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(!tv_vin_make.getText().toString().trim().isEmpty()) {
+                    mva_dialog.show();
+                    mva_dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    et_mva.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+                            final Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                  /*  if(finalTv_mva_barcode.getText().toString().trim().isEmpty()){
+                                        String mva = et_mva.getText().toString().trim();
+                                        dbclass.insert_mva(position,mva);
+                                        finalTv_mva_barcode.setText(mva);
+
+                                        __StaffData currentListData = (__StaffData) getItem(position);
+                                        currentListData.setVin_mva_barcode(mva);
+
+                                        mva_dialog.dismiss();
+                                    }
+                                    else{*/
+                                        String mva = et_mva.getText().toString().trim();
+                                        dbclass.update_mva(position,mva);
+                                        finalTv_mva_barcode.setText(mva);
+
+                                        __StaffData currentListData = (__StaffData) getItem(position);
+                                        currentListData.setVin_mva_barcode(mva);
+
+                                        mva_dialog.dismiss();
+                                   // }
+
+
+
+
+
+                                }
+                            }, 1500);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                        }
+                    });
+
+                }
+                else{
+                    Toast.makeText(context,"Scan VIN First",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+
+
+
+
         return convertView;
     }
 
 
     private class MyViewHolder {
-        TextView tv_vin_no, tv_vin_make;
+        TextView tv_vin_no, tv_vin_make,tv_mva_barcode;
         Spinner spin_start, spin_end, spin_mva;
+        LinearLayout lt_mva,lt_mva_barcode;
 
         public MyViewHolder(View item) {
             tv_vin_no = (TextView) item.findViewById(R.id.textview_vin_no);
             tv_vin_make = (TextView) item.findViewById(R.id.textview_vin_make);
             spin_start = (Spinner) item.findViewById(R.id.spinner_start);
+            tv_mva_barcode = (TextView) item.findViewById(R.id.textview_vin_mva);
             spin_end = (Spinner) item.findViewById(R.id.spinner_end);
             spin_mva = (Spinner) item.findViewById(R.id.spinner_mva);
+            lt_mva = (LinearLayout) item.findViewById(R.id.mva_layout);
+            lt_mva_barcode = (LinearLayout) item.findViewById(R.id.mva_barcode_layout);
+
         }
     }
 
