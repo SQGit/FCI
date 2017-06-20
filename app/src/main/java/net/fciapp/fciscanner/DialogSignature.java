@@ -290,7 +290,7 @@ public class DialogSignature extends Dialog {
             httppost.setHeader("apikey", "1eo7u4tig9704k2humvdywwnb4hnl2xa1jbrh7go");
             httppost.setHeader("formid", formId);
             httppost.setHeader("Action", status);
-            //   httppost.setHeader("Content-type", "multipart/form-data");
+            //httppost.setHeader("Content-type", "multipart/form-data");
             try {
                 MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT);
                 Log.e("tag", "img: " + String.valueOf(photo));
