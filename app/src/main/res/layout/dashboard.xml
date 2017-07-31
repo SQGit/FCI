@@ -35,7 +35,6 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:background="@drawable/square_bg"
-
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -104,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
-            android:text="Version 2.70"
+            android:text="Version 2.71"
             android:textSize="@dimen/_8sdp" />
 
     </LinearLayout>

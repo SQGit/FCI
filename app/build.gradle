@@ -15,8 +15,8 @@ android {
         applicationId "com.sqi.fciapp"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 20
-        versionName "2.70"
+        versionCode 21
+        versionName "2.71"
     }
     buildTypes {
         release {

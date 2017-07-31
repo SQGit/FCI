@@ -629,6 +629,7 @@ public class __Staff extends Activity {
         // Log.e("tag_class", "getfromdb_class");
         Cursor cursor = dbclass.getFromDb();
         if (cursor != null) {
+            Log.e("tag","clumn "+cursor.getColumnNames().toString());
             if (cursor.moveToFirst()) {
                 do {
                     String id = cursor.getString(cursor.getColumnIndex("pos"));
