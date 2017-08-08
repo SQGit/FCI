@@ -267,6 +267,20 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                     im.hideSoftInputFromWindow(et_vinscan.getWindowToken(), 0);
                     new getVin_Make(s.toString()).execute();
                 }
+                else if(s.length() ==18){
+
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    im.hideSoftInputFromWindow(et_vinscan.getWindowToken(), 0);
+
+                    String valu = s.toString();
+                    data = valu.substring(1);
+                    int i = valu.length();
+                    Log.e("tag", i + "<0> " + data);
+                    new getVin_Make(data).execute();
+
+                }
+
             }
 
             @Override
@@ -315,7 +329,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         btn_focus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (autoFocus == true) {
+                if (autoFocus) {
                     autoFocus = false;
                     mPreview.stop();
                     createCameraSource(autoFocus, useFlash);
