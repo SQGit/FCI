@@ -23,10 +23,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 /**
  * Created by Salman on 6/16/2016.
  */
-public class AdapterCompanyEdit extends BaseAdapter {
+class AdapterCompanyEdit extends BaseAdapter {
 
     Context context;
-
     TextView tv_name, tv_phone, tv_password, tv_editview;
     LinearLayout lt_bg;
     ArrayList<String> com_name = new ArrayList<>();

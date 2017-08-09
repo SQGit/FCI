@@ -105,6 +105,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
     String api_key;
+    String temp = "1234567890";
     //the default update interval for your text, this is in your hand , just run this sample
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
     Runnable updateTextRunnable = new Runnable() {
@@ -135,7 +136,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                         et_vinscan.setText(data);
                         if (sharedPreferences.getString("edit_button", "").equals("off")) {
                             btn_submit.setVisibility(View.GONE);
-                            new getVin_Make(data).execute();
+                            if(!(data.equals(temp))) {
+                                temp = data;
+                                new getVin_Make(data).execute();
+                            }
                             Log.e("tag", i + "data(18) " + data);
                             dup_sts = true;
                         }
@@ -166,7 +170,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                         et_vinscan.setText(data);
                         if (sharedPreferences.getString("edit_button", "").equals("off")) {
                             btn_submit.setVisibility(View.GONE);
-                            new getVin_Make(data).execute();
+                            if(!(data.equals(temp))) {
+                                temp = data;
+                                new getVin_Make(data).execute();
+                            }
                             Log.e("tag", i + "data(17) " + data);
                             dup_sts = true;
                         }
@@ -261,11 +268,22 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.e("tag",count+" textchange "+s);
+
+
                 if(s.length() ==17){
-                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                    InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    im.hideSoftInputFromWindow(et_vinscan.getWindowToken(), 0);
-                    new getVin_Make(s.toString()).execute();
+
+                   Log.e("tagasd","s: "+s.toString());
+                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                        InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        im.hideSoftInputFromWindow(et_vinscan.getWindowToken(), 0);
+                    if(!(temp.equals(s.toString()))) {
+                        Log.e("tagasd","different: "+s.toString());
+                        temp = s.toString();
+                        new getVin_Make(s.toString()).execute();
+                    }
+                    else{
+                        Log.e("tagasd","same: "+s.toString());
+                    }
                 }
                 else if(s.length() ==18){
 
@@ -277,7 +295,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                     data = valu.substring(1);
                     int i = valu.length();
                     Log.e("tag", i + "<0> " + data);
-                    new getVin_Make(data).execute();
+                    if(!(data.equals(temp))) {
+                        temp = data;
+                        new getVin_Make(data).execute();
+                    }
 
                 }
 
@@ -591,13 +612,19 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                 i = value.length();
                 Log.e("tag", i + "<0> " + data);
 
-                new getVin_Make(data).execute();
+                if(!(data.equals(temp))) {
+                    temp = data;
+                    new getVin_Make(data).execute();
+                }
 
             } else if (value.length() == 17) {
                 data = value;
                 Log.e("tag", i + "<1> " + data);
 
-                new getVin_Make(data).execute();
+                if(!(data.equals(temp))) {
+                    temp = data;
+                    new getVin_Make(data).execute();
+                }
 
             } else {
 

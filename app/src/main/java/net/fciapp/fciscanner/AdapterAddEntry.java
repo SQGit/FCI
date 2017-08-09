@@ -21,38 +21,25 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
 public class AdapterAddEntry extends BaseAdapter {
-    static int sizz;
-    public String dddd;
-    public int post;
-    public HashMap<Integer, String> vin_make = new HashMap<>();
-    public int p;
+    private static int sizz;
+    private String dddd;
+    private int p;
     Context context;
-
-    LinearLayout lt_bg;
-    ArrayList<String> ar_name = new ArrayList<>();
-    ArrayList<String> ar_phone = new ArrayList<>();
-    ArrayList<String> ar_pass = new ArrayList<>();
     Typeface tf;
-    Holder holder;
-    ArrayList<Integer> v_pos = new ArrayList<>();
-    ArrayList<String> v_mm = new ArrayList<>();
-    ArrayList<String> final_datas = new ArrayList<>();
-    ArrayList<String> final_datas1 = new ArrayList<>();
-    DbHelper dbclass;
-    ArrayList<String> vin_positions = new ArrayList<>();
-    ArrayList<String> vin_no = new ArrayList<>();
-    ArrayList<String> vin_makemodel = new ArrayList<>();
-    ArrayList<String> vin_start_guage = new ArrayList<>();
-    ArrayList<String> vin_end_guage = new ArrayList<>();
-    TextView tv_add_another,tv_save;
+    private Holder holder;
+    private ArrayList<Integer> v_pos = new ArrayList<>();
+    private ArrayList<String> v_mm = new ArrayList<>();
+    private DbHelper dbclass;
+    private ArrayList<String> vin_positions = new ArrayList<>();
+    private ArrayList<String> vin_no = new ArrayList<>();
+    private ArrayList<String> vin_makemodel = new ArrayList<>();
+    private ArrayList<String> vin_start_guage = new ArrayList<>();
+    private ArrayList<String> vin_end_guage = new ArrayList<>();
     Activity activity;
-    StaffAddEntry staffaddEntry;
+    private StaffAddEntry staffaddEntry;
     ArrayList<String> s = new ArrayList<>();
-    String tanks[] = {"1/2 tank", "1/4 tank","1/8 tank","3/4 tank"};
-    String spn;
+    private String tanks[] = {"1/2 tank", "1/4 tank","1/8 tank","3/4 tank"};
 
     AdapterAddEntry(Activity act,Context c1, HashMap<Integer, String> v_mk, ArrayList<Integer> v_p, ArrayList<String> aa, int k) {
 
@@ -61,10 +48,10 @@ public class AdapterAddEntry extends BaseAdapter {
         if (!(dddd == null)) {
             Log.e("tag", "outside" + dddd);
         }
-        this.vin_make = v_mk;
+        HashMap<Integer, String> vin_make = v_mk;
         this.v_pos = v_p;
         this.v_mm = aa;
-        this.sizz = k;
+        sizz = k;
 
        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         if(!(sharedPreferences.getString("size","").equals(""))) {
@@ -127,16 +114,7 @@ public class AdapterAddEntry extends BaseAdapter {
             holder.tv_endgug.setAdapter(spinnerArrayAdapter);
 
 
-        } else {
-
         }
-
-
-
-
-
-
-
         p = pos_view;
         Log.e("tag", "positions " + pos_view);
         getFromDb();
@@ -202,13 +180,6 @@ public class AdapterAddEntry extends BaseAdapter {
                 }
             });
 
-
-
-
-
-
-
-
         return convertView;
     }
 
@@ -270,7 +241,6 @@ public class AdapterAddEntry extends BaseAdapter {
 
             }
 
-
         }
 
     }
@@ -282,12 +252,10 @@ public class AdapterAddEntry extends BaseAdapter {
         Spinner tv_startgug;
         Spinner tv_endgug;
 
-
         public Holder(View base) {
             tv_vinno = (TextView) base.findViewById(R.id.tv_vinno);
 
         }
-
 
     }
 

@@ -397,10 +397,12 @@ public class __StaffAdapter extends BaseAdapter {
 
 
         final TextView finalTv_mva_barcode = tv_mva_barcode;
+
         lt_mva_barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Log.e("tag","ltmva clicked");
 
                 if(!tv_vin_make.getText().toString().trim().isEmpty()) {
                     mva_dialog.show();

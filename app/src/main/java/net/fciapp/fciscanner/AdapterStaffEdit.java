@@ -26,18 +26,20 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class AdapterStaffEdit extends BaseAdapter {
 
     Context context;
-    TextView tv_name, tv_phone, tv_password, tv_editview;
-    LinearLayout lt_bg;
-    ArrayList<String> ar_name = new ArrayList<>();
-    ArrayList<String> ar_phone = new ArrayList<>();
-    ArrayList<String> ar_pass = new ArrayList<>();
+    private TextView tv_name, tv_phone, tv_password, tv_editview;
+    private ArrayList<String> ar_name;
+    private ArrayList<String> ar_phone;
+    private ArrayList<String> ar_pass;
     Typeface tf;
     SweetAlertDialog sweetDialog;
 
     AdapterStaffEdit(Context c1, ArrayList<String> name, ArrayList<String> phone, ArrayList<String> pass) {
         this.context = c1;
+        ar_name = new ArrayList<>();
         this.ar_name = name;
+        ar_phone = new ArrayList<>();
         this.ar_phone = phone;
+        ar_pass = new ArrayList<>();
         this.ar_pass = pass;
     }
 
@@ -72,7 +74,7 @@ public class AdapterStaffEdit extends BaseAdapter {
         tv_phone = (TextView) convertView.findViewById(R.id.tv_phone);
         tv_password = (TextView) convertView.findViewById(R.id.tv_password);
         tv_editview = (TextView) convertView.findViewById(R.id.tv_editview);
-        lt_bg = (LinearLayout) convertView.findViewById(R.id.layout_bg);
+        LinearLayout lt_bg = (LinearLayout) convertView.findViewById(R.id.layout_bg);
 
         tv_name.setTypeface(tf);
         tv_phone.setTypeface(tf);
@@ -141,10 +143,10 @@ public class AdapterStaffEdit extends BaseAdapter {
     }
 
 
-    class staffDelete_Task extends AsyncTask<String, Void, String> {
+    private class staffDelete_Task extends AsyncTask<String, Void, String> {
 
         String phone;
-        public staffDelete_Task(String ph) {
+        staffDelete_Task(String ph) {
             this.phone = ph;
         }
         protected void onPreExecute() {
