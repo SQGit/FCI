@@ -262,30 +262,14 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         et_vinscan.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.e("tag",count+" before "+s);
+                Log.e("tag","before "+count+" before "+s);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.e("tag",count+" textchange "+s);
+                Log.e("tag","after "+count+" textchange "+s);
 
-
-                if(s.length() ==17){
-
-                   Log.e("tagasd","s: "+s.toString());
-                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                        InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        im.hideSoftInputFromWindow(et_vinscan.getWindowToken(), 0);
-                    if(!(temp.equals(s.toString()))) {
-                        Log.e("tagasd","different: "+s.toString());
-                        temp = s.toString();
-                        new getVin_Make(s.toString()).execute();
-                    }
-                    else{
-                        Log.e("tagasd","same: "+s.toString());
-                    }
-                }
-                else if(s.length() ==18){
+                if(s.length() ==18){
 
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -299,7 +283,22 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                         temp = data;
                         new getVin_Make(data).execute();
                     }
+                }
 
+                else if(s.length() ==17){
+
+                    Log.e("tagasd","s: "+s.toString());
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    im.hideSoftInputFromWindow(et_vinscan.getWindowToken(), 0);
+                    if(!(temp.equals(s.toString()))) {
+                        Log.e("tagasd","different: "+s.toString());
+                        temp = s.toString();
+                        new getVin_Make(s.toString()).execute();
+                    }
+                    else{
+                        Log.e("tagasd","same: "+s.toString());
+                    }
                 }
 
             }
